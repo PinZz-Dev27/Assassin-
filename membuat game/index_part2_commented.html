@@ -1,0 +1,2930 @@
+        /* Penutup blok selector CSS sebelumnya */
+        }
+
+        /* Label badge kelas atau tipe kategori kostum/suit (misal: SHADOW, OPERATIVE, SOVEREIGN) */
+        .suit-tag-class {
+            /* Posisi absolut relatif terhadap bingkai preview suit */
+            position: absolute;
+            /* Ditempatkan di bagian bawah sedikit keluar dari batas bingkai */
+            bottom: -6px;
+            /* Warna latar belakang gelap kebiruan khas cyber slate */
+            background: #0f172a;
+            /* Garis tepi tipis dengan warna abu-abu netral */
+            border: 1px solid #334155;
+            /* Warna teks abu-abu terang */
+            color: #94a3b8;
+            /* Ukuran font ringkas untuk badge mikro */
+            font-size: 9px;
+            /* Ketebalan font sangat tebal untuk keterbacaan tinggi */
+            font-weight: 900;
+            /* Ruang bantalan dalam: atas/bawah 2px, kiri/kanan 7px */
+            padding: 2px 7px;
+            /* Sudut membulat kapsul */
+            border-radius: 10px;
+            /* Jarak antar huruf diperlebar untuk gaya futuristik */
+            letter-spacing: 1px;
+            /* Tingkat tumpukan layer agar berada di atas orb */
+            z-index: 3;
+        }
+
+        /* Tipografi nama kostum/suit pada kartu perlengkapan */
+        .suit-name {
+            /* Menggunakan jenis huruf Rajdhani bernuansa sci-fi gaming */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran font judul kartu yang cukup menonjol */
+            font-size: 19px;
+            /* Ketebalan font ekstra tebal */
+            font-weight: 800;
+            /* Margin atas 4px dan nol di sisi lainnya */
+            margin: 4px 0 0 0;
+            /* Warna teks putih cerah */
+            color: #f8fafc;
+            /* Spasi karakter yang sedikit renggang */
+            letter-spacing: 0.5px;
+        }
+
+        /* Deskripsi teks penjelasan spesifikasi dan latar belakang kostum */
+        .suit-desc {
+            /* Ukuran font kecil untuk teks narasi */
+            font-size: 11px;
+            /* Warna teks abu-abu lembut agar nyaman dibaca */
+            color: #94a3b8;
+            /* Menghilangkan margin bawaan */
+            margin: 0;
+            /* Ketinggian baris teks agar tidak terlalu rapat */
+            line-height: 1.4;
+            /* Ketinggian minimum untuk menjaga konsistensi tinggi kartu antar varian */
+            min-height: 32px;
+        }
+
+        /* Lencana efek pasif (perk) khusus dari setiap kostum */
+        .suit-perk-badge {
+            /* Warna latar belakang semi-transparan dengan nuansa gelap pekat */
+            background: rgba(15, 23, 42, 0.9);
+            /* Garis batas aksen kuning keemasan halus */
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            /* Warna teks emas cerah */
+            color: #facc15;
+            /* Ukuran teks informasi keahlian pasif */
+            font-size: 10px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Jarak padding dalam badge */
+            padding: 4px 8px;
+            /* Sudut membulat halus */
+            border-radius: 8px;
+            /* Jarak renggang antar huruf */
+            letter-spacing: 0.5px;
+            /* Lebar memenuhi kontainer induk kartu */
+            width: 100%;
+            /* Memastikan padding terhitung di dalam dimensi ukuran */
+            box-sizing: border-box;
+        }
+
+        /* Tombol aksi untuk memakai atau memasang kostum ke karakter */
+        .suit-equip-btn {
+            /* Lebar tombol penuh 100% selebar kartu */
+            width: 100%;
+            /* Jarak bantalan tombol yang proporsional */
+            padding: 9px;
+            /* Sudut tombol melengkung modern */
+            border-radius: 10px;
+            /* Bobot teks tombol tebal */
+            font-weight: 800;
+            /* Ukuran huruf teks tombol */
+            font-size: 12px;
+            /* Renggang antar huruf pada teks tombol */
+            letter-spacing: 1px;
+            /* Format huruf kapital semua */
+            text-transform: uppercase;
+            /* Kursor mouse berubah menjadi bentuk jari telunjuk saat disentuh */
+            cursor: pointer;
+            /* Transisi animasi halus saat berinteraksi */
+            transition: 0.2s;
+            /* Warna latar tombol dasar gelap slate */
+            background: #1e293b;
+            /* Warna teks perak terang */
+            color: #cbd5e1;
+            /* Garis tepi tombol */
+            border: 1px solid #334155;
+        }
+
+        /* Gaya visual tombol saat kartu kostum terkait sedang terpasang aktif */
+        .suit-card.terpilih .suit-equip-btn {
+            /* Latar belakang gradasi emas menyala */
+            background: linear-gradient(90deg, #f59e0b, #eab308);
+            /* Warna teks gelap kontras terhadap warna emas */
+            color: #020617;
+            /* Warna garis tepi emas */
+            border-color: #facc15;
+            /* Bayangan bercahaya lembut keemasan */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ========================================================
+           NEW & IMPROVED CYBER BLACK MARKET (SHOP) STYLES
+           ======================================================== */
+        /* Kotak modal jendela toko Black Market bertema siber */
+        .shop-modal-box {
+            /* Batas lebar minimum dialog modal toko */
+            min-width: 760px;
+            /* Batas lebar maksimum dialog modal toko */
+            max-width: 880px;
+            /* Latar belakang gelap pekat yang diutamakan (!important) */
+            background: #0b1120 !important;
+            /* Garis batas bernuansa biru-slate */
+            border: 1px solid #334155 !important;
+            /* Efek bayangan jatuh yang dalam dan pekat */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85) !important;
+            /* Jarak bantalan dalam dialog modal */
+            padding: 28px !important;
+        }
+
+        /* Bar indikator saldo mata uang pemain di dalam menu toko */
+        .shop-currency-bar {
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Menengahkan elemen secara horizontal */
+            justify-content: center;
+            /* Menengahkan elemen secara vertikal */
+            align-items: center;
+            /* Jarak celah antar item mata uang */
+            gap: 30px;
+            /* Latar belakang semi-transparan elegan */
+            background: rgba(15, 23, 42, 0.85);
+            /* Garis batas halus sekeliling bar */
+            border: 1px solid #1e293b;
+            /* Sudut melengkung modern */
+            border-radius: 14px;
+            /* Ruang bantalan dalam bar saldo */
+            padding: 10px 24px;
+            /* Jarak margin vertikal terhadap elemen sekitar */
+            margin: 12px 0 18px 0;
+        }
+
+        /* Komponen item mata uang (koin emas atau diamond) */
+        .shop-curr-item {
+            /* Tata letak fleksibel sebaris */
+            display: flex;
+            /* Perataan tengah vertikal untuk ikon dan angka */
+            align-items: center;
+            /* Jarak pemisah antara ikon dan jumlah angka */
+            gap: 8px;
+            /* Ukuran angka saldo */
+            font-size: 16px;
+            /* Bobot huruf angka saldo tebal */
+            font-weight: 800;
+            /* Font digital Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Jarak renggang karakter angka */
+            letter-spacing: 1px;
+        }
+
+        /* Baris navigasi tab kategori produk di dalam Black Market */
+        .shop-category-tabs {
+            /* Tata letak baris flex */
+            display: flex;
+            /* Posisi tombol tab berada di tengah */
+            justify-content: center;
+            /* Jarak antar tombol tab */
+            gap: 10px;
+            /* Jarak margin ke bawah menuju daftar item produk */
+            margin-bottom: 20px;
+        }
+
+        /* Tampilan tombol filter tab kategori toko */
+        .shop-tab-btn {
+            /* Latar belakang gelap slate */
+            background: #0f172a;
+            /* Batas tepi abu-abu gelap */
+            border: 1px solid #334155;
+            /* Warna teks abu-abu redup */
+            color: #94a3b8;
+            /* Jarak bantalan tombol tab */
+            padding: 8px 20px;
+            /* Sudut tombol yang membulat */
+            border-radius: 10px;
+            /* Ukuran font teks label tab */
+            font-size: 13px;
+            /* Bobot ketebalan huruf */
+            font-weight: 800;
+            /* Kursor telunjuk pointer */
+            cursor: pointer;
+            /* Animasi transisi perubahan status hover dan aktif */
+            transition: all 0.2s;
+            /* Renggang spasi huruf */
+            letter-spacing: 0.5px;
+        }
+
+        /* Efek visual saat tab sedang aktif atau disorot mouse (hover) */
+        .shop-tab-btn.aktif,
+        .shop-tab-btn:hover {
+            /* Latar belakang aksen cyan lembut transparan */
+            background: rgba(56, 189, 248, 0.15);
+            /* Warna batas tepi berubah menjadi biru cyan */
+            border-color: #38bdf8;
+            /* Warna teks label berubah cerah menjadi cyan */
+            color: #38bdf8;
+            /* Efek pendaran neon biru cyan */
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Tata letak grid kartu produk pada menu toko */
+        .shop-cards-grid {
+            /* Tata letak berbasis CSS Grid */
+            display: grid;
+            /* Membagi menjadi 3 kolom dengan proporsi seimbang sama besar */
+            grid-template-columns: repeat(3, 1fr);
+            /* Jarak sela antar kartu barang */
+            gap: 16px;
+            /* Ketinggian maksimal grid agar kontainer dapat digulir jika barang banyak */
+            max-height: 450px;
+            /* Fitur scroll vertikal otomatis jika konten melampaui batas tinggi */
+            overflow-y: auto;
+            /* Ruang bantalan dalam kisi-kisi */
+            padding: 6px;
+        }
+
+        /* Kartu produk tunggal di dalam Black Market */
+        .shop-card {
+            /* Gradasi latar belakang diagonal bertema sci-fi gelap */
+            background: linear-gradient(145deg, #0b1120, #030712);
+            /* Garis tepi tegas berwarna slate */
+            border: 2px solid #1e293b;
+            /* Lengkungan sudut kartu */
+            border-radius: 16px;
+            /* Ruang bantalan isi kartu */
+            padding: 16px;
+            /* Tata letak tumpukan vertikal */
+            display: flex;
+            /* Arah tumpukan kolom ke bawah */
+            flex-direction: column;
+            /* Perataan elemen di tengah secara horizontal */
+            align-items: center;
+            /* Perataan teks di tengah */
+            text-align: center;
+            /* Jarak pemisah antar elemen internal kartu */
+            gap: 10px;
+            /* Posisi relatif sebagai patokan badge absolute */
+            position: relative;
+            /* Bayangan gelap lembut di bawah kartu */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            /* Transisi kurva halus saat kursor melintas */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Efek saat kartu produk disentuh kursor kursor (hover) */
+        .shop-card:hover {
+            /* Kartu terangkat sedikit ke atas */
+            transform: translateY(-4px);
+            /* Warna garis batas berubah menjadi biru cyan menyala */
+            border-color: #38bdf8;
+            /* Pendaran bayangan biru cyan futuristik */
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Varian kartu barang tier mewah/spesial berbasis diamond */
+        .shop-card.diamond-tier {
+            /* Garis batas berwarna emas tembaga mewah */
+            border-color: rgba(245, 158, 11, 0.6);
+            /* Latar gradasi gelap dengan semburat hangat keemasan */
+            background: linear-gradient(145deg, #1a1506, #070913);
+        }
+
+        /* Efek sorotan hover khusus untuk kartu tier diamond */
+        .shop-card.diamond-tier:hover {
+            /* Batas tepi menyala terang dengan warna kuning emas murni */
+            border-color: #facc15;
+            /* Pendaran bayangan emas bersinar terang */
+            box-shadow: 0 12px 30px rgba(250, 204, 21, 0.3);
+        }
+
+        /* Pita penanda kategori atau tier di pojok kanan atas kartu */
+        .shop-card-badge {
+            /* Posisi absolut pada pojok kartu */
+            position: absolute;
+            /* Jarak dari tepi atas */
+            top: 10px;
+            /* Jarak dari tepi kanan */
+            right: 10px;
+            /* Ukuran font lencana */
+            font-size: 9px;
+            /* Huruf tebal tegas */
+            font-weight: 900;
+            /* Bantalan padding lencana */
+            padding: 2px 8px;
+            /* Sudut melengkung halus */
+            border-radius: 6px;
+            /* Renggang huruf diperlebar */
+            letter-spacing: 1px;
+            /* Transformasi teks menjadi huruf kapital */
+            text-transform: uppercase;
+        }
+
+        /* Warna lencana khusus kategori kostum operative */
+        .badge-suit {
+            /* Latar belakang biru muda transparan */
+            background: rgba(56, 189, 248, 0.15);
+            /* Warna teks biru langit */
+            color: #38bdf8;
+            /* Garis batas biru langit */
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        /* Warna lencana khusus kategori senjata tempur */
+        .badge-weapon {
+            /* Latar belakang merah transparan */
+            background: rgba(239, 68, 68, 0.15);
+            /* Warna teks merah muda tajam */
+            color: #f87171;
+            /* Garis batas merah tajam */
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Warna lencana khusus kategori mata uang langka diamond */
+        .badge-diamond {
+            /* Latar belakang kuning emas transparan */
+            background: rgba(250, 204, 21, 0.2);
+            /* Warna teks emas terang */
+            color: #facc15;
+            /* Garis batas emas tegas */
+            border: 1px solid #facc15;
+        }
+
+        /* Tombol kapsul harga dan pembelian pada kartu toko */
+        .shop-price-pill {
+            /* Tata letak fleksibel sebaris */
+            display: flex;
+            /* Posisikan isi tepat di tengah vertikal */
+            align-items: center;
+            /* Posisikan isi tepat di tengah horizontal */
+            justify-content: center;
+            /* Jarak pemisah ikon dan nominal harga */
+            gap: 6px;
+            /* Lebar tombol penuh mengisi kontainer */
+            width: 100%;
+            /* Ruang bantalan tombol */
+            padding: 9px;
+            /* Sudut kapsul membulat */
+            border-radius: 10px;
+            /* Ukuran teks nominal harga */
+            font-size: 13px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Renggang spasi karakter */
+            letter-spacing: 0.5px;
+            /* Kursor telunjuk saat diarahkan */
+            cursor: pointer;
+            /* Transisi animasi saat kursor melintas */
+            transition: all 0.2s;
+            /* Tanpa garis batas dasar */
+            border: none;
+            /* Mendorong tombol selalu berada di dasar bawah kartu */
+            margin-top: auto;
+        }
+
+        /* Gaya visual tombol harga dengan mata uang koin emas */
+        .price-coin {
+            /* Gradasi warna latar tembaga keemasan */
+            background: linear-gradient(90deg, #d97706, #b45309);
+            /* Warna teks putih murni */
+            color: #fff;
+            /* Garis batas aksen oranye emas */
+            border: 1px solid #f59e0b;
+        }
+
+        /* Efek sorot pada tombol pembelian koin */
+        .price-coin:hover {
+            /* Gradasi warna tombol menjadi lebih terang menyala */
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            /* Bayangan bercahaya warna oranye keemasan */
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+            /* Sedikit membesar untuk umpan balik responsif */
+            transform: scale(1.02);
+        }
+
+        /* Gaya visual tombol harga dengan mata uang diamond */
+        .price-diamond {
+            /* Gradasi warna biru kristal langit */
+            background: linear-gradient(90deg, #0284c7, #0369a1);
+            /* Warna teks putih */
+            color: #fff;
+            /* Garis batas biru berlian neon */
+            border: 1px solid #00e5ff;
+        }
+
+        /* Efek sorot pada tombol pembelian diamond */
+        .price-diamond:hover {
+            /* Gradasi warna tombol menjadi sian kristal terang */
+            background: linear-gradient(90deg, #00e5ff, #0284c7);
+            /* Warna teks menjadi gelap kontras */
+            color: #020617;
+            /* Bayangan pendaran neon biru kristal */
+            box-shadow: 0 0 18px rgba(0, 229, 255, 0.7);
+            /* Efek pembesaran mikro */
+            transform: scale(1.02);
+        }
+
+        /* Animasi penghilangan kartu barang dari toko setelah berhasil dibeli */
+        .shop-card.vanished {
+            /* Opasitas menjadi nol transparan */
+            opacity: 0;
+            /* Kartu mengecil dan bergeser naik ke atas */
+            transform: scale(0.7) translateY(-20px);
+            /* Menonaktifkan interaksi klik kursor */
+            pointer-events: none;
+            /* Animasi melenyap keluar secara halus */
+            transition: all 0.35s ease-out;
+        }
+
+        /* SECTOR DISPATCH CARDS (MODAL PILIH MAP) */
+
+        /* Header bagian atas jendela modal penugasan sektor misi */
+        .dispatch-header {
+            /* Teks diposisikan di tengah */
+            text-align: center;
+            /* Jarak ke bawah menuju daftar kartu sektor */
+            margin-bottom: 20px;
+        }
+
+        /* Lencana teks subjudul terminal operasi penugasan */
+        .dispatch-badge {
+            /* Warna teks biru langit futuristik */
+            color: #38bdf8;
+            /* Ukuran font kecil ringkas */
+            font-size: 11px;
+            /* Ketebalan font ekstra tebal */
+            font-weight: 900;
+            /* Renggang huruf lebar khas kode sandi militer */
+            letter-spacing: 4px;
+            /* Seluruh karakter huruf kapital */
+            text-transform: uppercase;
+        }
+
+        /* Keterangan instruksi sekunder pada header penugasan */
+        .dispatch-subtitle {
+            /* Warna teks abu-abu lembut */
+            color: #94a3b8;
+            /* Ukuran font instruksi */
+            font-size: 13px;
+            /* Jarak margin atas 5px */
+            margin: 5px 0 0 0;
+        }
+
+        /* Latar belakang kartu penugasan Sektor 1: Gedung Pergudangan Tua Florence */
+        #card-sector-1 {
+            background: linear-gradient(90deg, #090e1a 45%, rgba(9, 14, 26, 0.75) 75%), url('background lobby.png') right center / 55% no-repeat;
+        }
+        /* Latar belakang kartu penugasan Sektor 2: Hutan Liar / Pangkalan Riset Biologi */
+        #card-sector-2 {
+            background: linear-gradient(90deg, #090e1a 45%, rgba(9, 14, 26, 0.75) 75%), url('jungle.png') right center / 55% no-repeat;
+        }
+        /* Latar belakang kartu penugasan Sektor 3: Laboratorium Cyber Citadel Penthouse */
+        #card-sector-3 {
+            background: linear-gradient(90deg, #090e1a 45%, rgba(9, 14, 26, 0.75) 75%), url('cyber lab.png') right center / 55% no-repeat;
+        }
+
+        /* Wadah vertikal yang memuat seluruh kartu pilihan sektor misi */
+        .sector-cards-container {
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Disusun berbaris ke bawah */
+            flex-direction: column;
+            /* Jarak sela antar kartu sektor */
+            gap: 14px;
+            /* Batas tinggi maksimum kontainer agar bisa di-scroll jika diperlukan */
+            max-height: 460px;
+            /* Pengguliran vertikal otomatis jika konten panjang */
+            overflow-y: auto;
+            /* Ruang bantalan kanan untuk jarak scrollbar */
+            padding-right: 4px;
+        }
+
+        /* Kartu pilihan sektor misi tunggal */
+        .sector-card {
+            /* Latar gradasi gelap cyberpunk */
+            background: linear-gradient(135deg, #090e1a, #030712);
+            /* Garis batas luar kartu berwarna abu-abu gelap */
+            border: 2px solid #1e293b;
+            /* Sudut melengkung modern */
+            border-radius: 18px;
+            /* Ruang bantalan dalam kartu */
+            padding: 20px 24px;
+            /* Tata letak fleksibel sebaris */
+            display: flex;
+            /* Posisi tengah secara vertikal */
+            align-items: center;
+            /* Memisahkan detail info kiri dengan tombol deploy kanan */
+            justify-content: space-between;
+            /* Jarak sela antar komponen kiri dan kanan */
+            gap: 20px;
+            /* Kursor mouse menjadi telunjuk pointer */
+            cursor: pointer;
+            /* Transisi animasi saat disentuh */
+            transition: all 0.3s;
+            /* Posisi relatif untuk elemen overlay gembok */
+            position: relative;
+            /* Memotong konten yang keluar dari radius sudut */
+            overflow: hidden;
+        }
+
+        /* Efek sorotan hover kursor pada kartu sektor yang sudah terbuka */
+        .sector-card:hover:not(.locked) {
+            /* Kartu bergeser halus sedikit ke kanan */
+            transform: translateX(6px);
+            /* Garis batas berubah menjadi emas bersinar */
+            border-color: var(--accent-gold);
+            /* Bayangan pendaran hangat keemasan */
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15);
+            /* Gradasi latar belakang berubah lebih terang kebiruan */
+            background: linear-gradient(135deg, #131c2e, #090e1a);
+        }
+
+        /* Status visual untuk kartu sektor yang masih terkunci */
+        .sector-card.locked {
+            /* Tampilan dibuat redup transparan */
+            opacity: 0.6;
+            /* Mengubah kursor menjadi simbol terlarang */
+            cursor: not-allowed;
+            /* Garis tepi kembali menjadi abu-abu redup */
+            border-color: #1e293b;
+        }
+
+        /* Bagian kolom kiri kartu sektor yang memuat rincian informasi misi */
+        .sector-left-info {
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Disusun menurun ke bawah */
+            flex-direction: column;
+            /* Jarak sela antar baris teks */
+            gap: 6px;
+            /* Rata kiri untuk teks informasi */
+            text-align: left;
+            /* Mengisi ruang kosong yang tersedia */
+            flex: 1;
+        }
+
+        /* Baris kepala penanda nomor sektor dan tingkat bahaya */
+        .sector-badge-header {
+            /* Tata letak fleksibel sebaris */
+            display: flex;
+            /* Penyelarasan vertikal di tengah */
+            align-items: center;
+            /* Jarak pemisah antar badge */
+            gap: 10px;
+        }
+
+        /* Label nomor kode sektor operasi */
+        .sector-num {
+            /* Font digital Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran font nomor */
+            font-size: 14px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna teks biru langit */
+            color: #38bdf8;
+            /* Renggang spasi huruf */
+            letter-spacing: 2px;
+        }
+
+        /* Label badge indikator tingkat ancaman bahaya misi */
+        .threat-tag {
+            /* Ukuran font lencana bahaya */
+            font-size: 10px;
+            /* Bobot huruf tebal */
+            font-weight: 900;
+            /* Ruang bantalan dalam badge */
+            padding: 2px 8px;
+            /* Sudut membulat */
+            border-radius: 6px;
+            /* Renggang spasi teks */
+            letter-spacing: 1px;
+        }
+
+        /* Indikator tingkat bahaya normal (Hijau) */
+        .threat-normal {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid #22c55e;
+        }
+
+        /* Indikator tingkat bahaya sulit (Kuning/Emas) */
+        .threat-hard {
+            background: rgba(245, 158, 11, 0.15);
+            color: #facc15;
+            border: 1px solid #f59e0b;
+        }
+
+        /* Indikator tingkat bahaya mimpi buruk/ekstrem (Merah) */
+        .threat-nightmare {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid #ef4444;
+        }
+
+        /* Judul nama sektor target penugasan */
+        .sector-name {
+            /* Font digital Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran judul nama sektor */
+            font-size: 22px;
+            /* Ketebalan huruf tebal */
+            font-weight: 800;
+            /* Warna teks putih cerah */
+            color: #f8fafc;
+            /* Menghilangkan margin bawaan */
+            margin: 0;
+            /* Jarak renggang huruf */
+            letter-spacing: 1px;
+        }
+
+        /* Ringkasan latar cerita dan tujuan briefing misi sektor */
+        .sector-brief {
+            /* Ukuran font deskripsi */
+            font-size: 12px;
+            /* Warna teks abu-abu lembut */
+            color: #94a3b8;
+            /* Menghilangkan margin */
+            margin: 0;
+            /* Jarak ketinggian baris teks */
+            line-height: 1.4;
+        }
+
+        /* Metadata pencapaian bintang dan status kesiapan misi */
+        .sector-meta {
+            /* Tata letak fleksibel sebaris */
+            display: flex;
+            /* Penyelarasan vertikal di tengah */
+            align-items: center;
+            /* Jarak sela antar informasi bintang dan kapsul status */
+            gap: 16px;
+            /* Jarak margin ke atas */
+            margin-top: 4px;
+        }
+
+        /* Tampilan simbol perolehan bintang prestasi sektor */
+        .sector-stars {
+            /* Ukuran simbol bintang */
+            font-size: 18px;
+            /* Warna bintang kuning emas */
+            color: #facc15;
+            /* Renggang spasi antar bintang */
+            letter-spacing: 3px;
+        }
+
+        /* Kapsul teks indikator kesiapan status sektor */
+        .sector-status-pill {
+            /* Ukuran teks status */
+            font-size: 11px;
+            /* Ketebalan huruf tebal */
+            font-weight: 800;
+            /* Ruang bantalan kapsul */
+            padding: 3px 10px;
+            /* Sudut kapsul membulat penuh */
+            border-radius: 20px;
+            /* Latar belakang gelap slate */
+            background: rgba(15, 23, 42, 0.8);
+            /* Batas tepi abu-abu */
+            border: 1px solid #334155;
+            /* Warna teks abu-abu terang */
+            color: #cbd5e1;
+        }
+
+        /* Kapsul status ketika sektor sudah siap diterjunkan */
+        .sector-status-pill.status-ready {
+            /* Warna teks hijau terang */
+            color: #4ade80;
+            /* Garis batas hijau transparan */
+            border-color: rgba(34, 197, 94, 0.4);
+            /* Latar belakang hijau transparan lembut */
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        /* Tombol aksi peluncuran operasi pada kartu sektor */
+        .btn-deploy-sector {
+            /* Latar gradasi warna biru taktis */
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            /* Warna teks putih murni */
+            color: #ffffff;
+            /* Tanpa garis tepi */
+            border: none;
+            /* Ruang bantalan dalam tombol */
+            padding: 14px 22px;
+            /* Sudut melengkung halus */
+            border-radius: 12px;
+            /* Font digital gaming */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran teks tombol */
+            font-size: 18px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Jarak renggang karakter */
+            letter-spacing: 2px;
+            /* Kursor telunjuk pointer */
+            cursor: pointer;
+            /* Transisi animasi responsif */
+            transition: 0.2s;
+            /* Mencegah teks terpotong ke baris baru */
+            white-space: nowrap;
+            /* Efek bayangan biru bercahaya */
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        /* Efek tombol luncur saat kartu sektor yang terbuka disentuh kursor */
+        .sector-card:hover:not(.locked) .btn-deploy-sector {
+            /* Gradasi warna tombol berubah menjadi biru cyan cerah */
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            /* Tombol membesar sedikit secara responsif */
+            transform: scale(1.05);
+            /* Pendaran bayangan biru cyan bersinar */
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Tampilan tombol pada kartu sektor yang terkunci */
+        .sector-card.locked .btn-deploy-sector {
+            /* Latar belakang abu-abu gelap mati */
+            background: #1e293b;
+            /* Warna teks redup */
+            color: #64748b;
+            /* Hilangkan efek bayangan bercahaya */
+            box-shadow: none;
+            /* Kursor tidak dapat diklik */
+            cursor: not-allowed;
+        }
+
+        /* Lapisan tirai penutup untuk sektor yang masih terkunci */
+        .sector-lock-overlay {
+            /* Posisi absolut menutupi seluruh luas kartu */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Latar belakang gelap transparan pekat */
+            background: rgba(3, 7, 18, 0.75);
+            /* Efek buram pada latar belakang di baliknya */
+            backdrop-filter: blur(4px);
+            /* Tata letak fleksibel untuk memposisikan teks gembok */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            /* Warna teks abu-abu peringatan */
+            color: #94a3b8;
+            /* Font digital Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 18px;
+            /* Berada di tumpukan teratas lapisan kartu */
+            z-index: 5;
+        }
+    </style>
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= SCENIC LOBBY VIEWPORT ================= -->
+    <!-- Kontainer utama pemandangan lobby panggung sinematik -->
+    <div class="lobby-viewport">
+        <!-- Adegan 3D/latar belakang atmosfer lobby citadel -->
+        <div class="lobby-scene">
+            <!-- BACKGROUND IMAGE: background lobby.png -->
+            <!-- Gambar latar belakang panorama benteng malam Florence Citadel -->
+            <img class="lobby-bg-img" src="background lobby.png" alt="Florence Night Citadel">
+
+            <!-- VOLUMETRIC SPOTLIGHT BEAM FROM CLOCKTOWER (23.4% down to 72%) -->
+            <!-- Cahaya sorot volumetrik dramatis dari menara jam istana -->
+            <div class="volumetric-spotlight"></div>
+
+            <!-- ATMOSPHERIC DUST MOTES FLOATING IN SPOTLIGHT BEAM -->
+            <!-- Wadah partikel debu atmosfer yang melayang di dalam berkas cahaya sorot -->
+            <div class="dust-container">
+                <!-- Partikel debu 1 -->
+                <div class="mote" style="width: 3px; height: 3px; top: 10%; left: 45%; animation-duration: 9s; animation-delay: 0s;"></div>
+                <!-- Partikel debu 2 -->
+                <div class="mote" style="width: 4px; height: 4px; top: 25%; left: 52%; animation-duration: 12s; animation-delay: 2s;"></div>
+                <!-- Partikel debu 3 -->
+                <div class="mote" style="width: 2px; height: 2px; top: 40%; left: 42%; animation-duration: 8s; animation-delay: 4s;"></div>
+                <!-- Partikel debu 4 -->
+                <div class="mote" style="width: 5px; height: 5px; top: 55%; left: 60%; animation-duration: 14s; animation-delay: 1s;"></div>
+                <!-- Partikel debu 5 -->
+                <div class="mote" style="width: 3px; height: 3px; top: 70%; left: 38%; animation-duration: 10s; animation-delay: 3s;"></div>
+                <!-- Partikel debu 6 -->
+                <div class="mote" style="width: 4px; height: 4px; top: 85%; left: 55%; animation-duration: 11s; animation-delay: 5s;"></div>
+                <!-- Partikel debu 7 -->
+                <div class="mote" style="width: 2px; height: 2px; top: 30%; left: 48%; animation-duration: 7s; animation-delay: 6s;"></div>
+                <!-- Partikel debu 8 -->
+                <div class="mote" style="width: 3px; height: 3px; top: 65%; left: 50%; animation-duration: 13s; animation-delay: 2.5s;"></div>
+            </div>
+
+            <!-- CHARACTER STAGE (ANCHORED RIGHT UNDER SPOTLIGHT ON WOODEN PLANK BRIDGE) -->
+            <!-- Panggung posisi karakter ninja pembunuh di atas jembatan papan kayu -->
+            <div class="character-stage">
+                <!-- Pembungkus sprite karakter beserta lapisan efek bayangan -->
+                <div class="character-wrapper">
+                    <!-- Warm ambient floor bounce glow on wooden deck -->
+                    <!-- Efek pantulan cahaya pendar hangat pada permukaan dek lantai kayu -->
+                    <div class="floor-bounce-glow"></div>
+                    <!-- Realistic directional cast shadow on planks -->
+                    <!-- Bayangan jatuh terarah realistis karakter pada papan lantai -->
+                    <div class="cast-shadow"></div>
+                    <!-- Sharp contact occlusion shadow beneath boots -->
+                    <!-- Bayangan oklusi kontak tajam tepat di bawah telapak sepatu karakter -->
+                    <div class="contact-shadow"></div>
+                    <!-- Hidden pedestal element to maintain compatibility -->
+                    <!-- Elemen tumpuan alas tersembunyi untuk kompatibilitas script lama -->
+                    <div class="ninja-pedestal"></div>
+                    <!-- The Assassin Character Sprite -->
+                    <!-- Gambar sprite karakter Assassin utama (dapat diklik untuk membuka lemari kostum) -->
+                    <img id="ninja-karakter" src="navy.png" alt="Master Assassin" onclick="bukaModal('modal-vault')" title="Click to Change Suit">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TOP NAVIGATION HUD ================= -->
+    <!-- Baris navigasi HUD bagian atas layar permainan -->
+    <header class="top-hud-bar">
+        <!-- Sisi kiri HUD: Profil pemain dan indikator saldo mata uang -->
+        <div class="top-hud-left">
+            <!-- PLAYER PROFILE CARD (ASSASSIN'S CREED STYLE) -->
+            <!-- Kartu identitas profil pemain bertema Assassin's Creed -->
+            <div class="player-profile-card" onclick="bukaModalNama()" title="Change Codename">
+                <!-- Bingkai lingkaran avatar pemain -->
+                <div class="avatar-ring-frame">
+                    <!-- Foto avatar wajah pemain yang menyesuaikan kostum -->
+                    <img id="avatar-img" src="navy.png" alt="Avatar">
+                    <!-- Lencana angka level pemain -->
+                    <div class="avatar-level-badge">8</div>
+                </div>
+                <!-- Kelompok teks rincian nama dan pangkat pemain -->
+                <div class="profile-info-group">
+                    <!-- Baris nama pemain beserta ikon pensil edit -->
+                    <div class="p-name-row">
+                        <!-- Teks nama panggilan pemain -->
+                        <span class="p-name" id="teks-profil">Player</span>
+                        <!-- Ikon tombol edit nama panggilan -->
+                        <span class="edit-badge">✎</span>
+                    </div>
+                    <!-- Baris gelar pangkat ninja dan bar progres XP -->
+                    <div class="p-rank-row">
+                        <!-- Teks titel pangkat ninja (misal: GENIN, CHUNIN, JONIN) -->
+                        <span class="p-rank" id="teks-rank">RANK: GENIN</span>
+                        <!-- Lintasan bar kemajuan pengalaman XP -->
+                        <div class="xp-track">
+                            <!-- Indikator pengisi bar progres XP -->
+                            <div class="xp-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CURRENCY: GOLD COINS -->
+            <!-- Kapsul saldo mata uang koin emas serikat -->
+            <div class="currency-capsule currency-gold" title="Guild Gold Coins">
+                <!-- Ikon visual koin emas -->
+                <span class="c-icon">🪙</span>
+                <!-- Nilai nominal saldo koin pemain -->
+                <span class="c-amount c-gold-val" id="teks-koin">8400</span>
+            </div>
+
+            <!-- CURRENCY: DIAMONDS -->
+            <!-- Kapsul saldo mata uang permata diamond berharga -->
+            <div class="currency-capsule currency-diamond" title="Precious Gems">
+                <!-- Ikon visual permata diamond -->
+                <span class="c-icon">💎</span>
+                <!-- Nilai nominal saldo diamond pemain -->
+                <span class="c-amount c-dia-val" id="teks-diamond">0</span>
+            </div>
+        </div>
+
+        <!-- CENTER GUILD CREST -->
+        <!-- Lambang persaudaraan serikat pembunuh di tengah atas layar -->
+        <div class="center-crest">
+            <!-- Teks subjudul serikat pembunuh -->
+            <div class="crest-subtitle">THE BROTHERHOOD</div>
+            <!-- Judul utama game Speed Assassin -->
+            <h1 class="crest-title">SPEED ASSASSIN</h1>
+        </div>
+
+        <!-- TOP RIGHT SETTINGS -->
+        <!-- Sisi kanan HUD: Tombol akses pengaturan sistem -->
+        <div class="top-hud-right">
+            <!-- Tombol ikon roda gigi bergaya gothic untuk membuka jendela setting -->
+            <div class="btn-settings-gothic" onclick="bukaModal('modal-setting')" title="System Settings">⚙️</div>
+        </div>
+    </header>
+
+    <!-- ================= SIDE ACTION DOCKS ================= -->
+    <!-- LEFT: ARMORY -->
+    <!-- Panel dermaga aksi samping kiri: Menu persenjataan dan perlengkapan tempur -->
+    <aside class="side-action-dock dock-left">
+        <!-- Judul tajuk dermaga persenjataan -->
+        <div class="dock-header">ARMORY</div>
+        <!-- Tombol aksi membuka lemari pakaian dan kostum tempur -->
+        <button class="gothic-action-btn" onclick="bukaModal('modal-vault')">
+            <!-- Ikon pakaian ninja -->
+            <span class="action-icon">🥋</span>
+            <!-- Label teks tombol Suit Vault -->
+            <span class="action-text">Suit Vault</span>
+        </button>
+        <!-- Tombol aksi membuka gudang persenjataan jarak dekat -->
+        <button class="gothic-action-btn" onclick="bukaModal('modal-senjata')">
+            <!-- Ikon pedang bersilang -->
+            <span class="action-icon">⚔️</span>
+            <!-- Label teks tombol Weapons -->
+            <span class="action-text">Weapons</span>
+        </button>
+        <!-- Tombol aksi membuka buku penguasaan skill dan jurus rahasia -->
+        <button class="gothic-action-btn" onclick="bukaModal('modal-skill')">
+            <!-- Ikon gulungan jurus ninja -->
+            <span class="action-icon">📜</span>
+            <!-- Label teks tombol Mastery Book -->
+            <span class="action-text">Mastery Book</span>
+        </button>
+    </aside>
+
+    <!-- RIGHT: OPERATIONS -->
+    <!-- Panel dermaga aksi samping kanan: Menu operasi taktis dan misi serikat -->
+    <aside class="side-action-dock dock-right">
+        <!-- Judul tajuk dermaga operasi taktis -->
+        <div class="dock-header">OPERATIONS</div>
+        <!-- Tombol aksi membuka pasar gelap sindikat kejahatan -->
+        <button class="gothic-action-btn" onclick="bukaModal('modal-shop')">
+            <!-- Ikon troli belanjaan -->
+            <span class="action-icon">🛒</span>
+            <!-- Label teks tombol Black Market -->
+            <span class="action-text">Black Market</span>
+        </button>
+        <!-- Tombol aksi membuka daftar kontrak buronan harian -->
+        <button class="gothic-action-btn" onclick="bukaModalMisi()">
+            <!-- Ikon target bidikan sasaran -->
+            <span class="action-icon">🎯</span>
+            <!-- Label teks tombol Daily Bounties -->
+            <span class="action-text">Daily Bounties</span>
+        </button>
+        <!-- Tombol aksi membuka rekam jejak prestasi dan medali penghargaan -->
+        <button class="gothic-action-btn" onclick="bukaModalPrestasi()">
+            <!-- Ikon medali kehormatan -->
+            <span class="action-icon">🏅</span>
+            <!-- Label teks tombol Service Record -->
+            <span class="action-text">Service Record</span>
+        </button>
+    </aside>
+
+    <!-- ================= BOTTOM CONTROL HUD ================= -->
+    <!-- Baris panel kontrol HUD bagian bawah layar navigasi utama -->
+    <footer class="bottom-hud-bar">
+        <!-- 2. CENTER: SECTOR SELECTOR CARDS (AC STYLE) -->
+        <!-- Kotak penampil miniatur pilihan sektor misi di tengah bawah HUD -->
+        <div class="sectors-nav-box">
+            <!-- Baris tab judul navigasi sektor misi -->
+            <div class="sectors-header-row">
+                <!-- Tab judul Sektor 1 (aktif secara default) -->
+                <span class="sector-header-tab active-sector-tab" onclick="pilihSektorHUD(1)">SECTOR 1: FLORENCE NIGHT</span>
+                <!-- Tab judul Sektor 2 -->
+                <span class="sector-header-tab" id="tab-hdr-2" onclick="pilihSektorHUD(2)">SECTOR 2: JUNGLE</span>
+                <!-- Tab judul Sektor 3 -->
+                <span class="sector-header-tab" id="tab-hdr-3" onclick="pilihSektorHUD(3)">SECTOR 3: LAB</span>
+            </div>
+            <!-- Baris deretan kartu miniatur pratayang ketiga sektor -->
+            <div class="sector-mini-cards-row">
+                <!-- SECTOR 1 -->
+                <!-- Kartu miniatur Sektor 1: Florence Night -->
+                <div class="sector-mini-card active-card" id="hud-mini-sector-1" onclick="pilihSektorHUD(1)">
+                    <!-- Gambar thumbnail pratayang Sektor 1 -->
+                    <img class="sector-card-bg-preview" src="background lobby.png" alt="Florence Night">
+                    <!-- Lapisan bayangan gradasi latar belakang kartu -->
+                    <div class="sector-gradient-shade"></div>
+                    <!-- Hamparan teks informasi nama dan status sektor -->
+                    <div class="sector-info-overlay">
+                        <!-- Nama singkat sektor -->
+                        <span class="sector-mini-title">FLORENCE</span>
+                        <!-- Status kesiapan sektor di HUD -->
+                        <span class="sector-mini-status" id="hud-status-1">READY</span>
+                    </div>
+                </div>
+
+                <!-- SECTOR 2 -->
+                <!-- Kartu miniatur Sektor 2: Jungle Outpost -->
+                <div class="sector-mini-card" id="hud-mini-sector-2" onclick="pilihSektorHUD(2)">
+                    <!-- Gambar thumbnail pratayang Sektor 2 -->
+                    <img class="sector-card-bg-preview" src="jungle.png" alt="Jungle Outpost">
+                    <!-- Lapisan bayangan gradasi kartu -->
+                    <div class="sector-gradient-shade"></div>
+                    <!-- Ikon gembok pengunci pada kartu mini sektor 2 -->
+                    <span class="sector-mini-lock" id="hud-lock-icon-2">🔒</span>
+                    <!-- Hamparan informasi status sektor 2 -->
+                    <div class="sector-info-overlay">
+                        <!-- Nama singkat sektor -->
+                        <span class="sector-mini-title">JUNGLE</span>
+                        <!-- Teks status terkunci atau siap -->
+                        <span class="sector-mini-status" id="hud-status-2">LOCKED</span>
+                    </div>
+                </div>
+
+                <!-- SECTOR 3 -->
+                <!-- Kartu miniatur Sektor 3: Cyber Citadel Lab -->
+                <div class="sector-mini-card" id="hud-mini-sector-3" onclick="pilihSektorHUD(3)">
+                    <!-- Gambar thumbnail pratayang Sektor 3 -->
+                    <img class="sector-card-bg-preview" src="cyber lab.png" alt="Cyber Citadel Lab">
+                    <!-- Lapisan bayangan gradasi kartu -->
+                    <div class="sector-gradient-shade"></div>
+                    <!-- Ikon gembok pengunci pada kartu mini sektor 3 -->
+                    <span class="sector-mini-lock" id="hud-lock-icon-3">🔒</span>
+                    <!-- Hamparan informasi status sektor 3 -->
+                    <div class="sector-info-overlay">
+                        <!-- Nama singkat sektor -->
+                        <span class="sector-mini-title">CYBER LAB</span>
+                        <!-- Teks status terkunci atau siap -->
+                        <span class="sector-mini-status" id="hud-status-3">LOCKED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. RIGHT: DEPLOY BUTTON -->
+        <!-- Pembungkus tombol aksi penerjunan pasukan misi -->
+        <div class="deploy-button-wrapper">
+            <!-- Tombol emas utama untuk langsung memulai penugasan ke sektor terpilih -->
+            <button class="btn-deploy-master" onclick="eksekusiDeployHUD()">DEPLOY</button>
+        </div>
+    </footer>
+
+<!-- ================= MODALS ================= -->
+
+    <!-- Modal pop-up Service Record untuk menampilkan prestasi dan klaim reward koin -->
+    <div id="modal-prestasi" class="modal-overlay">
+        <!-- Kotak isi dialog modal prestasi -->
+        <div class="modal-box">
+            <!-- Judul modal catatan rekam jejak prestasi -->
+            <h2>🏅 Service Record</h2>
+            <!-- Wadah kisi-kisi dinamis yang memuat daftar kartu prestasi -->
+            <div id="prestasi-container" class="grid-container"></div>
+            <!-- Tombol untuk menutup jendela modal prestasi -->
+            <button class="btn-tutup" onclick="tutupModal('modal-prestasi')">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal pop-up notifikasi saat pemain berhasil membuka sektor area misi baru -->
+    <div id="modal-unlock" class="modal-overlay" style="z-index: 1005;">
+        <!-- Kotak konten pop-up pengumuman pembukaan sektor baru -->
+        <div class="modal-box" style="border-color: #334155; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);">
+            <!-- Tajuk peringatan bahwa sektor baru telah terbuka -->
+            <h1 style="color: #f59e0b; font-size: 32px; margin-top: 0; font-family: 'Rajdhani', sans-serif;">🔒 SECTOR
+                UNLOCKED! 🔒</h1>
+            <!-- Paragraf pesan konfirmasi akses izin infiltrasi misi -->
+            <p style="font-size: 16px; color: #cbd5e1;">Access granted. New area ready for infiltration:</p>
+            <!-- Nama sektor area baru yang berhasil dibuka -->
+            <h2 id="teks-unlock-map"
+                style="color: #10b981; font-size: 24px; border: 1px solid #10b981; padding: 15px; border-radius: 12px; background: rgba(16, 185, 129, 0.1);">
+                🌲 New Area</h2>
+            <!-- Tombol konfirmasi penerimaan misi baru untuk menutup dialog -->
+            <button class="opsi-btn btn-beli"
+                style="padding: 12px 30px; font-size: 18px; width: 100%; margin-top: 15px;"
+                onclick="tutupModal('modal-unlock')">ACCEPT MISSION</button>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <!-- Modal pop-up pengaturan konfigurasi sistem suara dan data permainan -->
+    <div id="modal-setting" class="modal-overlay">
+        <!-- Kotak dialog pengaturan game -->
+        <div class="modal-box">
+            <!-- Judul dialog pengaturan sistem -->
+            <h2>⚙️ System Settings</h2>
+            <!-- Baris penggeser slider pengatur volume suara audio -->
+            <div class="setting-row"><span>Sound Volume:</span><input type="range" id="volume-slider" min="0" max="1"
+                    step="0.1" onchange="ubahVolume(this.value)"></div>
+            <!-- Tombol darurat untuk mereset dan menghapus seluruh simpanan data game -->
+            <button class="btn-tutup" style="border-color: #ef4444; color: #ef4444;" onclick="resetGameData()">⚠️ Reset
+                All Data</button>
+            <!-- Tombol konfirmasi untuk menyimpan perubahan pengaturan dan menutup dialog -->
+            <button class="btn-tutup"
+                style="margin-top: 15px; border-color: var(--accent-gold); color: var(--accent-gold);"
+                onclick="tutupModal('modal-setting')">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Modal pop-up kontrak misi harian (Daily Contracts) -->
+    <div id="modal-misi" class="modal-overlay">
+        <!-- Kotak dialog daftar misi harian -->
+        <div class="modal-box">
+            <!-- Judul modal misi harian -->
+            <h2>🎯 Daily Contracts</h2>
+            <!-- Kontainer tempat merender item-item misi harian secara dinamis -->
+            <div id="misi-container" class="grid-container"></div>
+            <!-- Tombol untuk menutup jendela modal misi harian -->
+            <button class="btn-tutup" onclick="tutupModal('modal-misi')">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal pop-up untuk mengubah nama panggilan agen (Codename) -->
+    <div id="modal-nama" class="modal-overlay" style="z-index: 1001;">
+        <!-- Kotak dialog input nama agen -->
+        <div class="modal-box" style="min-width: 400px;">
+            <!-- Judul dialog identitas agen -->
+            <h2>Agent Identity</h2>
+            <!-- Input bidang teks tempat memasukkan nama samaran baru -->
+            <input type="text" id="input-nama" class="input-nama" placeholder="Codename..." maxlength="12">
+            <!-- Tombol simpan perubahan identitas ke basis data lokal -->
+            <button class="opsi-btn btn-beli" onclick="simpanNama()"
+                style="width: 100%; padding: 15px; font-size: 18px; letter-spacing: 2px;">UPDATE DATABASE</button>
+            <!-- Tombol batal untuk menutup modal nama -->
+            <button class="btn-tutup" onclick="tutupModal('modal-nama')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Modal pop-up terminal pemilihan sektor area operasi misi lengkap -->
+    <div id="modal-pilih-map" class="modal-overlay">
+        <!-- Kotak dialog briefing pemilihan peta sektor -->
+        <div class="modal-box sector-dispatch-box" style="min-width: 650px; max-width: 720px;">
+            <!-- Tajuk briefing terminal penugasan -->
+            <div class="dispatch-header">
+                <!-- Label penanda terminal pemberangkatan -->
+                <div class="dispatch-badge">DISPATCH TERMINAL</div>
+                <!-- Judul utama pemilihan sektor misi -->
+                <h2 style="margin: 4px 0;">SELECT OPERATION SECTOR</h2>
+                <!-- Teks briefing instruksi sasaran target dan misi pencurian permata -->
+                <p class="dispatch-subtitle">Choose your target compound — eliminate all guards, take down the boss, and
+                    steal the diamonds!</p>
+            </div>
+
+            <!-- Wadah scrollable berisi daftar ketiga kartu sektor misi -->
+            <div class="sector-cards-container">
+                <!-- SECTOR 1 -->
+                <!-- Kartu Sektor 1: Old Warehouse Depot -->
+                <div class="sector-card" id="card-sector-1" onclick="gasMain(1, 'gedung')">
+                    <!-- Kolom informasi sektor kiri -->
+                    <div class="sector-left-info">
+                        <!-- Baris lencana nomor sektor dan tingkat ancaman -->
+                        <div class="sector-badge-header">
+                            <!-- Nomor sektor 1 -->
+                            <span class="sector-num">SECTOR 01</span>
+                            <!-- Lencana tingkat bahaya Normal -->
+                            <span class="threat-tag threat-normal">NORMAL</span>
+                        </div>
+                        <!-- Nama judul Sektor 1 -->
+                        <h3 class="sector-name">OLD WAREHOUSE DEPOT</h3>
+                        <!-- Ringkasan instruksi penyusupan pada Sektor 1 -->
+                        <p class="sector-brief">Infiltrate the logistics warehouse maze. Hide behind crates, dodge
+                            patrol flashlights, and take down enemies from behind.</p>
+                        <!-- Metadata pencapaian bintang dan status penugasan Sektor 1 -->
+                        <div class="sector-meta">
+                            <!-- Indikator bintang Sektor 1 -->
+                            <div class="sector-stars" id="stars-sector-1">⭐⭐⭐</div>
+                            <!-- Kapsul status siap bertugas -->
+                            <div class="sector-status-pill status-ready" id="status-pill-1">READY TO DEPLOY</div>
+                        </div>
+                    </div>
+                    <!-- Tombol luncurkan penugasan menuju Sektor 1 -->
+                    <button class="btn-deploy-sector">DEPLOY ➔</button>
+                </div>
+
+                <!-- SEKTOR 2 -->
+                <!-- Kartu Sektor 2: Bio-Research Outpost -->
+                <div class="sector-card" id="card-sector-2" onclick="gasMain(2, 'hutan')">
+                    <!-- Kolom informasi sektor 2 -->
+                    <div class="sector-left-info">
+                        <!-- Baris lencana nomor sektor dan ancaman -->
+                        <div class="sector-badge-header">
+                            <!-- Nomor sektor 2 -->
+                            <span class="sector-num">SEKTOR 02</span>
+                            <!-- Lencana tingkat bahaya Hard -->
+                            <span class="threat-tag threat-hard">HARD</span>
+                        </div>
+                        <!-- Nama judul Sektor 2 -->
+                        <h3 class="sector-name">BIO-RESEARCH OUTPOST</h3>
+                        <!-- Ringkasan instruksi bahaya pangkalan hutan Sektor 2 -->
+                        <p class="sector-brief">Military jungle base. Guarded by heavy armored juggernauts and deadly
+                            tripwire sensors.</p>
+                        <!-- Metadata bintang dan syarat pembukaan Sektor 2 -->
+                        <div class="sector-meta">
+                            <!-- Indikator perolehan bintang Sektor 2 -->
+                            <div class="sector-stars" id="stars-sector-2">☆☆☆</div>
+                            <!-- Kapsul status pembukaan -->
+                            <div class="sector-status-pill" id="status-pill-2">REQUIRES SECTOR 1</div>
+                        </div>
+                    </div>
+                    <!-- Lapisan penutup gembok jika Sektor 2 belum terbuka -->
+                    <div class="sector-lock-overlay" id="lock-overlay-2">
+                        <span>🔒</span> <span>LOCKED — COMPLETE SECTOR 1 FIRST</span>
+                    </div>
+                    <!-- Tombol deploy sektor 2 -->
+                    <button class="btn-deploy-sector" id="btn-deploy-2">DEPLOY ➔</button>
+                </div>
+
+                <!-- SECTOR 3 -->
+                <!-- Kartu Sektor 3: Cyber Citadel Penthouse -->
+                <div class="sector-card" id="card-sector-3" onclick="gasMain(3, 'lab')">
+                    <!-- Kolom informasi sektor 3 -->
+                    <div class="sector-left-info">
+                        <!-- Baris lencana nomor sektor dan ancaman -->
+                        <div class="sector-badge-header">
+                            <!-- Nomor sektor 3 -->
+                            <span class="sector-num">SECTOR 03</span>
+                            <!-- Lencana tingkat ancaman Nightmare -->
+                            <span class="threat-tag threat-nightmare">NIGHTMARE</span>
+                        </div>
+                        <!-- Nama judul Sektor 3 -->
+                        <h3 class="sector-name">CYBER CITADEL PENTHOUSE</h3>
+                        <!-- Ringkasan bahaya menara cyber dan bos rival pembunuh -->
+                        <p class="sector-brief">High-tech cyber fortress. Watch out for auto-turrets, the executive
+                            boss, and the Rival Assassin in Stage 4.</p>
+                        <!-- Metadata bintang dan status ketersediaan Sektor 3 -->
+                        <div class="sector-meta">
+                            <!-- Indikator bintang Sektor 3 -->
+                            <div class="sector-stars" id="stars-sector-3">☆☆☆</div>
+                            <!-- Kapsul syarat pembukaan Sektor 3 -->
+                            <div class="sector-status-pill" id="status-pill-3">REQUIRES SECTOR 2</div>
+                        </div>
+                    </div>
+                    <!-- Lapisan penutup gembok jika Sektor 3 belum terbuka -->
+                    <div class="sector-lock-overlay" id="lock-overlay-3">
+                        <span>🔒</span> <span>LOCKED — COMPLETE SECTOR 2 FIRST</span>
+                    </div>
+                    <!-- Tombol deploy sektor 3 -->
+                    <button class="btn-deploy-sector" id="btn-deploy-3">DEPLOY ➔</button>
+                </div>
+            </div>
+
+            <!-- Tombol kembali untuk menutup modal pemilihan map -->
+            <button class="btn-tutup" onclick="tutupModal('modal-pilih-map')" style="margin-top: 15px;">Back</button>
+        </div>
+    </div>
+
+    <!-- VAULT MODAL: 6 CYBER-ASSASSIN SUITS -->
+    <!-- Modal lemari kostum agen (Suit Vault) yang memuat koleksi jubah dan zirah taktis -->
+    <div id="modal-vault" class="modal-overlay">
+        <!-- Kotak dialog lemari kostum agen -->
+        <div class="modal-box" style="min-width: 650px; max-width: 780px;">
+            <!-- Header judul lemari pakaian tempur -->
+            <div class="dispatch-header">
+                <!-- Lencana lemari pakaian cyber -->
+                <div class="dispatch-badge">CYBER WARDROBE</div>
+                <!-- Judul lemari kostum agen -->
+                <h2 style="margin: 4px 0;">ARMORY — OPERATIVE SUITS</h2>
+                <!-- Penjelasan fungsi efek pasif khusus tiap kostum -->
+                <p class="dispatch-subtitle">Choose your shadow combat suit with unique passive perks and visual themes.
+                </p>
+            </div>
+
+            <!-- Kisi-kisi kartu varian kostum ninja pembunuh -->
+            <div class="vault-cards-grid">
+                <!-- 1. SHADOW BLACK -->
+                <!-- Kartu kostum 1: Shadow Black (Kostum standar bawaan) -->
+                <div class="suit-card" id="card-suit-hitam" onclick="gantiBaju('#111111')">
+                    <!-- Bingkai pratayang visual kostum -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya sekeliling orb -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(148, 163, 184, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola warna sampel bahan kain hitam -->
+                        <div class="suit-orb"
+                            style="background: #111111; border-color: #64748b; box-shadow: 0 0 15px #334155;"></div>
+                        <!-- Lencana kelas kostum Shadow -->
+                        <span class="suit-tag-class">SHADOW</span>
+                    </div>
+                    <!-- Nama kostum Shadow Black -->
+                    <h3 class="suit-name">Shadow Black</h3>
+                    <!-- Deskripsi teknologi tenunan polimer peredam radar -->
+                    <p class="suit-desc">Stealth polymer weave designed for deep infiltration and zero radar reflection.
+                    </p>
+                    <!-- Efek pasif: Pengurangan jarak deteksi musuh sebesar 40% -->
+                    <div class="suit-perk-badge">🕶️ VOID SHADOW (-40% DETECTION)</div>
+                    <!-- Tombol untuk memasang kostum hitam -->
+                    <button class="suit-equip-btn" id="btn-vault-hitam">EQUIP</button>
+                </div>
+
+                <!-- 2. OBSIDIAN NAVY -->
+                <!-- Kartu kostum 2: Obsidian Navy -->
+                <div class="suit-card" id="card-suit-navy" onclick="gantiBaju('#2c3e50')">
+                    <!-- Bingkai pratayang visual kostum navy -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya biru sian -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(0, 229, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola sampel bahan kain biru navy -->
+                        <div class="suit-orb"
+                            style="background: #2c3e50; border-color: #00e5ff; box-shadow: 0 0 15px #00e5ff;"></div>
+                        <!-- Lencana kelas kostum Operative -->
+                        <span class="suit-tag-class">OPERATIVE</span>
+                    </div>
+                    <!-- Nama kostum Obsidian Navy -->
+                    <h3 class="suit-name">Obsidian Navy</h3>
+                    <!-- Deskripsi serat kain penyerap suara langkah -->
+                    <p class="suit-desc">Standard stealth division suit with sound-absorbing fibers.</p>
+                    <!-- Efek pasif: Peredam kebisingan derap langkah sebesar 30% -->
+                    <div class="suit-perk-badge">⚡ SILENT STRIDE (-30% NOISE)</div>
+                    <!-- Tombol untuk memasang kostum navy -->
+                    <button class="suit-equip-btn" id="btn-vault-navy">EQUIP</button>
+                </div>
+
+                <!-- 3. LEGENDARY GOLD -->
+                <!-- Kartu kostum 3: Legendary Gold (Zirah Emas Kaisar) -->
+                <div class="suit-card" id="card-suit-emas" onclick="gantiBaju('#f1c40f')">
+                    <!-- Bingkai pratayang visual kostum emas -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya keemasan -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(250, 204, 21, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola sampel bahan lapis emas berkilau -->
+                        <div class="suit-orb"
+                            style="background: #f1c40f; border-color: #facc15; box-shadow: 0 0 15px #facc15;"></div>
+                        <!-- Lencana kelas kostum Sovereign -->
+                        <span class="suit-tag-class">SOVEREIGN</span>
+                    </div>
+                    <!-- Nama kostum Legendary Gold -->
+                    <h3 class="suit-name">Legendary Gold</h3>
+                    <!-- Deskripsi zirah berlapis emas kaisar pembunuh legendaris -->
+                    <p class="suit-desc">Gold-plated armor of the greatest assassin emperor of all time.</p>
+                    <!-- Efek pasif: Pengganda perolehan diamond hingga 2x lipat -->
+                    <div class="suit-perk-badge">💎 WEALTH HARVEST (+2x DIAMONDS)</div>
+                    <!-- Tombol untuk memasang kostum emas -->
+                    <button class="suit-equip-btn" id="btn-vault-emas">EQUIP</button>
+                </div>
+
+                <!-- 4. SLATE GREY -->
+                <!-- Kartu kostum 4: Slate Grey -->
+                <div class="suit-card" id="card-suit-abu" onclick="gantiBaju('#95a5a6')">
+                    <!-- Bingkai pratayang visual kostum abu-abu -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya perak -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(203, 213, 225, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola sampel bahan kevlar titanium abu-abu -->
+                        <div class="suit-orb"
+                            style="background: #95a5a6; border-color: #cbd5e1; box-shadow: 0 0 15px #cbd5e1;"></div>
+                        <!-- Lencana kelas kostum Enforcer -->
+                        <span class="suit-tag-class">ENFORCER</span>
+                    </div>
+                    <!-- Nama kostum Slate Grey -->
+                    <h3 class="suit-name">Slate Grey</h3>
+                    <!-- Deskripsi lapisan balistik titanium kevlar pertahanan jarak dekat -->
+                    <p class="suit-desc">Titanium kevlar layers for close-range compound defense.</p>
+                    <!-- Efek pasif: Penambahan kapasitas maksimal nyawa HP sebesar +3 -->
+                    <div class="suit-perk-badge">🛡️ BALLISTIC COAT (+3 HP MAX)</div>
+                    <!-- Tombol untuk memasang kostum abu-abu -->
+                    <button class="suit-equip-btn" id="btn-vault-abu">EQUIP</button>
+                </div>
+
+                <!-- 5. VOID PURPLE -->
+                <!-- Kartu kostum 5: Void Purple -->
+                <div class="suit-card" id="card-suit-ungu" onclick="gantiBaju('#8e44ad')">
+                    <!-- Bingkai pratayang visual kostum ungu -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya ungu mistik -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola sampel bahan kain fase kehampaan ungu -->
+                        <div class="suit-orb"
+                            style="background: #8e44ad; border-color: #c084fc; box-shadow: 0 0 15px #c084fc;"></div>
+                        <!-- Lencana kelas kostum Mystic -->
+                        <span class="suit-tag-class">MYSTIC</span>
+                    </div>
+                    <!-- Nama kostum Void Purple -->
+                    <h3 class="suit-name">Void Purple</h3>
+                    <!-- Deskripsi jubah pergeseran fase void pembunuh jarak jauh -->
+                    <p class="suit-desc">Void phase-shift tech that extends your takedown range.</p>
+                    <!-- Efek pasif: Penambahan jangkauan sergap takedown sebesar 25% -->
+                    <div class="suit-perk-badge">👁️ VOID REACH (+25% TAKEDOWN)</div>
+                    <!-- Tombol untuk memasang kostum ungu -->
+                    <button class="suit-equip-btn" id="btn-vault-ungu">EQUIP</button>
+                </div>
+
+                <!-- 6. CRIMSON BLOOD -->
+                <!-- Kartu kostum 6: Crimson Blood -->
+                <div class="suit-card" id="card-suit-merah" onclick="gantiBaju('#e74c3c')">
+                    <!-- Bingkai pratayang visual kostum merah -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya merah darah -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola sampel bahan serat merah darah mematikan -->
+                        <div class="suit-orb"
+                            style="background: #e74c3c; border-color: #ef4444; box-shadow: 0 0 15px #ef4444;"></div>
+                        <!-- Lencana kelas kostum Assassin -->
+                        <span class="suit-tag-class">ASSASSIN</span>
+                    </div>
+                    <!-- Nama kostum Crimson Blood -->
+                    <h3 class="suit-name">Crimson Blood</h3>
+                    <!-- Deskripsi tenunan pembunuh bayangan merah pemicu serangan brutal -->
+                    <p class="suit-desc">Blood-red shadow killer cloth built for lethal, merciless attacks.</p>
+                    <!-- Efek pasif: Penambahan kerusakan serangan jarak dekat sebesar +1 Melee DMG -->
+                    <div class="suit-perk-badge">🗡️ LETHAL MELEE (+1 MELEE DMG)</div>
+                    <!-- Tombol untuk memasang kostum merah -->
+                    <button class="suit-equip-btn" id="btn-vault-merah">EQUIP</button>
+                </div>
+
+                <!-- 7. GHOST WHITE -->
+                <!-- Kartu kostum 7: Ghost White -->
+                <div class="suit-card" id="card-suit-putih" onclick="gantiBaju('#ecf0f1')">
+                    <!-- Bingkai pratayang visual kostum putih -->
+                    <div class="suit-preview-frame">
+                        <!-- Cincin pendaran cahaya putih murni -->
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <!-- Orb bola sampel bahan kamuflase salju putih -->
+                        <div class="suit-orb"
+                            style="background: #ecf0f1; border-color: #ffffff; box-shadow: 0 0 15px #ffffff;"></div>
+                        <!-- Lencana kelas kostum Phantom -->
+                        <span class="suit-tag-class">PHANTOM</span>
+                    </div>
+                    <!-- Nama kostum Ghost White -->
+                    <h3 class="suit-name">Ghost White</h3>
+                    <!-- Deskripsi jubah kamuflase putih kutub pembelok cahaya senter musuh -->
+                    <p class="suit-desc">Arctic white armor that deflects enemy flashlight reflections.</p>
+                    <!-- Efek pasif: Penambahan kecepatan gerak lari sebesar 20% -->
+                    <div class="suit-perk-badge">💨 GHOST SPRINT (+20% SPEED)</div>
+                    <!-- Tombol untuk memasang kostum putih -->
+                    <button class="suit-equip-btn" id="btn-vault-putih">EQUIP</button>
+                </div>
+            </div>
+            <!-- Tombol untuk menutup jendela lemari kostum -->
+            <button class="btn-tutup" onclick="tutupModal('modal-vault')" style="margin-top: 15px;">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal gudang persenjataan (Armory - Weapons) -->
+    <div id="modal-senjata" class="modal-overlay">
+        <!-- Kotak konten modal senjata -->
+        <div class="modal-box">
+            <!-- Judul gudang persenjataan -->
+            <h2>Armory — Weapons</h2>
+            <!-- Daftar kisi senjata yang tersedia dan senjata terkunci demo -->
+            <div class="grid-container">
+                <!-- Item Senjata 1: Pedang Kayu Bokken (Tersedia di versi Demo) -->
+                <div class="list-item">
+                    <div>🗡️ Wooden Bokken <span
+                            style="font-size:11px; color:#22c55e; background: rgba(34,197,94,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">Demo
+                            Ready</span></div>
+                    <!-- Tombol pasang senjata pedang kayu -->
+                    <button class="opsi-btn" id="btn-senjata-kayu"
+                        onclick="gantiSenjata('bentuk-kayu', '#8B4513')">Equip</button>
+                </div>
+                <!-- Item Senjata 2: Steel Katana (Terkunci di versi Demo) -->
+                <div class="list-item" id="vault-katana">
+                    <div style="color: #94a3b8;">⚔️ Steel Katana <span
+                            style="font-size:11px; color:#ef4444; background: rgba(239,68,68,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">🔒
+                            Locked (Demo)</span></div>
+                    <!-- Tombol terkunci untuk pedang katana -->
+                    <button class="opsi-btn" style="opacity: 0.5; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game!', 'DEMO VERSION')">Locked</button>
+                </div>
+                <!-- Item Senjata 3: Void Karambit (Terkunci di versi Demo) -->
+                <div class="list-item" id="vault-karambit">
+                    <div style="color: #94a3b8;">🪝 Void Karambit <span
+                            style="font-size:11px; color:#ef4444; background: rgba(239,68,68,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">🔒
+                            Locked (Demo)</span></div>
+                    <!-- Tombol terkunci untuk pisau karambit -->
+                    <button class="opsi-btn" style="opacity: 0.5; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game!', 'DEMO VERSION')">Locked</button>
+                </div>
+                <!-- Item Senjata 4: Plasma Saber (Terkunci di versi Demo) -->
+                <div class="list-item" id="vault-saber">
+                    <div style="color: #94a3b8;">🗡️ Plasma Saber <span
+                            style="font-size:11px; color:#ef4444; background: rgba(239,68,68,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">🔒
+                            Locked (Demo)</span></div>
+                    <!-- Tombol terkunci untuk pedang plasma saber -->
+                    <button class="opsi-btn" style="opacity: 0.5; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game!', 'DEMO VERSION')">Locked</button>
+                </div>
+            </div>
+            <!-- Tombol untuk menutup modal gudang senjata -->
+            <button class="btn-tutup" onclick="tutupModal('modal-senjata')">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal buku protokol jurus taktis (Mastery Book / Cyber Skill Protocols) -->
+    <div id="modal-skill" class="modal-overlay">
+        <!-- Kotak konten modal protokol jurus -->
+        <div class="modal-box" style="min-width: 560px;">
+            <!-- Header judul menu jurus -->
+            <div class="dispatch-header">
+                <!-- Lencana kategori jurus agen khusus -->
+                <div class="dispatch-badge">SPECIAL OPERATIVE</div>
+                <!-- Judul menu protokol keahlian cyber -->
+                <h2 style="margin: 4px 0;">CYBER SKILL PROTOCOLS</h2>
+                <!-- Penjelasan pembukaan teknik bayangan menggunakan diamond -->
+                <p class="dispatch-subtitle">Unlock advanced shadow techniques using collected diamonds.</p>
+            </div>
+
+            <!-- Bar indikator ketersediaan diamond di menu skill -->
+            <div class="shop-currency-bar" style="margin-bottom: 16px;">
+                <div class="shop-curr-item" style="color: #00e5ff;">
+                    <!-- Ikon diamond -->
+                    <span style="font-size: 18px;">💎</span>
+                    <!-- Teks jumlah ketersediaan diamond -->
+                    <span>AVAILABLE DIAMONDS: <span id="skill-diamonds-display">0</span></span>
+                </div>
+            </div>
+
+            <!-- Kisi-kisi daftar keempat skill taktis -->
+            <div class="grid-container">
+                <!-- Skill 1: Ghost Walk (Tombol Q) -->
+                <div class="list-item" id="skill-ghost-card">
+                    <div>
+                        <!-- Nama jurus menghilang Ghost Walk -->
+                        <div style="color: #38bdf8; font-weight: 800; font-size: 16px;">👻 Ghost Walk (Q)</div>
+                        <!-- Keterangan efek tembus pandang tanpa terdeteksi senter -->
+                        <small>Become fully invisible and pass through detection cones.</small>
+                    </div>
+                    <!-- Tombol beli jurus Ghost Walk seharga 15 diamond -->
+                    <button class="opsi-btn btn-beli" id="btn-buy-ghost"
+                        onclick="beliSkill('skill_ghost', 15, 'skill-ghost-card')">💎 15</button>
+                </div>
+
+                <!-- Skill 2: Blink Kill (Tombol P) -->
+                <div class="list-item" id="skill-blink-card">
+                    <div>
+                        <!-- Nama jurus teleportasi Blink Kill -->
+                        <div style="color: #ef4444; font-weight: 800; font-size: 16px;">⚡ Blink Kill (P)</div>
+                        <!-- Keterangan efek teleportasi instan ke belakang musuh dan menebas langsung -->
+                        <small>Instantly warp behind nearest target and perform lethal strike.</small>
+                    </div>
+                    <!-- Tombol beli jurus Blink Kill seharga 25 diamond -->
+                    <button class="opsi-btn btn-beli" id="btn-buy-blink"
+                        onclick="beliSkill('skill_blink', 25, 'skill-blink-card')">💎 25</button>
+                </div>
+
+                <!-- Skill 3: Time Freeze (Tombol I) -->
+                <div class="list-item" id="skill-time-card">
+                    <div>
+                        <!-- Nama jurus pembeku waktu Time Freeze -->
+                        <div style="color: #c084fc; font-weight: 800; font-size: 16px;">⏳ Time Freeze (I)</div>
+                        <!-- Keterangan efek menghentikan gerak musuh dan jebakan selama 3 detik -->
+                        <small>Slow enemies and traps to a complete halt for 3 seconds.</small>
+                    </div>
+                    <!-- Tombol beli jurus Time Freeze seharga 35 diamond -->
+                    <button class="opsi-btn btn-beli" id="btn-buy-time"
+                        onclick="beliSkill('skill_time', 35, 'skill-time-card')">💎 35</button>
+                </div>
+
+                <!-- Skill 4: Shadow Clone (Tombol T) -->
+                <div class="list-item" id="skill-clone-card">
+                    <div>
+                        <!-- Nama jurus kloning bayangan Shadow Clone -->
+                        <div style="color: #4ade80; font-weight: 800; font-size: 16px;">👥 Shadow Clone (T)</div>
+                        <!-- Keterangan efek hologram pengalih perhatian patroli senter -->
+                        <small>Spawn a holo-decoy clone to divert enemy flashlight patrols.</small>
+                    </div>
+                    <!-- Tombol beli jurus Shadow Clone seharga 45 diamond -->
+                    <button class="opsi-btn btn-beli" id="btn-buy-clone"
+                        onclick="beliSkill('skill_clone', 45, 'skill-clone-card')">💎 45</button>
+                </div>
+            </div>
+            <!-- Tombol untuk menutup jendela modal skill -->
+            <button class="btn-tutup" onclick="tutupModal('modal-skill')" style="margin-top: 15px;">Close</button>
+        </div>
+    </div>
+
+    <!-- BLACK MARKET SHOP MODAL (ENHANCED UI & AUTO-HIDE OWNED ITEMS) -->
+    <!-- Modal toko pasar gelap Black Market dengan fitur penyembunyian item yang sudah dimiliki -->
+    <div id="modal-shop" class="modal-overlay">
+        <!-- Kotak konten modal Black Market -->
+        <div class="modal-box shop-modal-box">
+            <!-- Header judul toko pasar gelap sindikat siber -->
+            <div class="dispatch-header">
+                <!-- Lencana sindikat kejahatan siber -->
+                <div class="dispatch-badge">CYBER SYNDICATE</div>
+                <!-- Judul persenjataan pasar gelap -->
+                <h2 style="margin: 4px 0;">BLACK MARKET ARSENAL</h2>
+                <!-- Deskripsi otomatis masuk ke Armory setelah dibeli -->
+                <p class="dispatch-subtitle">High-grade tactical suits & deadly void blades. Purchased items are
+                    instantly stored in your Armory.</p>
+            </div>
+
+            <!-- Currency Indicator inside shop -->
+            <!-- Bar indikator jumlah koin dan diamond pemain saat berbelanja di toko -->
+            <div class="shop-currency-bar">
+                <!-- Jumlah koin emas -->
+                <div class="shop-curr-item" style="color: #f59e0b;">
+                    <span style="font-size: 18px;">💰</span>
+                    <span>COINS: <span id="shop-coins-display">8400</span></span>
+                </div>
+                <!-- Jumlah permata diamond -->
+                <div class="shop-curr-item" style="color: #00e5ff;">
+                    <span style="font-size: 18px;">💎</span>
+                    <span>DIAMONDS: <span id="shop-diamonds-display">0</span></span>
+                </div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <!-- Tombol-tombol tab filter penyaring kategori produk toko -->
+            <div class="shop-category-tabs">
+                <!-- Tab tampilkan semua barang -->
+                <button class="shop-tab-btn aktif" onclick="filterShopTab('all', this)">ALL ASSETS</button>
+                <!-- Tab khusus kostum taktis -->
+                <button class="shop-tab-btn" onclick="filterShopTab('suit', this)">TACTICAL SUITS</button>
+                <!-- Tab khusus bilah senjata tajam -->
+                <button class="shop-tab-btn" onclick="filterShopTab('weapon', this)">MELEE BLADES</button>
+            </div>
+
+            <!-- Grid wadah kartu-kartu barang jualan di toko -->
+            <div class="shop-cards-grid" id="shop-grid">
+                <!-- 0. OBSIDIAN NAVY SUIT (COINS) -->
+                <!-- Produk 0: Kostum Obsidian Navy seharga 800 koin -->
+                <div class="shop-card" id="shop-card-navy" data-kategori="suit">
+                    <!-- Lencana kategori suit -->
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <!-- Bingkai pratayang visual kostum -->
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(0, 229, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #2c3e50; border-color: #00e5ff; box-shadow: 0 0 15px #00e5ff;"></div>
+                    </div>
+                    <h3 class="suit-name">Obsidian Navy</h3>
+                    <p class="suit-desc">Standard stealth division suit with sound-absorbing fibers.</p>
+                    <div class="suit-perk-badge">⚡ SILENT STRIDE (-30% NOISE)</div>
+                    <!-- Tombol beli kostum navy dengan koin emas -->
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_navy', 800, 'koin', 'card-suit-navy', 'shop-card-navy')">
+                        <span>💰</span> 800 COINS
+                    </button>
+                </div>
+
+                <!-- 1. GHOST WHITE SUIT (COINS) -->
+                <!-- Produk 1: Kostum Ghost White seharga 1000 koin -->
+                <div class="shop-card" id="shop-card-putih" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #ecf0f1; border-color: #fff; box-shadow: 0 0 15px #fff;"></div>
+                    </div>
+                    <h3 class="suit-name">Ghost White</h3>
+                    <p class="suit-desc">Arctic camouflage suit that bends patrol light reflections.</p>
+                    <div class="suit-perk-badge">💨 GHOST SPRINT (+20% SPEED)</div>
+                    <!-- Tombol beli kostum putih dengan koin emas -->
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_putih', 1000, 'koin', 'card-suit-putih', 'shop-card-putih')">
+                        <span>💰</span> 1,000 COINS
+                    </button>
+                </div>
+
+                <!-- 2. SLATE GREY SUIT (COINS) -->
+                <!-- Produk 2: Kostum Slate Grey seharga 1500 koin -->
+                <div class="shop-card" id="shop-card-abu" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(203, 213, 225, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #95a5a6; border-color: #cbd5e1; box-shadow: 0 0 15px #cbd5e1;"></div>
+                    </div>
+                    <h3 class="suit-name">Slate Grey</h3>
+                    <p class="suit-desc">Reinforced ballistic armor plating for high-threat skirmishes.</p>
+                    <div class="suit-perk-badge">🛡️ BALLISTIC COAT (+3 HP MAX)</div>
+                    <!-- Tombol beli kostum abu-abu dengan koin emas -->
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_abu', 1500, 'koin', 'card-suit-abu', 'shop-card-abu')">
+                        <span>💰</span> 1,500 COINS
+                    </button>
+                </div>
+
+                <!-- 3. CRIMSON BLOOD SUIT (COINS) -->
+                <!-- Produk 3: Kostum Crimson Blood seharga 2000 koin -->
+                <div class="shop-card" id="shop-card-merah" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #e74c3c; border-color: #ef4444; box-shadow: 0 0 15px #ef4444;"></div>
+                    </div>
+                    <h3 class="suit-name">Crimson Blood</h3>
+                    <p class="suit-desc">Nanofiber weave infused with lethal combat stimulants.</p>
+                    <div class="suit-perk-badge">🗡️ LETHAL MELEE (+1 MELEE DMG)</div>
+                    <!-- Tombol beli kostum merah darah dengan koin emas -->
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_merah', 2000, 'koin', 'card-suit-merah', 'shop-card-merah')">
+                        <span>💰</span> 2,000 COINS
+                    </button>
+                </div>
+
+                <!-- 4. VOID PURPLE SUIT (COINS) -->
+                <!-- Produk 4: Kostum Void Purple seharga 2500 koin -->
+                <div class="shop-card" id="shop-card-ungu" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #8e44ad; border-color: #c084fc; box-shadow: 0 0 15px #c084fc;"></div>
+                    </div>
+                    <h3 class="suit-name">Void Purple</h3>
+                    <p class="suit-desc">Phase-shifting electromagnetic cloak extending takedown reach.</p>
+                    <div class="suit-perk-badge">👁️ VOID REACH (+25% TAKEDOWN)</div>
+                    <!-- Tombol beli kostum ungu void dengan koin emas -->
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_ungu', 2500, 'koin', 'card-suit-ungu', 'shop-card-ungu')">
+                        <span>💰</span> 2,500 COINS
+                    </button>
+                </div>
+
+                <!-- 5. LEGENDARY GOLD SUIT (DIAMONDS ONLY!) -->
+                <!-- Produk 5: Kostum Legendary Gold seharga 50 diamond eksklusif -->
+                <div class="shop-card diamond-tier" id="shop-card-emas" data-kategori="suit">
+                    <!-- Lencana khusus tier diamond -->
+                    <span class="shop-card-badge badge-diamond">💎 DIAMOND ONLY</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(250, 204, 21, 0.5) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #f1c40f; border-color: #facc15; box-shadow: 0 0 20px #facc15;"></div>
+                    </div>
+                    <h3 class="suit-name" style="color: #facc15;">Legendary Gold</h3>
+                    <p class="suit-desc">Emperor shadow armor. Doubled diamond harvest yield on every contract.</p>
+                    <div class="suit-perk-badge" style="border-color: #facc15; color: #facc15;">💎 WEALTH HARVEST (+2x
+                        DIAMONDS)</div>
+                    <!-- Tombol beli kostum emas khusus menggunakan mata uang diamond -->
+                    <button class="shop-price-pill price-diamond"
+                        onclick="beliItem('baju_emas', 50, 'diamond', 'card-suit-emas', 'shop-card-emas')">
+                        <span>💎</span> 50 DIAMONDS
+                    </button>
+                </div>
+
+                <!-- 6. STEEL KATANA (DEMO LOCKED) -->
+                <!-- Produk 6: Senjata Steel Katana (Terkunci pada versi Demo game) -->
+                <div class="shop-card" id="shop-card-katana" data-kategori="weapon" style="opacity: 0.85;">
+                    <!-- Lencana demo locked -->
+                    <span class="shop-card-badge"
+                        style="background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">🔒 DEMO
+                        LOCKED</span>
+                    <!-- Ikon visual pedang katana -->
+                    <div style="font-size: 40px; margin: 10px 0;">⚔️</div>
+                    <h3 class="suit-name">Steel Katana</h3>
+                    <p class="suit-desc">Folded Damascus steel blade. Locked in current Demo build.</p>
+                    <div class="suit-perk-badge" style="border-color: #475569; color: #94a3b8;">🔒 FULL VERSION
+                        EXCLUSIVE</div>
+                    <!-- Tombol info pemberitahuan terkunci di demo -->
+                    <button class="shop-price-pill"
+                        style="background: #1e293b; color: #64748b; border: 1px solid #334155; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.', 'DEMO VERSION')">
+                        <span>🔒</span> LOCKED (DEMO)
+                    </button>
+                </div>
+
+                <!-- 7. VOID KARAMBIT (DEMO LOCKED) -->
+                <!-- Produk 7: Senjata Void Karambit (Terkunci pada versi Demo game) -->
+                <div class="shop-card" id="shop-card-karambit" data-kategori="weapon" style="opacity: 0.85;">
+                    <!-- Lencana status demo locked -->
+                    <span class="shop-card-badge"
+                        style="background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">🔒 DEMO
+                        LOCKED</span>
+                    <!-- Ikon visual karambit -->
+                    <div style="font-size: 40px; margin: 10px 0;">🪝</div>
+                    <h3 class="suit-name">Void Karambit</h3>
+                    <p class="suit-desc">Curved assassin talon. Locked in current Demo build.</p>
+                    <div class="suit-perk-badge" style="border-color: #475569; color: #94a3b8;">🔒 FULL VERSION
+                        EXCLUSIVE</div>
+                    <!-- Tombol info terkunci -->
+                    <button class="shop-price-pill"
+                        style="background: #1e293b; color: #64748b; border: 1px solid #334155; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.', 'DEMO VERSION')">
+                        <span>🔒</span> LOCKED (DEMO)
+                    </button>
+                </div>
+
+                <!-- 8. PLASMA SABER (DEMO LOCKED) -->
+                <!-- Produk 8: Senjata Plasma Saber (Terkunci pada versi Demo game) -->
+                <div class="shop-card" id="shop-card-saber" data-kategori="weapon" style="opacity: 0.85;">
+                    <!-- Lencana status demo locked -->
+                    <span class="shop-card-badge"
+                        style="background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">🔒 DEMO
+                        LOCKED</span>
+                    <!-- Ikon visual pedang plasma -->
+                    <div style="font-size: 40px; margin: 10px 0;">🗡️</div>
+                    <h3 class="suit-name">Plasma Saber</h3>
+                    <p class="suit-desc">Superheated plasma edge. Locked in current Demo build.</p>
+                    <div class="suit-perk-badge" style="border-color: #475569; color: #94a3b8;">🔒 FULL VERSION
+                        EXCLUSIVE</div>
+                    <!-- Tombol info terkunci -->
+                    <button class="shop-price-pill"
+                        style="background: #1e293b; color: #64748b; border: 1px solid #334155; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.', 'DEMO VERSION')">
+                        <span>🔒</span> LOCKED (DEMO)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty state when all items bought -->
+            <!-- Tampilan pesan selamat ketika semua barang di Black Market telah berhasil dibeli -->
+            <div id="shop-empty-msg" style="display: none; padding: 40px 20px; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 10px;">⭐</div>
+                <h3 style="color: #38bdf8; font-family: 'Rajdhani', sans-serif; font-size: 22px; margin: 0;">ALL ASSETS
+                    ACQUIRED</h3>
+                <p style="color: #64748b; font-size: 13px; margin: 6px 0 0 0;">You have unlocked every piece of gear in
+                    the Black Market.</p>
+            </div>
+
+            <!-- Tombol untuk menutup jendela Black Market -->
+            <button class="btn-tutup" onclick="tutupModal('modal-shop')" style="margin-top: 18px;">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal pop-up pemberitahuan pesan kilat informasi sistem (Toast Notification Modal) -->
+    <div id="modal-info" class="modal-overlay" style="z-index: 2000;">
+        <!-- Kotak dialog pesan kilat info -->
+        <div class="modal-box" style="min-width: 300px; padding: 25px;">
+            <!-- Judul notifikasi info -->
+            <h2 id="info-judul" style="border: none; padding: 0; margin-bottom: 10px; font-size: 24px;">Info</h2>
+            <!-- Paragraf isi pesan notifikasi sistem -->
+            <p id="info-pesan" style="font-size: 16px; font-weight: 800; color: #cbd5e1; margin: 0;"></p>
+        </div>
+    </div>
+
+    <!-- Script logika interaksi frontend, audio synthesizer, dan manajemen state game -->
+    <script>
+        // Mengambil nilai volume suara dari penyimpanan lokal (localStorage)
+        let globalVolume = parseFloat(localStorage.getItem('volumeGame'));
+        // Jika nilai belum tersimpan atau bukan angka valid, tetapkan nilai default 1.0 (maksimum)
+        if (isNaN(globalVolume)) globalVolume = 1.0;
+        // Mendapatkan elemen penggeser slider volume suara
+        let volSlider = document.getElementById('volume-slider');
+        // Jika elemen slider ditemukan di DOM, sinkronkan nilai dan pasang event listener
+        if (volSlider) {
+            // Setel posisi slider sesuai volume tersimpan
+            volSlider.value = globalVolume;
+            // Dengarkan perubahan input slider untuk mengubah volume suara
+            volSlider.addEventListener('input', function () {ubahVolume(this.value);});
+        }
+
+        // Deklarasi konstruktor AudioContext lintas peramban (standar Web Audio API atau webkit)
+        const AudioContextUI = window.AudioContext || window.webkitAudioContext;
+        // Variabel penampung instance AudioContext khusus antarmuka pengguna
+        let actxUI;
+        // Node pengontrol volume utama (master gain) audio UI
+        let masterGainUI;
+
+        // Fungsi untuk menginisialisasi sistem suara sintesis Web Audio API pada UI
+        function inisialisasiAudioUI() {
+            // Cek apakah konteks audio sudah pernah dibuat sebelumnya
+            if (!actxUI) {
+                try {
+                    // Buat instance AudioContext baru
+                    actxUI = new AudioContextUI();
+                    // Buat GainNode untuk mengatur penguatan volume suara utama
+                    masterGainUI = actxUI.createGain();
+                    // Sambungkan node gain ke tujuan akhir audio (speaker/headphone)
+                    masterGainUI.connect(actxUI.destination);
+                    // Tetapkan tingkat volume suara awal
+                    masterGainUI.gain.value = globalVolume;
+                } catch (e) {console.warn(e);} // Tangkap dan catat peringatan jika audio tidak didukung
+            }
+            // Jika status audio sedang tertahan (suspended karena kebijakan autoplay browser), lanjutkan pemutaran
+            if (actxUI && actxUI.state === 'suspended') actxUI.resume();
+        }
+
+        // Fungsi pembantu untuk membangkitkan dan memainkan nada osilator sintetis Web Audio API
+        function playToneUI(type, f0, f1, dur, gVal = 0.1, isRamp = true) {
+            // Jika volume dimatikan (0 atau kurang), batalkan pemutaran nada
+            if (globalVolume <= 0) return;
+            // Pastikan konteks audio sudah siap diinisialisasi
+            inisialisasiAudioUI();
+            // Validasi keberadaan instance konteks audio dan master gain
+            if (!actxUI || !masterGainUI) return;
+            // Ambil waktu audio terkini, buat osilator frekuensi dan pengatur gain envelope suara
+            let now = actxUI.currentTime, osc = actxUI.createOscillator(), g = actxUI.createGain();
+            // Tetapkan tipe gelombang osilator (sine, triangle, square, atau sawtooth)
+            osc.type = type; osc.frequency.setValueAtTime(f0, now);
+            // Cek apakah ada pergeseran frekuensi dari f0 ke f1
+            if (f1 && f1 !== f0) {
+                // Geser frekuensi secara eksponensial halus jika parameter isRamp bernilai true
+                if (isRamp) osc.frequency.exponentialRampToValueAtTime(Math.max(10, f1), now + dur);
+                // Geser frekuensi langsung pada pertengahan durasi jika false
+                else osc.frequency.setValueAtTime(f1, now + dur * 0.4);
+            }
+            // Tetapkan volume awal nada sesuai gVal
+            g.gain.setValueAtTime(gVal, now); g.gain.linearRampToValueAtTime(0.001, now + dur);
+            // Hubungkan osilator ke envelope gain, lalu ke master gain UI
+            osc.connect(g); g.connect(masterGainUI); osc.start(now); osc.stop(now + dur);
+        }
+
+        // Fungsi pemutar efek suara terprogram berdasarkan jenis aksi interaksi antarmuka pengguna
+        function mainkanSuaraUI(jenis) {
+            // Suara saat kursor melintas di atas tombol (nada lembut frekuensi 450Hz ke 700Hz)
+            if (jenis === 'hover') playToneUI('sine', 450, 700, 0.04, 0.04);
+            // Suara saat membuka jendela modal (nada naik segitiga)
+            else if (jenis === 'open') playToneUI('triangle', 300, 450, 0.15, 0.1);
+            // Suara saat menutup jendela modal (nada turun segitiga)
+            else if (jenis === 'close') playToneUI('triangle', 450, 300, 0.15, 0.1);
+            // Suara saat terjadi kesalahan atau aksi terlarang (nada gergaji rendah)
+            else if (jenis === 'error') playToneUI('sawtooth', 200, 150, 0.2, 0.15, false);
+            // Suara saat berhasil membeli item atau klaim hadiah (nada kotak naik)
+            else if (jenis === 'buy') playToneUI('square', 600, 1000, 0.2, 0.1, false);
+            // Suara saat tombol deploy/mulai permainan ditekan (nada meluncur cepat)
+            else if (jenis === 'start') playToneUI('sawtooth', 300, 800, 0.5, 0.2);
+            // Suara selebrasi akor musik pembukaan kunci (nada akor nada Do-Mi-Sol / 440, 660, 880 Hz)
+            else if (jenis === 'tada' && actxUI && masterGainUI) {
+                [440, 660, 880].forEach((f, i) => {
+                    let t = actxUI.currentTime + i * 0.15, o = actxUI.createOscillator(), g = actxUI.createGain();
+                    o.type = 'sine'; o.frequency.setValueAtTime(f, t);
+                    g.gain.setValueAtTime(0.2, t); g.gain.linearRampToValueAtTime(0.001, t + 0.6);
+                    o.connect(g); g.connect(masterGainUI); o.start(t); o.stop(t + 0.6);
+                });
+            }
+        }
+
+        // Memasang pendengar event mouseover pada seluruh dokumen untuk memicu efek suara hover
+        document.addEventListener('mouseover', (e) => {
+            // Cek apakah target yang disentuh merupakan tombol atau kartu interaktif
+            if (e.target.closest('button, .profile-card, .btn-map, .list-item, .btn-settings-icon')) {
+                mainkanSuaraUI('hover');
+            }
+        });
+
+        // Fungsi untuk mengubah dan menyimpan pengaturan volume audio global permainan
+        function ubahVolume(val) {
+            // Konversi nilai input teks/angka menjadi float
+            globalVolume = parseFloat(val);
+            // Simpan pengaturan volume ke dalam localStorage peramban
+            localStorage.setItem('volumeGame', globalVolume);
+            // Terapkan perubahan volume ke master gain Web Audio jika sudah aktif
+            if (masterGainUI && actxUI) masterGainUI.gain.setValueAtTime(globalVolume, actxUI.currentTime);
+        }
+
+        // Mengambil data saldo koin pemain dari localStorage
+        let storedKoin = localStorage.getItem('koinPemain');
+        // Tetapkan saldo koin: gunakan nilai tersimpan jika valid, atau nilai awal 8400
+        let koinPemain = (storedKoin !== null && !isNaN(parseInt(storedKoin))) ? parseInt(storedKoin) : 8400;
+        // Mengambil level sektor tertinggi yang telah terbuka (default: 1)
+        let levelTerbuka = parseInt(localStorage.getItem('unlockedLevel')) || 1;
+        // Mengambil nama samaran pemain (default: Agent-X)
+        let namaPemain = localStorage.getItem('playerName') || 'Agent-X';
+        // Tampilkan nominal saldo koin pada teks antarmuka HUD
+        document.getElementById("teks-koin").innerText = koinPemain;
+
+        // RANK
+        // Mengambil total jumlah musuh yang berhasil dieliminasi sepanjang riwayat game
+        let totalKills = parseInt(localStorage.getItem('totalKills')) || 0;
+        // Fungsi untuk menentukan gelar pangkat assassin berdasarkan total pembunuhan musuh
+        function getRankName() {
+            // Pangkat tertinggi LEGEND jika membunuh 100 musuh atau lebih
+            if (totalKills >= 100) return "LEGEND";
+            // Pangkat SHADOW jika membunuh 50 musuh atau lebih
+            if (totalKills >= 50) return "SHADOW";
+            // Pangkat JONIN jika membunuh 20 musuh atau lebih
+            if (totalKills >= 20) return "JONIN";
+            // Pangkat CHUNIN jika membunuh 5 musuh atau lebih
+            if (totalKills >= 5) return "CHUNIN";
+            // Pangkat pemula GENIN jika kurang dari 5
+            return "GENIN";
+        }
+        // Perbarui teks gelar pangkat ninja pada tampilan HUD profil
+        document.getElementById("teks-rank").innerText = "RANK: " + getRankName();
+
+        // Mengecek apakah ada sektor yang baru saja terbuka setelah menyelesaikan babak permainan sebelumnya
+        let cekUnlock = localStorage.getItem('justUnlocked');
+        // Jika ada penanda sektor baru dibuka
+        if (cekUnlock) {
+            // Tentukan nama sektor yang berhasil dibuka
+            let mapName = (cekUnlock == 2) ? "🌲 Sector 2: Night Forest" : "🧪 Sector 3: Secret Lab";
+            // Tampilkan nama sektor pada elemen modal unlock
+            document.getElementById('teks-unlock-map').innerText = mapName;
+            // Buka jendela modal pengumuman sektor terbuka
+            bukaModal('modal-unlock');
+            // Mainkan efek suara terompet selebrasi (tada) dengan jeda 500ms
+            setTimeout(() => mainkanSuaraUI('tada'), 500);
+            // Hapus penanda dari localStorage agar tidak muncul berulang-ulang
+            localStorage.removeItem('justUnlocked');
+        }
+
+        // Fungsi untuk membuka jendela modal prestasi dan membangun elemen daftar prestasinya
+        function bukaModalPrestasi() {
+            // Mainkan suara pembuka jendela UI
+            mainkanSuaraUI('open');
+            // Ambil data progres prestasi dari penyimpanan lokal
+            let tk = parseInt(localStorage.getItem('totalKills')) || 0;
+            let isGhost = localStorage.getItem('ach_ghost') === 'true';
+            let isSpeed = localStorage.getItem('ach_speed') === 'true';
+            // Cek apakah reward prestasi sudah pernah diklaim sebelumnya
+            let cG = localStorage.getItem('claim_ach_ghost') === 'true';
+            let cS = localStorage.getItem('claim_ach_speed') === 'true';
+            let cK = localStorage.getItem('claim_ach_kill') === 'true';
+
+            // Objek teks informasi prestasi The Ghost (Selesaikan stage tanpa membunuh)
+            let tGhost = {j: "👻 The Ghost", d: "Clear stage with 0 kills.", b: "Claim 3000 C"};
+            // Objek teks informasi prestasi Lightning Strike (Menang di bawah 25 detik)
+            let tSpeed = {j: "⚡ Lightning Strike", d: "Win under 25 seconds.", b: "Claim 2000 C"};
+            // Objek teks informasi prestasi Reaper (Eliminasi 50 target sasaran)
+            let tKill = {j: "🩸 Reaper", d: `Eliminate 50 targets. (${tk}/50)`, b: "Claim 4000 C"};
+
+            // Template HTML untuk daftar ketiga kartu pencapaian prestasi
+            let htmlPrestasi = `
+        <div class="list-item"><div><div style="font-weight: 900; color: var(--accent-gold); font-size: 16px;">${tGhost.j}</div><div style="font-size: 13px; color: #94a3b8;">${tGhost.d}</div></div><button class="opsi-btn btn-beli" ${cG ? 'disabled' : (isGhost ? '' : 'disabled')} onclick="klaimMisi('claim_ach_ghost', 3000, this, false)">${cG ? 'Claimed' : (isGhost ? tGhost.b : 'Locked')}</button></div>
+        <div class="list-item"><div><div style="font-weight: 900; color: var(--accent-gold); font-size: 16px;">${tSpeed.j}</div><div style="font-size: 13px; color: #94a3b8;">${tSpeed.d}</div></div><button class="opsi-btn btn-beli" ${cS ? 'disabled' : (isSpeed ? '' : 'disabled')} onclick="klaimMisi('claim_ach_speed', 2000, this, false)">${cS ? 'Claimed' : (isSpeed ? tSpeed.b : 'Locked')}</button></div>
+        <div class="list-item"><div><div style="font-weight: 900; color: var(--accent-gold); font-size: 16px;">${tKill.j}</div><div style="font-size: 13px; color: #94a3b8;">${tKill.d}</div></div><button class="opsi-btn btn-beli" ${cK ? 'disabled' : (tk >= 50 ? '' : 'disabled')} onclick="klaimMisi('claim_ach_kill', 4000, this, false)">${cK ? 'Claimed' : (tk >= 50 ? tKill.b : 'Locked')}</button></div>
+      `;
+            // Masukkan HTML yang telah disusun ke dalam kontainer prestasi
+            document.getElementById('prestasi-container').innerHTML = htmlPrestasi;
+            // Tampilkan modal prestasi di layar
+            document.getElementById('modal-prestasi').style.display = "flex";
+        }
+
+        // Fungsi untuk mengambil atau mereset data statistik progres misi harian pemain
+        function getDailyStats() {
+            // Mengambil tanggal hari ini dalam format lokal
+            let tglHariIni = new Date().toLocaleDateString();
+            // Mengambil tanggal misi harian terakhir yang tercatat di penyimpanan
+            let savedDate = localStorage.getItem('daily_quest_date');
+            // Jika tanggal tersimpan berbeda dengan hari ini (hari baru telah tiba), reset statistik harian
+            if (savedDate !== tglHariIni) {
+                localStorage.setItem('daily_quest_date', tglHariIni);
+                localStorage.setItem('daily_kills', '0');
+                localStorage.setItem('daily_intel', '0');
+                localStorage.setItem('daily_stages', '0');
+                localStorage.setItem('daily_boss', '0');
+            }
+            // Mengembalikan objek statistik pencapaian harian pemain
+            return {
+                kills: parseInt(localStorage.getItem('daily_kills')) || 0,
+                intel: parseInt(localStorage.getItem('daily_intel')) || 0,
+                stages: parseInt(localStorage.getItem('daily_stages')) || 0,
+                boss: parseInt(localStorage.getItem('daily_boss')) || 0
+            };
+        }
+
+        // Fungsi untuk membuka dialog modal kontrak misi harian dan merender daftar misinya
+        function bukaModalMisi() {
+            // Mainkan efek suara buka jendela
+            mainkanSuaraUI('open');
+            // Dapatkan tanggal hari ini
+            let tglHariIni = new Date().toLocaleDateString();
+            // Ambil statistik progres harian
+            let dStats = getDailyStats();
+
+            // Status Klaim Hari Ini
+            // Pengecekan apakah hadiah masing-masing misi harian sudah diklaim pada tanggal hari ini
+            let cLogin = (localStorage.getItem('misi_claim_login') === tglHariIni);
+            let cKills = (localStorage.getItem('misi_claim_kills') === tglHariIni);
+            let cIntel = (localStorage.getItem('misi_claim_intel') === tglHariIni);
+            let cStages = (localStorage.getItem('misi_claim_stages') === tglHariIni);
+            let cBoss = (localStorage.getItem('misi_claim_boss') === tglHariIni);
+
+            // 1. MISI LOGIN: Langsung bisa diklaim begitu login / buka menu
+            // Konfigurasi data misi login harian (Check-in Protocol)
+            let mLogin = {
+                title: "🎁 Daily Check-in Protocol",
+                desc: "Direct daily login reward. Ready to claim immediately!",
+                reward: "+500 🪙 & +2 💎",
+                ready: true,
+                claimed: cLogin,
+                btnText: cLogin ? "✓ Done" : "Claim Reward",
+                id: "misi_claim_login",
+                koin: 500,
+                diamond: 2
+            };
+
+            // 2. MISI BUNUH MUSUH: Harus bunuh 15 musuh
+            // Konfigurasi data misi eliminasi 15 target musuh
+            let kTarget = 15;
+            let kCur = Math.min(kTarget, dStats.kills);
+            let kReady = dStats.kills >= kTarget;
+            let mKills = {
+                title: "🩸 Target Elimination",
+                desc: `Eliminate enemy operatives in combat. (${kCur}/${kTarget})`,
+                reward: "+1000 🪙 & +3 💎",
+                ready: kReady,
+                claimed: cKills,
+                btnText: cKills ? "✓ Done" : (kReady ? "Claim Reward" : `Locked (${kCur}/${kTarget})`),
+                id: "misi_claim_kills",
+                koin: 1000,
+                diamond: 3
+            };
+
+            // 3. MISI DOKUMEN / INTEL: Ambil 5 dokumen
+            // Konfigurasi data misi mengumpulkan 5 dokumen intelijen rahasia
+            let iTarget = 5;
+            let iCur = Math.min(iTarget, dStats.intel);
+            let iReady = dStats.intel >= iTarget;
+            let mIntel = {
+                title: "📂 Classified Intel Recovery",
+                desc: `Collect secret documents scattered in sectors. (${iCur}/${iTarget})`,
+                reward: "+1200 🪙 & +3 💎",
+                ready: iReady,
+                claimed: cIntel,
+                btnText: cIntel ? "✓ Done" : (iReady ? "Claim Reward" : `Locked (${iCur}/${iTarget})`),
+                id: "misi_claim_intel",
+                koin: 1200,
+                diamond: 3
+            };
+
+            // 4. MISI STAGE: Selesaikan 3 stage & escape
+            // Target menyelesaikan dan melarikan diri dari 3 babak stage misi
+            let sTarget = 3;
+            let sCur = Math.min(sTarget, dStats.stages);
+            let sReady = dStats.stages >= sTarget;
+            // Konfigurasi data misi spesialis ekstraksi helipad
+            let mStages = {
+                title: "🚁 Extraction Specialist",
+                desc: `Successfully extract from missions via helipad. (${sCur}/${sTarget})`,
+                reward: "+1500 🪙 & +4 💎",
+                ready: sReady,
+                claimed: cStages,
+                btnText: cStages ? "✓ Done" : (sReady ? "Claim Reward" : `Locked (${sCur}/${sTarget})`),
+                id: "misi_claim_stages",
+                koin: 1500,
+                diamond: 4
+            };
+
+            // 5. MISI BOSS: Kalahkan 1 Boss / Rival Assassin
+            // Target mengalahkan minimal 1 bos sektor atau assassin tandingan
+            let bTarget = 1;
+            let bCur = Math.min(bTarget, dStats.boss);
+            let bReady = dStats.boss >= bTarget;
+            // Konfigurasi data misi eksekusi target bernilai tinggi
+            let mBoss = {
+                title: "👑 High-Value Target Execution",
+                desc: `Assassinate a Sector Boss or Rival Assassin. (${bCur}/${bTarget})`,
+                reward: "+2000 🪙 & +5 💎",
+                ready: bReady,
+                claimed: cBoss,
+                btnText: cBoss ? "✓ Done" : (bReady ? "Claim Reward" : `Locked (${bCur}/${bTarget})`),
+                id: "misi_claim_boss",
+                koin: 2000,
+                diamond: 5
+            };
+
+            // Menggabungkan seluruh kelima misi harian ke dalam satu array
+            let allMisi = [mLogin, mKills, mIntel, mStages, mBoss];
+
+            // Menyusun elemen string HTML kartu-kartu misi harian
+            let htmlMisi = allMisi.map(m => `
+                <div class="list-item" style="display:flex; justify-content:space-between; align-items:center; background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px 16px; margin-bottom:10px;">
+                    <div>
+                        <div style="font-weight: 900; color: #10b981; font-size: 15px; display:flex; align-items:center; gap:8px;">
+                            ${m.title}
+                            <span style="font-size:11px; background:rgba(16,185,129,0.2); color:#34d399; padding:2px 7px; border-radius:10px; font-weight:700;">${m.reward}</span>
+                        </div>
+                        <div style="font-size: 13px; color: #94a3b8; margin-top:3px;">${m.desc}</div>
+                    </div>
+                    <button class="opsi-btn btn-beli" 
+                        style="min-width:130px; font-size:13px; padding:8px 14px; font-weight:800; border-radius:8px;"
+                        ${m.claimed || !m.ready ? 'disabled' : ''} 
+                        onclick="klaimMisiHarian('${m.id}', ${m.koin}, ${m.diamond}, this)">
+                        ${m.btnText}
+                    </button>
+                </div>
+            `).join('');
+
+            // Tampilkan daftar kartu misi ke dalam wadah misi-container
+            document.getElementById('misi-container').innerHTML = htmlMisi;
+            // Munculkan jendela modal misi di layar
+            document.getElementById('modal-misi').style.display = "flex";
+        }
+
+        // Fungsi pemrosesan klaim hadiah koin dan diamond dari misi harian
+        function klaimMisiHarian(id, koin, diamond, btnEl) {
+            // Mainkan efek suara pembelian/klaim berhasil
+            mainkanSuaraUI('buy');
+            // Tambahkan koin ke saldo pemain
+            koinPemain += koin;
+            // Simpan saldo koin baru ke penyimpanan lokal
+            localStorage.setItem('koinPemain', koinPemain);
+            // Perbarui tampilan saldo koin di layar HUD
+            document.getElementById("teks-koin").innerText = koinPemain;
+
+            // Ambil saldo diamond saat ini
+            let curD = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+            // Tambahkan nominal diamond hadiah
+            curD += diamond;
+            // Simpan saldo diamond baru ke penyimpanan lokal
+            localStorage.setItem('ninjaDiamonds', curD);
+            // Perbarui angka diamond di HUD jika elemennya tersedia
+            let dElem = document.getElementById("teks-diamond");
+            if (dElem) dElem.innerText = curD;
+
+            // Catat tanggal klaim hari ini agar tidak bisa diklaim dua kali di hari yang sama
+            let tglHariIni = new Date().toLocaleDateString();
+            localStorage.setItem(id, tglHariIni);
+
+            // Perbarui tampilan teks tombol menjadi telah selesai dan nonaktifkan
+            btnEl.innerText = "✓ Done";
+            btnEl.disabled = true;
+            // Tampilkan pop-up informasi ucapan selamat atas hadiah yang diperoleh
+            tampilkanInfo(`Reward Claimed: +${koin} Coins & +${diamond} Diamonds!`, "MISSION ACCOMPLISHED");
+        }
+
+        // Fungsi serbaguna untuk mengklaim hadiah pencapaian prestasi biasa
+        function klaimMisi(id, jumlah, btnEl, isDaily) {
+            // Mainkan efek suara transaksi berhasil
+            mainkanSuaraUI('buy');
+            // Tambahkan saldo koin pemain
+            koinPemain += jumlah;
+            // Simpan saldo koin ke penyimpanan
+            localStorage.setItem('koinPemain', koinPemain);
+            // Perbarui tampilan koin di HUD
+            document.getElementById("teks-koin").innerText = koinPemain;
+            // Simpan status klaim (tanggal untuk harian, atau 'true' untuk permanen)
+            if (isDaily) localStorage.setItem(id, new Date().toLocaleDateString());
+            else localStorage.setItem(id, 'true');
+            // Ubah teks tombol menjadi 'Done' dan nonaktifkan
+            btnEl.innerText = "Done";
+            btnEl.disabled = true;
+            // Tampilkan pesan kilat transfer hadiah
+            tampilkanInfo("Transferred " + jumlah + " C", "System");
+        }
+
+        // Fungsi untuk membuka modal pengubahan nama panggilan agen
+        function bukaModalNama() {
+            // Mainkan suara pembuka jendela UI
+            mainkanSuaraUI('open');
+            // Isi kolom input dengan nama pemain saat ini
+            document.getElementById('input-nama').value = namaPemain;
+            // Tampilkan modal ubah nama
+            document.getElementById('modal-nama').style.display = 'flex';
+        }
+
+        // Fungsi untuk memvalidasi dan menyimpan nama baru agen ke database lokal
+        function simpanNama() {
+            // Ambil teks dari kolom input nama
+            let namaBaru = document.getElementById('input-nama').value;
+            // Validasi: pastikan nama tidak kosong atau hanya berisi spasi putih
+            if (namaBaru && namaBaru.trim() !== "") {
+                // Mainkan suara konfirmasi berhasil
+                mainkanSuaraUI('buy');
+                // Bersihkan spasi dan batasi panjang nama maksimal 15 karakter
+                namaPemain = namaBaru.trim().substring(0, 15);
+                // Simpan nama baru ke penyimpanan lokal
+                localStorage.setItem('playerName', namaPemain);
+                // Sinkronkan nama di elemen UI
+                updateNamaUI();
+                // Tutup jendela modal ganti nama
+                tutupModal('modal-nama');
+                // Beri tahu pengguna bahwa database telah diperbarui
+                tampilkanInfo("Database Updated", "System");
+            } else {
+                // Mainkan suara nada gagal/salah
+                mainkanSuaraUI('error');
+                // Tampilkan pesan galat bahwa masukan nama tidak valid
+                tampilkanInfo("Invalid Input!", "Error");
+            }
+        }
+
+        // Fungsi untuk memperbarui tampilan teks nama panggilan pada kartu profil HUD
+        function updateNamaUI() {
+            document.getElementById("teks-profil").innerText = namaPemain;
+        }
+
+        // Change character image & glow color
+        // Fungsi untuk mengatur efek bayangan realistis pada gambar karakter ninja
+        function aplikasikanWarnaGlow(hexColor) {
+            let imgKarakter = document.getElementById("ninja-karakter");
+            if (imgKarakter) {
+                // Terapkan filter bayangan jatuh pekat pada sprite karakter
+                imgKarakter.style.filter = "drop-shadow(0 20px 20px rgba(0,0,0,0.75))";
+            }
+        }
+
+        // Ensure throwing knives are unlocked from the start
+        // Memastikan item senjata lempar shuriken selalu terbuka secara default
+        localStorage.setItem('item_shuriken', 'true');
+        // Shadow Black (#111111) is the ONLY suit unlocked by default from the start
+        // Kostum hitam adalah satu-satunya kostum yang terbuka secara otomatis sejak awal permainan
+        localStorage.setItem('baju_hitam', 'true');
+
+        // Peta pemetaan antara kode warna hex dengan kunci penyimpanan kostum di localStorage
+        let keyBajuMap = {
+            '#111111': 'baju_hitam',
+            '#2c3e50': 'baju_navy',
+            '#ecf0f1': 'baju_putih',
+            '#95a5a6': 'baju_abu',
+            '#e74c3c': 'baju_merah',
+            '#8e44ad': 'baju_ungu',
+            '#f1c40f': 'baju_emas'
+        };
+
+        // Mengambil kode warna kostum ninja yang sedang dipakai (default: hitam #111111)
+        let warnaBaju = localStorage.getItem('ninjaColor') || '#111111';
+        // Tentukan kunci kostum berdasarkan warna
+        let checkKey = keyBajuMap[warnaBaju] || 'baju_hitam';
+        // Jika kostum yang tersimpan belum terbeli atau tidak sah, kembalikan secara aman ke warna hitam default
+        if (checkKey !== 'baju_hitam' && localStorage.getItem(checkKey) !== 'true') {
+            warnaBaju = '#111111';
+            localStorage.setItem('ninjaColor', '#111111');
+        }
+        // Atur variabel CSS global --ninja-color pada elemen root dokumen
+        document.documentElement.style.setProperty('--ninja-color', warnaBaju);
+
+        // Menyesuaikan berkas gambar karakter ninja sesuai warna kostum yang sedang dipakai
+        let imgKarakter = document.getElementById("ninja-karakter");
+        if (imgKarakter) {
+            if (warnaBaju === '#111111') imgKarakter.src = "hitam.png";
+            else if (warnaBaju === '#2c3e50') imgKarakter.src = "navy.png";
+            else if (warnaBaju === '#ecf0f1') imgKarakter.src = "putih.png";
+            else if (warnaBaju === '#95a5a6') imgKarakter.src = "abu.png";
+            else if (warnaBaju === '#e74c3c') imgKarakter.src = "merah.png";
+            else if (warnaBaju === '#8e44ad') imgKarakter.src = "ungu.png";
+            else if (warnaBaju === '#f1c40f') imgKarakter.src = "emas.png";
+        }
+        // Terapkan efek visual glow pada karakter
+        aplikasikanWarnaGlow(warnaBaju);
+
+        // Fungsi untuk menyaring tampilan kartu barang di Black Market berdasarkan tab kategori
+        function filterShopTab(cat, btn) {
+            // Hapus kelas 'aktif' dari seluruh tombol tab toko
+            document.querySelectorAll('.shop-tab-btn').forEach(b => b.classList.remove('aktif'));
+            // Tambahkan kelas 'aktif' pada tombol tab yang sedang diklik
+            if (btn) btn.classList.add('aktif');
+
+            // Ambil semua elemen kartu toko
+            let cards = document.querySelectorAll('.shop-card');
+            let visibleCount = 0;
+            // Lakukan perulangan untuk memeriksa kepemilikan dan kategori setiap kartu
+            cards.forEach(card => {
+                let cardKey = card.id.replace('shop-card-', '');
+                let fullKey = card.getAttribute('data-kategori') === 'suit' ? ('baju_' + cardKey) : ('senjata_' + cardKey);
+                let isOwned = localStorage.getItem(fullKey) === 'true';
+
+                // Jika barang sudah dimiliki oleh pemain, sembunyikan otomatis dari toko
+                if (isOwned) {
+                    card.style.display = 'none';
+                    return;
+                }
+
+                // Tampilkan kartu jika kategori sesuai dengan filter yang dipilih
+                if (cat === 'all' || card.getAttribute('data-kategori') === cat) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Munculkan pesan toko kosong jika semua barang pada kategori telah habis dibeli
+            let emptyMsg = document.getElementById('shop-empty-msg');
+            if (emptyMsg) {
+                emptyMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
+            }
+        }
+
+        // Fungsi untuk memperbarui tampilan saldo dan menyembunyikan item yang sudah dibeli di Black Market
+        function perbaruiShopUI() {
+            // Sinkronisasi teks nominal koin dan diamond di dalam toko
+            let sCoins = document.getElementById('shop-coins-display');
+            let sDiams = document.getElementById('shop-diamonds-display');
+            if (sCoins) sCoins.innerText = koinPemain;
+            if (sDiams) sDiams.innerText = localStorage.getItem('ninjaDiamonds') || '0';
+
+            // Check owned status and hide purchased items from shop
+            // Daftar pemetaan seluruh produk toko beserta kunci penyimpanan dan ID lemari vault
+            let cards = [
+                {id: 'shop-card-navy', key: 'baju_navy', vault: 'card-suit-navy'},
+                {id: 'shop-card-putih', key: 'baju_putih', vault: 'card-suit-putih'},
+                {id: 'shop-card-abu', key: 'baju_abu', vault: 'card-suit-abu'},
+                {id: 'shop-card-merah', key: 'baju_merah', vault: 'card-suit-merah'},
+                {id: 'shop-card-ungu', key: 'baju_ungu', vault: 'card-suit-ungu'},
+                {id: 'shop-card-emas', key: 'baju_emas', vault: 'card-suit-emas'},
+                {id: 'shop-card-katana', key: 'senjata_katana', vault: 'vault-katana'},
+                {id: 'shop-card-karambit', key: 'senjata_karambit', vault: 'vault-karambit'},
+                {id: 'shop-card-saber', key: 'senjata_saber', vault: 'vault-saber'}
+            ];
+
+            let activeCount = 0;
+            // Periksa status setiap item: jika sudah dimiliki, sembunyikan dari toko dan tampilkan di lemari vault
+            cards.forEach(item => {
+                let el = document.getElementById(item.id);
+                let vEl = document.getElementById(item.vault);
+                let isOwned = localStorage.getItem(item.key) === 'true';
+
+                if (isOwned) {
+                    if (el) el.style.display = 'none';
+                    if (vEl) vEl.style.display = 'flex';
+                } else {
+                    if (el) {
+                        el.style.display = 'flex';
+                        activeCount++;
+                    }
+                }
+            });
+
+            // Tampilkan pesan semua barang terbeli jika tidak ada produk yang tersisa
+            let emptyMsg = document.getElementById('shop-empty-msg');
+            if (emptyMsg) {
+                emptyMsg.style.display = (activeCount === 0) ? 'block' : 'none';
+            }
+        }
+
+        // Fungsi untuk memperbarui status pembukaan jurus skill di modal Mastery Book
+        function perbaruiSkillUI() {
+            // Tampilkan saldo diamond saat ini di modal skill
+            let sDiams = document.getElementById('skill-diamonds-display');
+            let currentDiamonds = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+            if (sDiams) sDiams.innerText = currentDiamonds;
+
+            // Daftar tombol jurus skill
+            let skills = [
+                {key: 'skill_ghost', btn: 'btn-buy-ghost'},
+                {key: 'skill_blink', btn: 'btn-buy-blink'},
+                {key: 'skill_time', btn: 'btn-buy-time'},
+                {key: 'skill_clone', btn: 'btn-buy-clone'}
+            ];
+
+            // Jika skill sudah terbeli, ubah tombol menjadi status UNLOCKED hijau
+            skills.forEach(s => {
+                let b = document.getElementById(s.btn);
+                if (b) {
+                    if (localStorage.getItem(s.key) === 'true') {
+                        b.innerText = "✓ UNLOCKED";
+                        b.disabled = true;
+                        b.style.borderColor = "#22c55e";
+                        b.style.color = "#4ade80";
+                        b.style.background = "rgba(34, 197, 94, 0.15)";
+                    }
+                }
+            });
+        }
+
+        // Fungsi transaksi untuk membeli jurus skill menggunakan diamond
+        function beliSkill(skillKey, costDiamond, cardId) {
+            // Ambil saldo diamond pemain saat ini
+            let currentDiamonds = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+            // Validasi apakah saldo diamond mencukupi harga skill
+            if (currentDiamonds >= costDiamond) {
+                // Mainkan suara transaksi sukses
+                mainkanSuaraUI('buy');
+                // Potong saldo diamond
+                currentDiamonds -= costDiamond;
+                // Simpan perubahan diamond dan status kepemilikan skill
+                localStorage.setItem('ninjaDiamonds', currentDiamonds);
+                localStorage.setItem(skillKey, 'true');
+
+                // Sinkronkan angka diamond di tampilan layar
+                document.getElementById('teks-diamond').innerText = currentDiamonds;
+                // Perbarui tampilan status tombol skill
+                perbaruiSkillUI();
+                // Tampilkan pemberitahuan sukses
+                tampilkanInfo("Skill Protocol Unlocked!", "SYSTEM");
+            } else {
+                // Mainkan efek suara gagal
+                mainkanSuaraUI('error');
+                // Tampilkan pesan galat bahwa diamond tidak mencukupi
+                tampilkanInfo("Need " + costDiamond + " 💎! Insufficient Diamonds.", "Error");
+            }
+        }
+
+        // Fungsi transaksi pembelian item di Black Market (mendukung koin emas dan diamond)
+        function beliItem(kunciId, harga, mataUang, idVault, idShopCard) {
+            // Tolak pembelian jika item merupakan senjata yang terkunci di versi demo
+            if (kunciId && kunciId.startsWith('senjata_')) {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.", "DEMO VERSION");
+                return;
+            }
+            let success = false;
+            let currentDiamonds = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+
+            // Pembelian dengan mata uang DIAMOND
+            if (mataUang === 'diamond') {
+                if (currentDiamonds >= harga) {
+                    currentDiamonds -= harga;
+                    localStorage.setItem('ninjaDiamonds', currentDiamonds);
+                    document.getElementById("teks-diamond").innerText = currentDiamonds;
+                    let sd = document.getElementById('shop-diamonds-display');
+                    if (sd) sd.innerText = currentDiamonds;
+                    success = true;
+                } else {
+                    mainkanSuaraUI('error');
+                    tampilkanInfo("Need " + harga + " 💎! Insufficient Diamonds.", "Error");
+                    return;
+                }
+            } else {
+                // Pembelian dengan mata uang KOIN EMAS
+                if (koinPemain >= harga) {
+                    koinPemain -= harga;
+                    localStorage.setItem('koinPemain', koinPemain);
+                    document.getElementById("teks-koin").innerText = koinPemain;
+                    let sc = document.getElementById('shop-coins-display');
+                    if (sc) sc.innerText = koinPemain;
+                    success = true;
+                } else {
+                    mainkanSuaraUI('error');
+                    tampilkanInfo("Need " + harga + " C! Insufficient Coins.", "Error");
+                    return;
+                }
+            }
+
+            // Jika transaksi berhasil diproses
+            if (success) {
+                // Mainkan suara transaksi sukses
+                mainkanSuaraUI('buy');
+                // Simpan kepemilikan item ke localStorage
+                localStorage.setItem(kunciId, 'true');
+
+                // Animate card vanishing
+                // Beri efek animasi kartu melenyap halus dari etalase toko
+                let shopCard = document.getElementById(idShopCard);
+                if (shopCard) {
+                    shopCard.classList.add('vanished');
+                    setTimeout(() => {
+                        shopCard.style.display = 'none';
+                        perbaruiShopUI();
+                    }, 350);
+                }
+
+                // Tampilkan kartu di dalam lemari persenjataan (Armory Vault)
+                let vEl = document.getElementById(idVault);
+                if (vEl) vEl.style.display = 'flex';
+
+                // Sinkronkan status pemasangan item di UI
+                perbaruiEquippedUI();
+                // Tampilkan notifikasi keberhasilan akuisisi barang
+                tampilkanInfo("Asset Acquired! Stored in Armory.", "PURCHASED");
+            }
+        }
+
+        // Fungsi untuk memperbarui status visual kostum dan senjata yang sedang terpasang (Equipped)
+        function perbaruiEquippedUI() {
+            // Ambil warna kostum dan tipe senjata yang sedang aktif
+            let currentBaju = localStorage.getItem('ninjaColor') || '#111111';
+            let currentSenjata = localStorage.getItem('weaponType') || 'bentuk-kayu';
+
+            // Sync Diamond Counter
+            // Sinkronkan angka tampilan saldo diamond
+            let dElem = document.getElementById('teks-diamond');
+            if (dElem) dElem.innerText = localStorage.getItem('ninjaDiamonds') || '0';
+
+            // 7 SUITS: Hitam (Default Owned), Navy, Gold, Abu, Ungu, Merah, Putih (Must be bought)
+            // Daftar konfigurasi ketujuh kostum ninja
+            let bajus = [
+                {btnId: 'btn-vault-hitam', cardId: 'card-suit-hitam', color: '#111111', key: 'baju_hitam'},
+                {btnId: 'btn-vault-navy', cardId: 'card-suit-navy', color: '#2c3e50', key: 'baju_navy'},
+                {btnId: 'btn-vault-emas', cardId: 'card-suit-emas', color: '#f1c40f', key: 'baju_emas'},
+                {btnId: 'btn-vault-abu', cardId: 'card-suit-abu', color: '#95a5a6', key: 'baju_abu'},
+                {btnId: 'btn-vault-ungu', cardId: 'card-suit-ungu', color: '#8e44ad', key: 'baju_ungu'},
+                {btnId: 'btn-vault-merah', cardId: 'card-suit-merah', color: '#e74c3c', key: 'baju_merah'},
+                {btnId: 'btn-vault-putih', cardId: 'card-suit-putih', color: '#ecf0f1', key: 'baju_putih'}
+            ];
+            // Lakukan pembaruan tombol dan kartu kostum sesuai status (LOCKED, EQUIPPED, atau EQUIP)
+            bajus.forEach(b => {
+                let btn = document.getElementById(b.btnId);
+                let card = document.getElementById(b.cardId);
+                let isOwned = (b.key === 'baju_hitam') || (localStorage.getItem(b.key) === 'true');
+                let isEquipped = isOwned && (b.color.toLowerCase() === currentBaju.toLowerCase());
+
+                // Pengaturan gaya tombol
+                if (btn) {
+                    if (!isOwned) {
+                        btn.innerText = "🔒 LOCKED";
+                        btn.style.opacity = "0.6";
+                        btn.style.background = "rgba(100, 116, 139, 0.4)";
+                        btn.style.color = "#94a3b8";
+                        btn.style.cursor = "not-allowed";
+                    } else if (isEquipped) {
+                        btn.innerText = "✓ EQUIPPED";
+                        btn.style.opacity = "1";
+                        btn.style.background = "#22c55e";
+                        btn.style.color = "#ffffff";
+                        btn.style.cursor = "default";
+                    } else {
+                        btn.innerText = "EQUIP";
+                        btn.style.opacity = "1";
+                        btn.style.background = "";
+                        btn.style.color = "";
+                        btn.style.cursor = "pointer";
+                    }
+                }
+                // Pengaturan gaya kartu kostum
+                if (card) {
+                    if (isEquipped) {
+                        card.classList.add('terpilih');
+                    } else {
+                        card.classList.remove('terpilih');
+                    }
+                    if (!isOwned) {
+                        card.style.opacity = "0.7";
+                        card.style.filter = "grayscale(0.6)";
+                    } else {
+                        card.style.opacity = "1";
+                        card.style.filter = "none";
+                    }
+                }
+            });
+
+            // Pengaturan status tombol senjata yang terpasang
+            let senjatas = [
+                {id: 'btn-senjata-kayu', type: 'bentuk-kayu'},
+                {id: 'btn-senjata-katana', type: 'bentuk-katana'},
+                {id: 'btn-senjata-karambit', type: 'bentuk-karambit'},
+                {id: 'btn-senjata-saber', type: 'bentuk-saber'}
+            ];
+            senjatas.forEach(s => {
+                let el = document.getElementById(s.id);
+                if (el) {
+                    if (s.type === currentSenjata) {el.innerText = "✓ EQUIPPED"; el.classList.add('terpilih');}
+                    else {el.innerText = "EQUIP"; el.classList.remove('terpilih');}
+                }
+            });
+        }
+
+        // Fungsi untuk memperbarui tampilan perolehan bintang dan gembok pada kartu sektor misi
+        function perbaruiTampilanMap() {
+            let card2 = document.getElementById('card-sector-2');
+            let card3 = document.getElementById('card-sector-3');
+            let lock2 = document.getElementById('lock-overlay-2');
+            let lock3 = document.getElementById('lock-overlay-3');
+            let pill2 = document.getElementById('status-pill-2');
+            let pill3 = document.getElementById('status-pill-3');
+
+            // Count stars earned
+            // Fungsi penolong untuk mengambil perolehan bintang tertinggi pada tiap sektor
+            function getStarsForLevel(lvl) {
+                let s1 = parseInt(localStorage.getItem('stars_' + lvl + '_1')) || 0;
+                let s2 = parseInt(localStorage.getItem('stars_' + lvl + '_2')) || 0;
+                let s3 = parseInt(localStorage.getItem('stars_' + lvl + '_3')) || 0;
+                let maxS = Math.max(s1, s2, s3);
+                if (maxS >= 3) return "⭐⭐⭐";
+                if (maxS === 2) return "⭐⭐☆";
+                if (maxS === 1) return "⭐☆☆";
+                return "☆☆☆";
+            }
+
+            // Tampilkan ikon bintang pada masing-masing sektor
+            let s1Elem = document.getElementById('stars-sector-1');
+            let s2Elem = document.getElementById('stars-sector-2');
+            let s3Elem = document.getElementById('stars-sector-3');
+            if (s1Elem) s1Elem.innerText = getStarsForLevel(1);
+            if (s2Elem) s2Elem.innerText = getStarsForLevel(2);
+            if (s3Elem) s3Elem.innerText = getStarsForLevel(3);
+
+            // Periksa status pembukaan Sektor 2
+            if (levelTerbuka < 2) {
+                if (card2) card2.classList.add('locked');
+                if (lock2) lock2.style.display = 'flex';
+                if (pill2) {pill2.innerText = "LOCKED"; pill2.classList.remove('status-ready');}
+            } else {
+                if (card2) card2.classList.remove('locked');
+                if (lock2) lock2.style.display = 'none';
+                if (pill2) {pill2.innerText = "UNLOCKED — READY"; pill2.classList.add('status-ready');}
+            }
+
+            // Periksa status pembukaan Sektor 3
+            if (levelTerbuka < 3) {
+                if (card3) card3.classList.add('locked');
+                if (lock3) lock3.style.display = 'flex';
+                if (pill3) {pill3.innerText = "LOCKED"; pill3.classList.remove('status-ready');}
+            } else {
+                if (card3) card3.classList.remove('locked');
+                if (lock3) lock3.style.display = 'none';
+                if (pill3) {pill3.innerText = "UNLOCKED — READY"; pill3.classList.add('status-ready');}
+            }
+        }
+
+        // Fungsi berbahaya untuk menghapus seluruh data permainan dan menyetel ulang ke awal
+        function resetGameData() {
+            mainkanSuaraUI('error');
+            // Minta konfirmasi tegas kepada pengguna sebelum menghapus
+            if (confirm("Wipe all system data? This cannot be undone.")) {
+                // Bersihkan seluruh data penyimpanan lokal browser
+                localStorage.clear();
+                // Muat ulang halaman secara otomatis
+                location.reload();
+            }
+        }
+
+        // Fungsi terpusat untuk menampilkan jendela modal pop-up berdasarkan ID elemennya
+        function bukaModal(id) {
+            mainkanSuaraUI('open');
+            // Segarkan data UI yang berkaitan sebelum modal dibuka
+            if (id === 'modal-vault' || id === 'modal-senjata') perbaruiEquippedUI();
+            if (id === 'modal-pilih-map') perbaruiTampilanMap();
+            if (id === 'modal-shop') perbaruiShopUI();
+            if (id === 'modal-skill') perbaruiSkillUI();
+            // Tampilkan modal dengan gaya flex
+            document.getElementById(id).style.display = "flex";
+        }
+
+        // Fungsi terpusat untuk menutup jendela modal pop-up dengan animasi fade out
+        function tutupModal(id) {
+            mainkanSuaraUI('close');
+            let modal = document.getElementById(id);
+            modal.style.animation = "none";
+            // Berikan jeda mikro sebelum menyembunyikan elemen untuk kelancaran animasi
+            setTimeout(() => {
+                modal.style.display = "none";
+                modal.style.animation = "modalFade 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards";
+            }, 10);
+        }
+
+        // Fungsi untuk menampilkan kotak pesan notifikasi toast singkat yang hilang otomatis
+        function tampilkanInfo(psn, jdl) {
+            // Pasang teks judul dan isi pesan notifikasi
+            document.getElementById("info-judul").innerText = jdl;
+            document.getElementById("info-pesan").innerText = psn;
+            // Tampilkan pop-up notifikasi
+            document.getElementById("modal-info").style.display = "flex";
+            // Tutup pop-up secara otomatis setelah 1.5 detik
+            setTimeout(() => {tutupModal('modal-info');}, 1500);
+        }
+
+        // Equip suit & change character image (7 suits supported)
+        // Fungsi untuk memakai kostum ninja dan memperbarui visual sprite karakter
+        function gantiBaju(c) {
+            let keyBajuMap = {
+                '#111111': 'baju_hitam',
+                '#2c3e50': 'baju_navy',
+                '#ecf0f1': 'baju_putih',
+                '#95a5a6': 'baju_abu',
+                '#e74c3c': 'baju_merah',
+                '#8e44ad': 'baju_ungu',
+                '#f1c40f': 'baju_emas'
+            };
+            let suitKey = keyBajuMap[c] || 'baju_hitam';
+            // Validasi: pastikan kostum sudah terbeli sebelum dapat dipakai
+            if (suitKey !== 'baju_hitam' && localStorage.getItem(suitKey) !== 'true') {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Baju ini masih terkunci! Silakan beli di Shop terlebih dahulu.", "SUIT LOCKED");
+                return;
+            }
+
+            // Mainkan efek suara berhasil memasang kostum
+            mainkanSuaraUI('buy');
+            // Terapkan properti CSS warna ninja
+            document.documentElement.style.setProperty('--ninja-color', c);
+            // Simpan warna kostum pilihan ke penyimpanan lokal
+            localStorage.setItem('ninjaColor', c);
+
+            // Ganti sumber berkas gambar karakter ninja sesuai warna yang dipilih
+            let imgKarakter = document.getElementById("ninja-karakter");
+            if (imgKarakter) {
+                if (c === '#111111') imgKarakter.src = "hitam.png";
+                else if (c === '#2c3e50') imgKarakter.src = "navy.png";
+                else if (c === '#ecf0f1') imgKarakter.src = "putih.png";
+                else if (c === '#95a5a6') imgKarakter.src = "abu.png";
+                else if (c === '#e74c3c') imgKarakter.src = "merah.png";
+                else if (c === '#8e44ad') imgKarakter.src = "ungu.png";
+                else if (c === '#f1c40f') imgKarakter.src = "emas.png";
+            }
+
+            // Perbarui efek glow, UI perlengkapan, lalu tutup jendela lemari
+            aplikasikanWarnaGlow(c);
+            perbaruiEquippedUI();
+            tutupModal('modal-vault');
+            tampilkanInfo("Operative Suit Equipped!", "ARMORY");
+        }
+
+        // Fungsi untuk mengganti senjata yang digunakan oleh ninja
+        function gantiSenjata(t, c) {
+            // Tolak penggantian jika senjata yang dipilih bukan pedang kayu demo
+            if (t !== 'bentuk-kayu') {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Senjata ini terkunci di versi Demo game!", "DEMO VERSION");
+                return;
+            }
+            // Mainkan efek suara dan simpan preferensi senjata
+            mainkanSuaraUI('buy');
+            localStorage.setItem('weaponType', t);
+            localStorage.setItem('weaponColor', c);
+            perbaruiEquippedUI();
+            tutupModal('modal-senjata');
+        }
+
+        // Fungsi peluncuran misi ke berkas game.html dengan parameter level dan map yang dipilih
+        function gasMain(lvl, mapId) {
+            // Batalkan peluncuran jika sektor yang dipilih masih terkunci
+            if (lvl > levelTerbuka) {
+                mainkanSuaraUI('error');
+                return;
+            }
+            // Mainkan suara peluncuran misi
+            mainkanSuaraUI('start');
+            // Simpan ID map dan nomor level yang akan dimainkan
+            localStorage.setItem('selectedMap', mapId);
+            localStorage.setItem('selectedLevel', lvl);
+            // Tutup modal pemilihan peta
+            tutupModal('modal-pilih-map');
+            // Tampilkan pesan inisialisasi sistem
+            tampilkanInfo("Initializing Mission...", "SYSTEM");
+            // Arahkan peramban menuju halaman arena game.html setelah jeda 1 detik
+            setTimeout(() => {window.location.href = "game.html";}, 1000);
+        }
+
+        // Inisialisasi awal saat halaman selesai dimuat: perbarui seluruh elemen antarmuka
+        updateNamaUI();
+        perbaruiEquippedUI();
+        perbaruiShopUI();
+        perbaruiSkillUI();
+    
+        // ================= NEW HUD LOGIC & COMPATIBILITY =================
+        // Variabel penyimpan sektor aktif yang dipilih pada bilah navigasi HUD bawah (default: 1)
+        let sektorDipilihHUD = 1;
+        // Peta korespondensi antara angka nomor sektor dengan string identifier peta
+        let mapIds = {1: 'gedung', 2: 'hutan', 3: 'lab'};
+
+        // Fungsi pemilihan sektor melalui navigasi HUD bawah
+        function pilihSektorHUD(num) {
+            mainkanSuaraUI('click');
+            sektorDipilihHUD = num;
+            
+            // Update active mini card
+            // Sinkronkan status aktif pada ketiga kartu mini dan tab judul sektor di HUD
+            [1, 2, 3].forEach(i => {
+                let card = document.getElementById('hud-mini-sector-' + i);
+                let tab = document.getElementById('tab-hdr-' + i);
+                if (card) {
+                    if (i === num) card.classList.add('active-card');
+                    else card.classList.remove('active-card');
+                }
+                if (tab) {
+                    if (i === num) tab.classList.add('active-sector-tab');
+                    else tab.classList.remove('active-sector-tab');
+                }
+            });
+
+            // Open dispatch modal for full briefing
+            // Buka jendela modal pemilihan map untuk melihat rincian briefing lengkap
+            bukaModal('modal-pilih-map');
+        }
+
+        // Fungsi eksekusi deploy cepat langsung dari tombol DEPLOY di bar HUD bawah
+        function eksekusiDeployHUD() {
+            // Jika sektor yang dipilih masih terkunci, buka modal map untuk memberi peringatan
+            if (sektorDipilihHUD > levelTerbuka) {
+                bukaModal('modal-pilih-map');
+                return;
+            }
+            // Langsung luncurkan misi permainan menuju sektor yang aktif
+            gasMain(sektorDipilihHUD, mapIds[sektorDipilihHUD]);
+        }
+
+        // Fungsi sinkronisasi status gembok dan teks READY/LOCKED pada kartu mini HUD bawah
+        function syncHUDWithMapStatus() {
+            let status2 = document.getElementById('hud-status-2');
+            let lock2 = document.getElementById('hud-lock-icon-2');
+            let status3 = document.getElementById('hud-status-3');
+            let lock3 = document.getElementById('hud-lock-icon-3');
+
+            // Sinkronisasi Sektor 2
+            if (levelTerbuka >= 2) {
+                if (status2) status2.innerText = "READY";
+                if (lock2) lock2.style.display = "none";
+            } else {
+                if (status2) status2.innerText = "LOCKED";
+                if (lock2) lock2.style.display = "block";
+            }
+
+            // Sinkronisasi Sektor 3
+            if (levelTerbuka >= 3) {
+                if (status3) status3.innerText = "READY";
+                if (lock3) lock3.style.display = "none";
+            } else {
+                if (status3) status3.innerText = "LOCKED";
+                if (lock3) lock3.style.display = "block";
+            }
+        }
+
+        // Keep avatar image in sync with equipped suit
+        // Fungsi sinkronisasi gambar avatar profil di kiri atas HUD dengan kostum yang dipakai
+        function syncAvatarImg() {
+            let imgK = document.getElementById("ninja-karakter");
+            let av = document.getElementById("avatar-img");
+            if (imgK && av) {
+                av.src = imgK.src;
+            }
+        }
+
+        // Call syncs
+        // Jalankan fungsi sinkronisasi awal saat halaman pertama kali dibuka
+        syncAvatarImg();
+        syncHUDWithMapStatus();
+
+        // Hook sync into perbaruiTampilanMap
+        // Menyambungkan (hook) fungsi sinkronisasi HUD ke dalam fungsi perbaruiTampilanMap
+        let orig_perbaruiTampilanMap = perbaruiTampilanMap;
+        perbaruiTampilanMap = function() {
+            orig_perbaruiTampilanMap();
+            syncHUDWithMapStatus();
+        };
+
+        // Hook sync into gantiBaju
+        // Menyambungkan (hook) sinkronisasi avatar ke dalam fungsi gantiBaju agar langsung berganti
+        let orig_gantiBaju = gantiBaju;
+        gantiBaju = function(c) {
+            orig_gantiBaju(c);
+            setTimeout(syncAvatarImg, 50);
+        };
+</script>
+</body>
+
+</html>

@@ -1,0 +1,842 @@
+<!-- Deklarasi tipe dokumen HTML5 untuk memberitahu browser standar rendering yang digunakan -->
+<!DOCTYPE html>
+<!-- Elemen root dokumen HTML dengan atribut bahasa disetel ke Bahasa Indonesia (id) -->
+<html lang="id">
+
+<!-- Bagian head berisi metadata, judul dokumen, dan gaya visual (CSS) -->
+<head>
+    <!-- Pengaturan set karakter UTF-8 untuk mendukung berbagai karakter dan simbol -->
+    <meta charset="UTF-8">
+    <!-- Pengaturan viewport agar tampilan responsif dan proporsional di berbagai ukuran layar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Judul halaman web yang ditampilkan pada tab browser -->
+    <title>Speed Assassin - Arena</title>
+    <!-- Blok penulisan gaya CSS internal untuk mengatur tampilan seluruh antarmuka dan elemen game -->
+    <style>
+        /* Selector universal (*) untuk mereset dan menyeragamkan perilaku dasar semua elemen */
+        * {
+            /* Mengatur perhitungan lebar dan tinggi elemen agar memperhitungkan padding dan border */
+            box-sizing: border-box;
+            /* Mencegah seleksi teks secara tidak sengaja oleh pemain saat bermain game */
+            user-select: none;
+        }
+
+        /* Gaya utama untuk elemen body dokumen HTML */
+        body {
+            /* Menghapus margin bawaan browser pada elemen body */
+            margin: 0;
+            /* Menghapus padding bawaan browser pada elemen body */
+            padding: 0;
+            /* Latar belakang gradasi melingkar gelap dari biru tua di tengah (#1a2332) ke hitam di tepi (#0d1117) */
+            background: radial-gradient(circle at center, #1a2332 0%, #0d1117 100%);
+            /* Mengaktifkan flexbox layout untuk penataan posisi konten di tengah layar */
+            display: flex;
+            /* Memposisikan konten horizontal secara presisi di tengah layar */
+            justify-content: center;
+            /* Memposisikan konten vertikal secara presisi di tengah layar */
+            align-items: center;
+            /* Menyesuaikan tinggi body sebesar 100% tinggi viewport layar */
+            height: 100vh;
+            /* Warna teks default terang (#f8fafc) agar kontras dengan latar belakang gelap */
+            color: #f8fafc;
+            /* Jenis font keluarga Segoe UI yang modern, bersih, dan mudah dibaca */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Menyembunyikan scrollbar agar layar game tidak bergeser */
+            overflow: hidden;
+        }
+
+        /* Gaya visual untuk elemen kanvas utama permainan (#arenaGame) */
+        #arenaGame {
+            /* Warna latar belakang kanvas arena bernuansa abu-abu gelap */
+            background-color: #2c2f33;
+            /* Garis tepi kanvas arena dengan ketebalan 3px dan warna abu-abu kebiruan */
+            border: 3px solid #1e293b;
+            /* Sudut kanvas yang membulat sebesar 14px agar tampak halus */
+            border-radius: 14px;
+            /* Efek bayangan luar gelap yang realistis untuk memberikan kesan melayang */
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            /* Batas lebar maksimum kanvas tidak melebihi 96% lebar viewport */
+            max-width: 96vw;
+            /* Batas tinggi maksimum kanvas tidak melebihi 88% tinggi viewport */
+            max-height: 88vh;
+            /* Rasio aspek proporsional kanvas tetap terkunci pada 1000 berbanding 700 */
+            aspect-ratio: 1000 / 700;
+            /* Lebar dasar kanvas game sebesar 1000 piksel */
+            width: 1000px;
+            /* Tinggi dasar kanvas game sebesar 700 piksel */
+            height: 700px;
+            /* Menampilkan kanvas sebagai elemen blok mandiri */
+            display: block;
+        }
+
+        /* Gaya bersama untuk tombol buka info kontrol (#btn-toggle-info) dan tombol jeda/pengaturan (#btn-settings) */
+        #btn-toggle-info,
+        #btn-settings {
+            /* Posisi absolut relatif terhadap jendela browser */
+            position: absolute;
+            /* Jarak tombol dari sisi atas layar sebesar 14px */
+            top: 14px;
+            /* Warna latar belakang gelap semi-transparan dengan transparansi 92% */
+            background: rgba(15, 23, 42, 0.92);
+            /* Efek keburaman latar belakang (glassmorphism) sebesar 10px */
+            backdrop-filter: blur(10px);
+            /* Warna teks tombol terang putih keabuan */
+            color: #f8fafc;
+            /* Garis batas tombol tipis dengan warna biru slate gelap */
+            border: 1px solid #334155;
+            /* Jarak ruang dalam tombol: 8px vertikal dan 16px horizontal */
+            padding: 8px 16px;
+            /* Sudut tombol dibuat membulat sebesar 12px */
+            border-radius: 12px;
+            /* Ketebalan huruf sangat tebal (800) untuk keterbacaan tinggi */
+            font-weight: 800;
+            /* Ukuran font teks tombol sebesar 13px */
+            font-size: 13px;
+            /* Mengubah kursor mouse menjadi pointer saat berada di atas tombol */
+            cursor: pointer;
+            /* Urutan tumpukan z-index tinggi agar selalu di atas elemen permainan lainnya */
+            z-index: 101;
+            /* Transisi animasi halus selama 0.2 detik untuk interaksi hover */
+            transition: all 0.2s ease;
+            /* Efek bayangan lembut pada tombol */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+            /* Mengaktifkan flexbox untuk menyejajarkan ikon dan teks tombol */
+            display: flex;
+            /* Memposisikan item di tengah secara vertikal */
+            align-items: center;
+            /* Jarak spasi antar elemen di dalam tombol sebesar 8px */
+            gap: 8px;
+        }
+
+        /* Penempatan posisi horizontal khusus untuk tombol informasi kontrol di sisi kiri */
+        #btn-toggle-info {
+            /* Menempatkan tombol informasi kontrol 20px dari tepi kiri layar */
+            left: 20px;
+        }
+
+        /* Penempatan posisi horizontal khusus untuk tombol pengaturan/pause di sisi kanan */
+        #btn-settings {
+            /* Menempatkan tombol pengaturan 20px dari tepi kanan layar */
+            right: 20px;
+        }
+
+        /* Efek interaktif ketika kursor mouse diarahkan ke tombol info atau pengaturan */
+        #btn-toggle-info:hover,
+        #btn-settings:hover {
+            /* Warna latar tombol berubah menjadi slate lebih terang saat di-hover */
+            background: #1e293b;
+            /* Warna garis batas berubah menjadi lebih terang saat di-hover */
+            border-color: #475569;
+            /* Efek tombol sedikit terangkat ke atas setinggi 2px */
+            transform: translateY(-2px);
+            /* Bayangan tombol membesar untuk memberikan efek timbul */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Gaya bilah HUD ringkas di bagian atas layar agar tidak mengganggu pandangan gameplay */
+        /* COMPACT NON-OBSTRUCTIVE TOP HUD BAR */
+        #top-hud-bar {
+            /* Menetapkan posisi absolut di bagian atas */
+            position: absolute;
+            /* Jarak 14px dari batas atas layar */
+            top: 14px;
+            /* Penempatan titik awal 50% dari sisi kiri layar */
+            left: 50%;
+            /* Transformasi geser sumbu-X sebesar -50% untuk menempatkan HUD tepat di tengah horizontal */
+            transform: translateX(-50%);
+            /* Tata letak fleksibel mendatar */
+            display: flex;
+            /* Meratakan vertikal semua komponen HUD di tengah */
+            align-items: center;
+            /* Jarak renggang antar item HUD sebesar 20px */
+            gap: 20px;
+            /* Warna latar bilah semi-transparan dengan transparansi 94% */
+            background: rgba(15, 23, 42, 0.94);
+            /* Border abu-abu kebiruan tipis di sekeliling bilah HUD */
+            border: 1px solid #334155;
+            /* Sudut berbentuk kapsul melengkung dengan radius 30px */
+            border-radius: 30px;
+            /* Padding bagian dalam bilah HUD: 7px atas-bawah dan 24px kiri-kanan */
+            padding: 7px 24px;
+            /* Efek blur latar belakang tembus pandang */
+            backdrop-filter: blur(12px);
+            /* Efek bayangan lembut gelap di bawah bilah HUD */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            /* Tingkat lapisan z-index 100 agar berada di atas kanvas game */
+            z-index: 100;
+            /* Mencegah HUD menghalangi klik mouse pemain ke area permainan di belakangnya */
+            pointer-events: none;
+            /* Mencegah teks HUD terlipat ke baris baru */
+            white-space: nowrap;
+        }
+
+        /* Kontainer pembungkus elemen nyawa (HP) pemain di dalam HUD */
+        .hud-hp-wrap {
+            /* Menjadikan kontainer HP tertata flexbox secara horizontal */
+            display: flex;
+            /* Memposisikan teks dan bar darah lurus di tengah vertikal */
+            align-items: center;
+            /* Jarak spasi antar elemen HP sebesar 8px */
+            gap: 8px;
+        }
+
+        /* Wadah luar untuk baris indikator HP pemain */
+        .hud-hp-bar {
+            /* Lebar tetap bilah indikator HP sebesar 110px */
+            width: 110px;
+            /* Tinggi bilah indikator HP sebesar 9px */
+            height: 9px;
+            /* Warna dasar gelap pada bar darah yang kosong */
+            background: #1e293b;
+            /* Sudut melengkung halus sebesar 5px */
+            border-radius: 5px;
+            /* Memastikan isi bar tidak meluber keluar batas sudut melengkung */
+            overflow: hidden;
+            /* Border tipis 1px sebagai bingkai bar HP */
+            border: 1px solid #334155;
+        }
+
+        /* Lapisan pengisi darah pemain yang dinamis sesuai jumlah HP saat ini */
+        #bar-player-hp-fill {
+            /* Lebar default penuh 100% saat darah maksimal */
+            width: 100%;
+            /* Memenuhi tinggi keseluruhan wadah bar */
+            height: 100%;
+            /* Gradasi warna horizontal dari merah (#ef4444) ke hijau cerah (#22c55e) */
+            background: linear-gradient(90deg, #ef4444, #22c55e);
+            /* Efek animasi transisi halus saat darah berkurang atau bertambah */
+            transition: width 0.2s ease;
+        }
+
+        /* Teks indikator angka HP numerik pemain */
+        #angka-player-hp {
+            /* Ukuran font angka HP sebesar 13px */
+            font-size: 13px;
+            /* Ketebalan font 800 agar terlihat tebal dan jelas */
+            font-weight: 800;
+            /* Warna hijau cerah melambangkan kondisi darah */
+            color: #22c55e;
+            /* Font monospace agar angka memiliki lebar karakter yang konsisten */
+            font-family: monospace;
+        }
+
+        /* Teks status misi dan intelijen pada bilah HUD */
+        #teks-status {
+            /* Menghilangkan margin bawaan */
+            margin: 0;
+            /* Ukuran font teks status sebesar 14px */
+            font-size: 14px;
+            /* Ketebalan huruf 800 */
+            font-weight: 800;
+            /* Jarak renggang antar huruf sebesar 0.5px */
+            letter-spacing: 0.5px;
+            /* Warna teks terang putih */
+            color: #f8fafc;
+            /* Menata item status dengan flexbox */
+            display: flex;
+            /* Menyejajarkan teks status di tengah vertikal */
+            align-items: center;
+            /* Jarak renggang antar komponen status sebesar 12px */
+            gap: 12px;
+        }
+
+        /* Panel panduan kontrol yang dapat dibuka-tutup tanpa menghalangi arena */
+        /* COLLAPSIBLE CONTROLS GUIDE (DOES NOT BLOCK GAMEPLAY) */
+        #info {
+            /* Posisi absolut menempel di layar */
+            position: absolute;
+            /* Jarak 65px dari atas layar tepat di bawah tombol kontrol */
+            top: 65px;
+            /* Jarak 20px dari sisi kiri layar */
+            left: 20px;
+            /* Latar belakang gelap semi-transparan dengan opasitas 95% */
+            background: rgba(15, 23, 42, 0.95);
+            /* Border bercahaya biru muda transparan */
+            border: 2px solid rgba(56, 189, 248, 0.35);
+            /* Sudut panel membulat halus sebesar 16px */
+            border-radius: 16px;
+            /* Padding dalam panel: 16px atas-bawah dan 20px kiri-kanan */
+            padding: 16px 20px;
+            /* Efek bayangan tebal pada kotak info */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            /* Efek kaca buram di balik panel */
+            backdrop-filter: blur(12px);
+            /* Batas lebar minimal panel panduan sebesar 250px */
+            min-width: 250px;
+            /* Z-index 99 agar berada di lapisan atas kanvas */
+            z-index: 99;
+            /* Transisi animasi halus saat membuka atau menutup panel */
+            transition: all 0.25s ease-out;
+            /* Default panel disembunyikan hingga tombol ditekan */
+            display: none;
+        }
+
+        /* Kelas aktif saat panel panduan kontrol dibuka */
+        #info.buka {
+            /* Menampilkan panel info sebagai elemen blok */
+            display: block;
+            /* Memanggil animasi muncul memudar (fadeInHud) */
+            animation: fadeInHud 0.2s ease-out;
+        }
+
+        /* Definisi animasi keyframes untuk efek fade-in panel kontrol */
+        @keyframes fadeInHud {
+            /* Keadaan awal animasi: transparan dan sedikit bergeser ke atas */
+            from {
+                /* Opasitas awal nol (tidak terlihat) */
+                opacity: 0;
+                /* Bergeser ke atas 8px */
+                transform: translateY(-8px);
+            }
+
+            /* Keadaan akhir animasi: terlihat penuh dan di posisi normal */
+            to {
+                /* Opasitas penuh terlihat */
+                opacity: 1;
+                /* Kembali ke posisi y semula */
+                transform: translateY(0);
+            }
+        }
+
+        /* Gaya judul pada panel informasi kontrol */
+        #info h2 {
+            /* Margin hanya di bagian bawah sebesar 10px */
+            margin: 0 0 10px 0;
+            /* Warna kuning emas untuk judul */
+            color: #facc15;
+            /* Ukuran font judul info sebesar 16px */
+            font-size: 16px;
+            /* Ketebalan font 800 */
+            font-weight: 800;
+            /* Garis bawah putus-putus sebagai pemisah dekoratif */
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.15);
+            /* Ruang pemisah bawah judul 6px */
+            padding-bottom: 6px;
+            /* Jarak renggang antar huruf sebesar 0.5px */
+            letter-spacing: 0.5px;
+        }
+
+        /* Gaya paragraf baris tombol kontrol pada panel informasi */
+        #info p {
+            /* Jarak margin vertikal tipis sebesar 6px */
+            margin: 6px 0;
+            /* Ukuran font instruksi tombol sebesar 12px */
+            font-size: 12px;
+            /* Warna teks abu-abu terang */
+            color: #cbd5e1;
+            /* Menata label dan tombol di ujung berlawanan */
+            display: flex;
+            /* Memberikan ruang maksimal antara nama aksi dan tombol */
+            justify-content: space-between;
+            /* Menyelaraskan teks secara vertikal */
+            align-items: center;
+        }
+
+        /* Gaya lencana tombol keyboard (tag <b>) di dalam panel info */
+        #info p b {
+            /* Warna teks tombol terang putih */
+            color: #f8fafc;
+            /* Warna latar gelap seperti tuts keyboard */
+            background: #1e293b;
+            /* Garis batas tipis pada lencana tombol */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Padding dalam lencana tombol: 2px vertikal dan 7px horizontal */
+            padding: 2px 7px;
+            /* Sudut melengkung kecil sebesar 6px */
+            border-radius: 6px;
+            /* Ukuran font tuts tombol sebesar 11px */
+            font-size: 11px;
+            /* Jarak spasi antar huruf tombol sebesar 1px */
+            letter-spacing: 1px;
+        }
+
+        /* Gaya modal panel jeda (pause) dan pengaturan permainan */
+        #panel-pengaturan {
+            /* Penempatan posisi absolut tepat di layar */
+            position: absolute;
+            /* Posisi 50% dari atas layar */
+            top: 50%;
+            /* Posisi 50% dari kiri layar */
+            left: 50%;
+            /* Mentransformasikan posisi tepat di titik tengah layar (center modal) */
+            transform: translate(-50%, -50%);
+            /* Latar belakang hitam kebiruan pekat hampir solid (98%) */
+            background: rgba(15, 23, 42, 0.98);
+            /* Garis batas panel pengaturan berwarna abu-abu kebiruan */
+            border: 1px solid #334155;
+            /* Sudut panel modal membulat sebesar 18px */
+            border-radius: 18px;
+            /* Jarak padding bagian dalam modal: 24px atas-bawah dan 28px kiri-kanan */
+            padding: 24px 28px;
+            /* Perataan teks di tengah secara default */
+            text-align: center;
+            /* Bayangan dramatis besar agar modal tampak menonjol di atas game */
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            /* Lapisan z-index paling atas (200) untuk menutupi elemen lain */
+            z-index: 200;
+            /* Awalnya disembunyikan sampai game dijeda */
+            display: none;
+            /* Lebar modal pengaturan tetap sebesar 440px */
+            width: 440px;
+            /* Batas lebar maksimum 92% viewport untuk perangkat layar kecil */
+            max-width: 92vw;
+            /* Batas tinggi maksimum 85% viewport untuk mencegah keluar layar */
+            max-height: 85vh;
+            /* Mengizinkan scroll vertikal jika konten melebihi batas tinggi */
+            overflow-y: auto;
+            /* Efek buram kuat di balik modal */
+            backdrop-filter: blur(16px);
+            /* Animasi muncul halus saat panel dibuka */
+            animation: munculModal 0.2s ease-out;
+        }
+
+        /* Kustomisasi scrollbar browser untuk panel pengaturan */
+        #panel-pengaturan::-webkit-scrollbar {
+            /* Mengatur lebar scrollbar menjadi ramping (6px) */
+            width: 6px;
+        }
+
+        /* Kustomisasi rel track scrollbar pada panel pengaturan */
+        #panel-pengaturan::-webkit-scrollbar-track {
+            /* Warna latar track scrollbar gelap */
+            background: #0f172a;
+        }
+
+        /* Kustomisasi penggeser (thumb) scrollbar pada panel pengaturan */
+        #panel-pengaturan::-webkit-scrollbar-thumb {
+            /* Warna penggeser scrollbar */
+            background: #334155;
+            /* Sudut penggeser membulat sebesar 4px */
+            border-radius: 4px;
+        }
+
+        /* Definisi keyframe animasi kemunculan modal jeda */
+        @keyframes munculModal {
+            /* Titik awal animasi kemunculan modal */
+            from {
+                /* Opasitas modal bermula dari nol */
+                opacity: 0;
+                /* Mulai sedikit lebih ke atas dan ukuran sedikit mengecil (scale 0.96) */
+                transform: translate(-50%, -46%) scale(0.96);
+            }
+
+            /* Titik akhir animasi kemunculan modal */
+            to {
+                /* Opasitas menjadi terlihat penuh */
+                opacity: 1;
+                /* Berada tepat di tengah layar dengan skala normal 1 */
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Gaya judul pada panel pengaturan game */
+        #panel-pengaturan h2 {
+            /* Warna teks judul putih bersih */
+            color: #f8fafc;
+            /* Menghilangkan margin atas */
+            margin-top: 0;
+            /* Ukuran font judul modal sebesar 20px */
+            font-size: 20px;
+            /* Ketebalan font 800 */
+            font-weight: 800;
+            /* Spasi renggang antar karakter sebesar 2px */
+            letter-spacing: 2px;
+            /* Garis bawah pemisah tipis berwarna gelap */
+            border-bottom: 1px solid #1e293b;
+            /* Padding bawah judul sebesar 10px */
+            padding-bottom: 10px;
+        }
+
+        /* Gaya untuk setiap baris opsi pengaturan (misalnya volume) */
+        .setting-item {
+            /* Jarak vertikal luar sebesar 12px */
+            margin: 12px 0;
+            /* Teks rata kiri */
+            text-align: left;
+            /* Ketebalan huruf tebal 700 */
+            font-weight: 700;
+            /* Ukuran font opsi pengaturan sebesar 13px */
+            font-size: 13px;
+            /* Warna teks abu-abu kebiruan terang */
+            color: #cbd5e1;
+            /* Menata item label dan input berdampingan */
+            display: flex;
+            /* Memberi jarak maksimal antara label dan slider */
+            justify-content: space-between;
+            /* Meratakan vertikal di tengah */
+            align-items: center;
+            /* Warna latar item pengaturan kotak hitam kebiruan */
+            background: #090d16;
+            /* Padding dalam item: 10px vertikal dan 14px horizontal */
+            padding: 10px 14px;
+            /* Sudut melengkung sebesar 10px */
+            border-radius: 10px;
+            /* Border tipis pembatas item */
+            border: 1px solid #1e293b;
+        }
+
+        /* Gaya untuk elemen input slider volume */
+        input[type="range"] {
+            /* Warna aksen penggeser slider biru langit cerah */
+            accent-color: #38bdf8;
+            /* Kursor berubah menjadi tangan saat diarahkan ke slider */
+            cursor: pointer;
+            /* Lebar slider sebesar 140px */
+            width: 140px;
+        }
+
+        /* Kotak tutorial lengkap pada menu pause */
+        .tutorial-box {
+            /* Margin luar vertikal sebesar 14px */
+            margin: 14px 0;
+            /* Teks rata kiri */
+            text-align: left;
+            /* Warna latar belakang gelap kotak tutorial */
+            background: #090d16;
+            /* Garis tepi tipis kotak tutorial */
+            border: 1px solid #1e293b;
+            /* Sudut melengkung sebesar 12px */
+            border-radius: 12px;
+            /* Padding dalam kotak: 12px vertikal dan 14px horizontal */
+            padding: 12px 14px;
+        }
+
+        /* Header judul pada kotak tutorial */
+        .tutorial-header {
+            /* Ukuran font header tutorial sebesar 12px */
+            font-size: 12px;
+            /* Ketebalan font 800 */
+            font-weight: 800;
+            /* Warna kuning oranye khas pemberitahuan */
+            color: #f59e0b;
+            /* Huruf kapital semua untuk penegasan */
+            text-transform: uppercase;
+            /* Spasi renggang huruf sebesar 1px */
+            letter-spacing: 1px;
+            /* Jarak margin bawah sebesar 8px */
+            margin-bottom: 8px;
+            /* Fleksibel untuk menata ikon dan teks */
+            display: flex;
+            /* Meratakan ikon dan teks vertikal di tengah */
+            align-items: center;
+            /* Jarak antara ikon dan teks sebesar 6px */
+            gap: 6px;
+        }
+
+        /* Tata letak grid daftar kontrol tutorial */
+        .tutorial-list {
+            /* Menggunakan grid CSS dua kolom */
+            display: grid;
+            /* Dua kolom sama lebar (1fr 1fr) */
+            grid-template-columns: 1fr 1fr;
+            /* Jarak vertikal 6px dan horizontal 12px antar item */
+            gap: 6px 12px;
+            /* Ukuran font teks tutorial 12px */
+            font-size: 12px;
+        }
+
+        /* Baris item kontrol individu dalam tutorial */
+        .tutorial-item {
+            /* Menggunakan flexbox mendatar */
+            display: flex;
+            /* Memberi jarak maksimal antara label aksi dan tombol */
+            justify-content: space-between;
+            /* Meratakan vertikal di tengah */
+            align-items: center;
+            /* Warna abu-abu redup untuk deskripsi kontrol */
+            color: #94a3b8;
+            /* Padding tipis vertikal sebesar 3px */
+            padding: 3px 0;
+            /* Garis pemisah putus-putus sangat halus */
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+        }
+
+        /* Lencana tombol keyboard pada daftar tutorial */
+        .tutorial-item b {
+            /* Warna teks tombol putih terang */
+            color: #f8fafc;
+            /* Latar belakang tombol keyboard */
+            background: #1e293b;
+            /* Padding dalam lencana: 2px vertikal dan 6px horizontal */
+            padding: 2px 6px;
+            /* Sudut membulat kecil sebesar 5px */
+            border-radius: 5px;
+            /* Ukuran font tuts keyboard 11px */
+            font-size: 11px;
+            /* Font monospace khas tombol keyboard */
+            font-family: monospace;
+            /* Garis tepi tipis pada tombol */
+            border: 1px solid #334155;
+        }
+
+        /* Gaya tombol resume / lanjutkan permainan */
+        .btn-resume {
+            /* Warna latar biru cerah */
+            background: #0284c7;
+            /* Warna teks tombol putih */
+            color: white;
+            /* Garis batas tombol dengan nuansa biru lebih pekat */
+            border: 1px solid #0369a1;
+            /* Padding dalam tombol sebesar 11px */
+            padding: 11px;
+            /* Sudut melengkung tombol sebesar 10px */
+            border-radius: 10px;
+            /* Ketebalan font 800 */
+            font-weight: 800;
+            /* Ukuran teks tombol sebesar 14px */
+            font-size: 14px;
+            /* Kursor mouse menjadi pointer saat mengarah ke tombol */
+            cursor: pointer;
+            /* Lebar tombol memenuhi seluruh lebar wadah (100%) */
+            width: 100%;
+            /* Margin atas memberi jarak 10px dari elemen di atasnya */
+            margin-top: 10px;
+            /* Transisi animasi halus selama 0.2 detik */
+            transition: all 0.2s;
+        }
+
+        /* Efek hover ketika kursor diarahkan ke tombol resume */
+        .btn-resume:hover {
+            /* Warna latar menjadi biru lebih pekat */
+            background: #0369a1;
+            /* Sedikit terangkat 1px ke atas */
+            transform: translateY(-1px);
+        }
+
+        /* Efek klik aktif ketika tombol resume ditekan */
+        .btn-resume:active {
+            /* Tombol sedikit tertekan ke bawah 1px */
+            transform: translateY(1px);
+        }
+    <!-- Penutup tag style -->
+    </style>
+<!-- Penutup tag head -->
+</head>
+
+<!-- Bagian tubuh dokumen tempat seluruh elemen antarmuka dan kanvas diletakkan -->
+<body>
+
+    <!-- Tombol navigasi untuk membuka atau menutup panel ringkasan kontrol permainan (shortcut H) -->
+    <button id="btn-toggle-info" onclick="toggleInfo()">📜 Controls [H]</button>
+    <!-- Tombol navigasi untuk membuka panel jeda / pengaturan suara (shortcut ESC) -->
+    <button id="btn-settings" onclick="bukaPengaturan()">⚙️ Pause [ESC]</button>
+
+    <!-- Bilah HUD atas yang bersih dan tidak menghalangi arena permainan -->
+    <!-- CLEAN NON-OBSTRUCTIVE TOP HUD BAR -->
+    <div id="top-hud-bar">
+        <!-- Label judul misi / sektor saat ini dengan gaya teks futuristik berwarna biru muda -->
+        <div id="teks-misi-judul"
+            style="color: #38bdf8; font-weight: 800; font-size: 13px; letter-spacing: 1px; font-family: 'Rajdhani', sans-serif;">
+            SECTOR 1-1</div>
+
+        <!-- Wadah pembungkus indikator status HP pemain -->
+        <div class="hud-hp-wrap">
+            <!-- Ikon dan teks penanda HP berwarna merah tebal -->
+            <span style="color:#ef4444; font-size:12px; font-weight:800;">❤️ HP</span>
+            <!-- Wadah bilah bar HP dengan batas tepi -->
+            <div class="hud-hp-bar">
+                <!-- Elemen isi persentase bar darah yang diatur secara dinamis oleh JavaScript -->
+                <div id="bar-player-hp-fill"></div>
+            <!-- Penutup kontainer hud-hp-bar -->
+            </div>
+            <!-- Teks nilai numerik HP pemain yang sedang aktif (misalnya 12 / 12) -->
+            <span id="angka-player-hp">12 / 12</span>
+        <!-- Penutup kontainer hud-hp-wrap -->
+        </div>
+
+        <!-- Wadah status informasi pengumpulan berkas intelijen -->
+        <div id="teks-status">
+            <!-- Menampilkan jumlah berkas intel yang berhasil dikumpulkan dalam sektor -->
+            <span>📂 INTEL: 0 / 3</span>
+        <!-- Penutup kontainer teks-status -->
+        </div>
+    <!-- Penutup kontainer top-hud-bar -->
+    </div>
+
+    <!-- Panel collapsible bantuan tombol dan skill bertarung (berada di luar area bertarung) -->
+    <!-- COLLAPSIBLE CONTROLS & SKILL GUIDE (OFF THE ARENA) -->
+    <div id="info">
+        <!-- Judul panel panduan kontrol bertarung -->
+        <h2
+            style="margin: 0 0 10px 0; color: #facc15; font-size: 16px; font-weight: 800; border-bottom: 2px dashed rgba(255, 255, 255, 0.15); padding-bottom: 6px;">
+            Combat Controls</h2>
+        <!-- Petunjuk kontrol pergerakan karakter menggunakan tombol WASD atau tombol panah -->
+        <p id="t-gerak">Move <b>W A S D / 🠹🠸🠻🠺</b></p>
+        <!-- Petunjuk kontrol dash menghindar menggunakan tombol Shift -->
+        <p id="t-dash">Quick Dash <b>SHIFT</b></p>
+        <!-- Petunjuk serangan jarak dekat menggunakan tombol L atau klik kiri mouse -->
+        <p id="t-slash">Melee Attack <b>L / CLICK</b></p>
+        <!-- Kotak info tips khusus stealth kill dari belakang musuh -->
+        <p
+            style="color: #facc15; font-size: 11px; margin: 4px 0 8px 0; background: rgba(250,204,21,0.1); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(250,204,21,0.2);">
+            ⚡ <b>Stealth Kill:</b> Strike unaware targets from behind</p>
+        <!-- Wadah kontrol skill tebasan beruntun (Rapid Slashes) -->
+        <div id="ui-rapid">
+            <!-- Petunjuk tombol skill Rapid Slashes dengan tombol J -->
+            <p style="color:#f59e0b;" id="t-rapid">Rapid Slashes <b>J</b></p>
+        <!-- Penutup kontainer ui-rapid -->
+        </div>
+        <!-- Wadah kontrol skill tembus pandang (Ghost Walk) yang awalnya disembunyikan sampai terbuka -->
+        <div id="ui-ghost" style="display:none;">
+            <!-- Petunjuk tombol skill Ghost Walk dengan tombol Q -->
+            <p style="color:#00e5ff;" id="t-ghost">Ghost Walk <b>Q</b></p>
+        <!-- Penutup kontainer ui-ghost -->
+        </div>
+        <!-- Wadah kontrol skill teleportasi serang (Blink Kill) yang awalnya disembunyikan -->
+        <div id="ui-blink" style="display:none;">
+            <!-- Petunjuk tombol skill Blink Kill dengan tombol P -->
+            <p style="color:#ef4444;" id="t-blink">Blink Kill <b>P</b></p>
+        <!-- Penutup kontainer ui-blink -->
+        </div>
+        <!-- Wadah kontrol skill pembeku waktu (Time Freeze) yang awalnya disembunyikan -->
+        <div id="ui-time" style="display:none;">
+            <!-- Petunjuk tombol skill Time Freeze dengan tombol I -->
+            <p style="color:#a855f7;" id="t-time">Time Freeze <b>I</b></p>
+        <!-- Penutup kontainer ui-time -->
+        </div>
+        <!-- Wadah kontrol skill klon bayangan (Shadow Clone) yang awalnya disembunyikan -->
+        <div id="ui-clone" style="display:none;">
+            <!-- Petunjuk tombol skill Shadow Clone dengan tombol T -->
+            <p style="color:#22c55e;" id="t-clone">Shadow Clone <b>T</b></p>
+        <!-- Penutup kontainer ui-clone -->
+        </div>
+        <!-- Wadah kontrol melempar pisau atau shuriken -->
+        <div id="ui-shuriken">
+            <!-- Petunjuk tombol melempar pisau dengan tombol C -->
+            <p style="color:#facc15;" id="t-shuriken">Throw Knife <b>C</b></p>
+        <!-- Penutup kontainer ui-shuriken -->
+        </div>
+    <!-- Penutup kontainer panel info -->
+    </div>
+
+    <!-- Modal pop-up jeda dan pengaturan permainan -->
+    <div id="panel-pengaturan">
+        <!-- Judul modal menu jeda permainan -->
+        <h2 id="set-judul">⏸️ GAME PAUSED</h2>
+        
+        <!-- Baris pengaturan tingkat volume audio permainan -->
+        <div class="setting-item">
+            <!-- Label teks volume suara -->
+            <span id="set-suara">🔊 Volume Suara:</span>
+            <!-- Elemen slider rentang volume dari 0.0 hingga 1.0 dengan langkah perubahan 0.1 -->
+            <input type="range" id="slider-volume" min="0" max="1" step="0.1" value="1.0"
+                oninput="ubahVolumeGame(this.value)">
+        <!-- Penutup kontainer setting-item volume -->
+        </div>
+
+        <!-- Kotak daftar lengkap panduan kontrol permainan pada modal jeda -->
+        <div class="tutorial-box">
+            <!-- Header judul bagian panduan lengkap -->
+            <div class="tutorial-header">🎮 PANDUAN LENGKAP TOMBOL & KONTROL</div>
+            <!-- Wadah kisi grid dua kolom berisi rincian tiap fungsi tombol -->
+            <div class="tutorial-list">
+                <!-- Baris informasi tombol pergerakan karakter -->
+                <div class="tutorial-item"><span>Gerak Karakter</span><b>W A S D / 🠹🠸🠻🠺</b></div>
+                <!-- Baris informasi tombol dash bayangan -->
+                <div class="tutorial-item"><span>Dash Bayangan</span><b>SHIFT</b></div>
+                <!-- Baris informasi tombol serangan tebasan pedang -->
+                <div class="tutorial-item"><span>Serangan Pedang</span><b>L / KLIK</b></div>
+                <!-- Baris informasi tombol tebasan cepat bertubi-tubi -->
+                <div class="tutorial-item"><span>Tebas Cepat (Rapid)</span><b>J</b></div>
+                <!-- Baris informasi tombol lempar pisau atau kunai -->
+                <div class="tutorial-item"><span>Lempar Pisau/Kunai</span><b>C</b></div>
+                <!-- Baris informasi cara melakukan eksekusi stealth musuh dari belakang -->
+                <div class="tutorial-item"><span>Eksekusi Belakang</span><b>Serang Belakang</b></div>
+                <!-- Baris informasi tombol mengaktifkan skill Ghost Walk -->
+                <div class="tutorial-item"><span>Skill Ghost Walk</span><b>Q</b></div>
+                <!-- Baris informasi tombol mengaktifkan skill Blink Kill -->
+                <div class="tutorial-item"><span>Skill Blink Kill</span><b>P</b></div>
+                <!-- Baris informasi tombol mengaktifkan skill Time Freeze -->
+                <div class="tutorial-item"><span>Skill Time Freeze</span><b>I</b></div>
+                <!-- Baris informasi tombol mengaktifkan skill Shadow Clone -->
+                <div class="tutorial-item"><span>Skill Shadow Clone</span><b>T</b></div>
+                <!-- Baris informasi tombol pintas menampilkan atau menyembunyikan bantuan info -->
+                <div class="tutorial-item"><span>Buka/Tutup Info</span><b>H</b></div>
+                <!-- Baris informasi tombol pintas mengulang kembali tahap permainan yang gagal -->
+                <div class="tutorial-item"><span>Ulangi Tahap</span><b>R</b></div>
+            <!-- Penutup kontainer tutorial-list -->
+            </div>
+        <!-- Penutup kontainer tutorial-box -->
+        </div>
+
+        <!-- Tombol untuk menutup menu jeda dan melanjutkan aksi permainan -->
+        <button class="btn-resume" id="btn-resume-game" onclick="lanjutMain()">▶️ Lanjut Main [ESC]</button>
+        <!-- Tombol darurat untuk keluar dari permainan saat ini dan kembali menuju halaman lobi utama (index.html) -->
+        <button class="btn-resume" id="btn-exit-lobby"
+            style="background: #b91c1c; border-color: #991b1b; margin-top: 8px;"
+            onclick="window.location.href='index.html'">🚪 Kembali ke Lobi</button>
+    <!-- Penutup kontainer modal panel-pengaturan -->
+    </div>
+
+    <!-- Elemen Canvas HTML5 berukuran 1000x700 piksel tempat seluruh grafik game digambar oleh script -->
+    <canvas id="arenaGame" width="1000" height="700"></canvas>
+
+    <!-- Tag pembuka skrip JavaScript internal untuk mengelola status antarmuka dan kontrol HUD -->
+    <script>
+        // Mengatur status awal permainan ke kondisi sedang berjalan ('playing') pada objek global window
+        window.gameState = "playing";
+
+        // Blok inisialisasi pengaturan volume dari memori lokal browser (localStorage)
+        // Volume Setting
+        // Mengambil data volume tersimpan dari localStorage dan mengubahnya menjadi bilangan pecahan desimal
+        let volumeTersimpan = parseFloat(localStorage.getItem('volumeGame'));
+        // Jika data volume belum pernah disimpan atau bernilai NaN, gunakan nilai default 1.0 (100% penuh)
+        if (isNaN(volumeTersimpan)) volumeTersimpan = 1.0;
+        // Mengatur posisi slider pengatur volume sesuai dengan nilai volume yang tersimpan
+        document.getElementById('slider-volume').value = volumeTersimpan;
+
+        // Fungsi untuk memperbarui volume audio game dan menyimpannya secara permanen ke localStorage
+        function ubahVolumeGame(nilaiVolume) {
+            // Menyimpan nilai volume terbaru yang dipilih pemain ke dalam localStorage browser
+            localStorage.setItem('volumeGame', nilaiVolume);
+            // Memeriksa apakah fungsi aturVolume sudah dimuat oleh script mesin game, lalu menjalankannya
+            if (typeof aturVolume === "function") aturVolume(nilaiVolume);
+        }
+
+        // Fungsi untuk membuka atau menutup panel informasi panduan tombol kontrol di sisi kiri layar
+        function toggleInfo() {
+            // Mengambil elemen panel informasi panduan kontrol berdasarkan id elemen
+            let panelInfo = document.getElementById("info");
+            // Menambahkan atau menghapus kelas CSS 'buka' pada panel info (toggle)
+            panelInfo.classList.toggle("buka");
+            // Mengecek apakah kelas 'buka' saat ini aktif pada panel info
+            let sedangTerbuka = panelInfo.classList.contains("buka");
+            // Memperbarui teks pada tombol info menjadi 'Close' atau 'Controls' sesuai status buka panel
+            document.getElementById("btn-toggle-info").innerText = sedangTerbuka ? "❌ Close [H]" : "📜 Controls [H]";
+        }
+
+        // Menambahkan pendengar event keyboard untuk tombol pintas membuka/menutup panduan kontrol
+        window.addEventListener('keydown', (peristiwa) => {
+            // Memeriksa jika tombol yang ditekan adalah huruf 'h' atau 'H'
+            if (peristiwa.key === 'h' || peristiwa.key === 'H') {
+                // Menjalankan fungsi toggleInfo untuk membuka atau menutup panel panduan kontrol
+                toggleInfo();
+            }
+        });
+
+        // Fungsi untuk membuka modal jeda dan menampilkan pengaturan permainan
+        function bukaPengaturan() {
+            // Mengubah gaya tampilan modal pengaturan menjadi terlihat ('block')
+            document.getElementById("panel-pengaturan").style.display = "block";
+            // Menyimpan status permainan saat ini agar bisa dikembalikan saat resume nanti
+            window.lastGameState = window.gameState;
+            // Mengubah status permainan menjadi 'paused' untuk menghentikan update loop game
+            window.gameState = "paused";
+        }
+
+        // Fungsi untuk menutup modal jeda dan melanjutkan permainan kembali
+        function lanjutMain() {
+            // Menyembunyikan modal pengaturan ('none')
+            document.getElementById("panel-pengaturan").style.display = "none";
+            // Mengembalikan status permainan ke status sebelumnya atau default ke 'playing'
+            window.gameState = window.lastGameState || "playing";
+        }
+        // Penutup skrip internal
+    </script>
+    <!-- Memuat file script logika utama permainan (game.js) -->
+    <script src="game.js"></script>
+<!-- Penutup tag body -->
+</body>
+
+<!-- Penutup tag elemen html -->
+</html>

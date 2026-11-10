@@ -1,0 +1,2040 @@
+<!-- Deklarasi tipe dokumen untuk standar HTML5 -->
+<!DOCTYPE html>
+<!-- Elemen root HTML yang membungkus seluruh dokumen dengan bahasa Indonesia -->
+<html lang="id">
+
+<!-- Bagian head dokumen yang memuat metadata, judul halaman, dan gaya CSS internal -->
+<head>
+    <!-- Pengaturan set karakter dokumen menggunakan UTF-8 agar mendukung berbagai simbol -->
+    <meta charset="UTF-8">
+    <!-- Konfigurasi viewport agar antarmuka responsif dan sesuai dengan skala layar perangkat -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Judul halaman web yang akan muncul pada tab peramban/browser -->
+    <title>Speed Assassin - Florence Guild HQ</title>
+    <!-- Tag pembuka style CSS internal untuk menata seluruh tampilan dan antarmuka -->
+    <style>
+        /* Mengimpor font eksternal dari Google Fonts: Cinzel (gaya gothic/klasik), Nunito (modern), dan Rajdhani (futuristik) */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Nunito:wght@600;800;900&family=Rajdhani:wght@500;700;900&display=swap');
+
+        /* Definisi variabel CSS global (:root) untuk konsistensi warna tema game di seluruh elemen */
+        :root {
+            /* Warna khas karakter ninja (kuning terang) */
+            --ninja-color: #facc15;
+            /* Warna latar belakang utama bernuansa sangat gelap */
+            --dark-bg: #030712;
+            /* Warna latar belakang panel dengan transparansi */
+            --panel-bg: rgba(10, 15, 26, 0.78);
+            /* Warna border keemasan dengan tingkat opasitas halus */
+            --border-color: rgba(212, 175, 55, 0.28);
+            /* Warna aksen emas utama */
+            --accent-gold: #f59e0b;
+            /* Warna kilau/glow aksen emas cerah */
+            --accent-glow: #facc15;
+            /* Warna emas terang untuk efek pencahayaan */
+            --gold-bright: #ffd269;
+            /* Warna emas gelap untuk aksen sekunder dan batas */
+            --gold-dark: #b45309;
+            /* Warna biru khas kastil Florence */
+            --florence-blue: #1e293b;
+        }
+
+        /* SCROLLBAR GELAP */
+        /* Mengatur ukuran lebar bilah gulir (scrollbar) kustom pada peramban berbasis WebKit */
+        ::-webkit-scrollbar {
+            /* Lebar scrollbar vertikal */
+            width: 8px;
+        }
+
+        /* Mengatur tampilan lintasan (track) scrollbar */
+        ::-webkit-scrollbar-track {
+            /* Warna latar belakang lintasan scrollbar */
+            background: #080d1a;
+        }
+
+        /* Mengatur tampilan tuas geser (thumb) scrollbar */
+        ::-webkit-scrollbar-thumb {
+            /* Warna pegangan tuas scrollbar */
+            background: #334155;
+            /* Sudut melengkung pada tuas scrollbar */
+            border-radius: 10px;
+        }
+
+        /* Efek interaktif saat kursor melayang di atas tuas scrollbar */
+        ::-webkit-scrollbar-thumb:hover {
+            /* Mengubah warna tuas menjadi warna emas saat diarahkan kursor */
+            background: var(--accent-gold);
+        }
+
+        /* Pengaturan universal untuk seluruh elemen HTML di halaman */
+        * {
+            /* Memasukkan padding dan border ke dalam perhitungan total lebar/tinggi elemen */
+            box-sizing: border-box;
+            /* Mencegah seleksi teks secara tidak sengaja oleh pemain saat bermain */
+            user-select: none;
+        }
+
+        /* Pengaturan gaya untuk badan dokumen (body) */
+        body {
+            /* Menghilangkan margin bawaan browser */
+            margin: 0;
+            /* Menghilangkan padding bawaan browser */
+            padding: 0;
+            /* Menentukan jenis font utama keluarga Nunito dengan fallback sans-serif */
+            font-family: 'Nunito', sans-serif;
+            /* Latar belakang gelap pekat */
+            background: #020409;
+            /* Membatasi tinggi pas satu viewport layar penuh */
+            height: 100vh;
+            /* Membatasi lebar pas satu viewport layar penuh */
+            width: 100vw;
+            /* Mencegah bilah gulir muncul di luar area yang diinginkan */
+            overflow: hidden;
+            /* Warna teks standar (abu-abu sangat terang mendekati putih) */
+            color: #f8fafc;
+            /* Posisi relatif sebagai acuan elemen absolute di dalamnya */
+            position: relative;
+        }
+
+        /* ================= LOBBY BACKGROUND & SCENE ================= */
+        /* Kontainer tampilan viewport latar belakang lobi utama */
+        .lobby-viewport {
+            /* Posisi tetap memenuhi seluruh layar */
+            position: fixed;
+            /* Menempel ke tepi atas */
+            top: 0;
+            /* Menempel ke tepi kiri */
+            left: 0;
+            /* Lebar 100% dari lebar layar viewport */
+            width: 100vw;
+            /* Tinggi 100% dari tinggi layar viewport */
+            height: 100vh;
+            /* Menyembunyikan bagian yang meluap dari batas layar */
+            overflow: hidden;
+            /* Indeks tumpukan lapisan paling dasar */
+            z-index: 0;
+            /* Warna dasar gelap */
+            background: #020409;
+        }
+
+        /* Container with exact aspect ratio of background lobby.png (1697 x 927 = 1.8306) */
+        /* Kontainer adegan lobi dengan rasio aspek presisi gambar latar */
+        .lobby-scene {
+            /* Posisi absolut terhadap viewport lobi */
+            position: absolute;
+            /* Berada di tengah sumbu horizontal */
+            left: 50%;
+            /* Berada di tengah sumbu vertikal */
+            top: 50%;
+            /* Transformasi pergeseran mundur 50% untuk penengahan presisi */
+            transform: translate(-50%, -50%);
+            /* Lebar responsif mempertahankan rasio aspek gambar */
+            width: max(100vw, calc(100vh * 1.830636));
+            /* Tinggi responsif mempertahankan rasio aspek gambar */
+            height: max(100vh, calc(100vw / 1.830636));
+            /* Menonaktifkan interaksi klik/pointer agar tembus ke elemen di baliknya */
+            pointer-events: none;
+        }
+
+        /* Gambar elemen latar belakang pemandangan lobi */
+        .lobby-bg-img {
+            /* Posisi absolut di pojok kiri atas scene */
+            position: absolute;
+            /* Menempel di bagian atas */
+            top: 0;
+            /* Menempel di bagian kiri */
+            left: 0;
+            /* Lebar mengisi kontainer */
+            width: 100%;
+            /* Tinggi mengisi kontainer */
+            height: 100%;
+            /* Ditampilkan sebagai elemen blok */
+            display: block;
+            /* Mengisi ruang kontainer secara penuh */
+            object-fit: fill;
+        }
+
+        /* VOLUMETRIC SPOTLIGHT BEAM CONE (Emanating from clocktower lamp at 50% X, 23.4% Y down to 72% Y) */
+        /* Efek visual berkas cahaya kerucut volumetrik dari lentera menara jam */
+        .volumetric-spotlight {
+            /* Posisi absolut dalam koordinat scene */
+            position: absolute;
+            /* Titik awal vertikal di posisi 23.4% */
+            top: 23.4%;
+            /* Titik awal horizontal di posisi tengah */
+            left: 50%;
+            /* Penyesuaian agar titik tengah berkas pas di sumbu X */
+            transform: translateX(-50%);
+            /* Lebar pancaran berkas cahaya */
+            width: 58%;
+            /* Tinggi pancaran berkas cahaya */
+            height: 48.5%;
+            /* Gradasi radial untuk efek pendaran cahaya dari sumber ke lantai */
+            background: radial-gradient(ellipse at 50% 0%, rgba(255, 230, 140, 0.32) 0%, rgba(255, 205, 85, 0.14) 38%, rgba(255, 180, 50, 0.03) 72%, transparent 85%);
+            /* Pemotongan bentuk kerucut trapesium menggunakan poligon */
+            clip-path: polygon(48.6% 0%, 51.4% 0%, 75% 100%, 25% 100%);
+            /* Cahaya tidak menghalangi klik mouse */
+            pointer-events: none;
+            /* Efek blending layar agar cahaya menyatu cerah dengan latar */
+            mix-blend-mode: screen;
+            /* Animasi kedip berkilau halus terus-menerus */
+            animation: beamShimmer 5s ease-in-out infinite alternate;
+            /* Lapisan di atas latar lobi */
+            z-index: 2;
+        }
+
+        /* Keyframes untuk animasi kilau dan fluktuasi intensitas berkas cahaya */
+        @keyframes beamShimmer {
+            /* Kondisi awal intensitas opasitas cahaya */
+            0% { opacity: 0.82; }
+            /* Kondisi puncak intensitas opasitas cahaya */
+            100% { opacity: 1; }
+        }
+
+        /* FLOATING DUST MOTES INSIDE SPOTLIGHT */
+        /* Kontainer partikel debu melayang di dalam sorotan lampu */
+        .dust-container {
+            /* Posisi absolut dalam scene */
+            position: absolute;
+            /* Jarak dari atas */
+            top: 25%;
+            /* Jarak dari kiri */
+            left: 36%;
+            /* Lebar kontainer partikel */
+            width: 28%;
+            /* Tinggi kontainer partikel */
+            height: 45%;
+            /* Tidak menangkap interaksi kursor mouse */
+            pointer-events: none;
+            /* Lapisan di atas berkas cahaya */
+            z-index: 3;
+            /* Menyembunyikan partikel yang bergerak ke luar batas */
+            overflow: hidden;
+        }
+
+        /* Partikel butiran debu individual yang bersinar */
+        .mote {
+            /* Posisi absolut di dalam dust-container */
+            position: absolute;
+            /* Bentuk lingkaran sempurna */
+            border-radius: 50%;
+            /* Warna partikel debu kekuningan semi-transparan */
+            background: rgba(255, 235, 160, 0.9);
+            /* Efek pendaran cahaya di sekeliling butiran debu */
+            box-shadow: 0 0 8px rgba(255, 220, 120, 0.9);
+            /* Animasi pergerakan melayang ke atas tanpa henti */
+            animation: moteFloat linear infinite;
+        }
+
+        /* Keyframes pergerakan melayang dan fading partikel debu */
+        @keyframes moteFloat {
+            /* Posisi awal di bagian bawah kontainer dengan transparansi penuh */
+            0% {
+                transform: translateY(100%) translateX(0);
+                opacity: 0;
+            }
+            /* Partikel mulai terlihat jelas saat naik */
+            15% {
+                opacity: 0.8;
+            }
+            /* Partikel tetap terlihat sebagian besar waktu */
+            85% {
+                opacity: 0.7;
+            }
+            /* Partikel menghilang perlahan di bagian atas sambil bergeser ke kanan */
+            100% {
+                transform: translateY(-20%) translateX(25px);
+                opacity: 0;
+            }
+        }
+
+        /* ================= CHARACTER UNDER SPOTLIGHT ================= */
+        /* Exact coordinates: lamp is at 50%, 23.4%; floor deck center is at 50%, 70.8% */
+        /* Area panggung tempat karakter berdiri di bawah sorotan lampu */
+        .character-stage {
+            /* Posisi absolut di dalam scene */
+            position: absolute;
+            /* Posisi horizontal tengah */
+            left: 50%;
+            /* Posisi vertikal dekat lantai panggung */
+            top: 73.8%;
+            /* Penyesuaian pivot agar karakter bertumpu tepat di lantai */
+            transform: translate(-50%, -100%);
+            /* Tata letak fleksibel vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Penjajaran horizontal ke tengah */
+            align-items: center;
+            /* Mengunci posisi ke bagian bawah */
+            justify-content: flex-end;
+            /* Mengizinkan interaksi klik pada karakter */
+            pointer-events: auto;
+            /* Berada di atas lapisan cahaya dan latar */
+            z-index: 5;
+        }
+
+        /* Pembungkus sprite dan elemen bayangan karakter */
+        .character-wrapper {
+            /* Posisi relatif sebagai kontainer elemen bayangan dan sprite */
+            position: relative;
+            /* Mengatur kontainer secara flex vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Pusatkan karakter secara horizontal */
+            align-items: center;
+        }
+
+        /* AMBIENT FLOOR BOUNCE GLOW ON WOODEN DECK */
+        /* Pendaran cahaya pantulan lantai kayu di bawah karakter */
+        .floor-bounce-glow {
+            /* Posisi absolut di dasar karakter */
+            position: absolute;
+            /* Posisi sedikit di bawah pijakan */
+            bottom: -22px;
+            /* Posisi tengah */
+            left: 50%;
+            /* Menengahkan sumbu horizontal */
+            transform: translateX(-50%);
+            /* Lebar area pantulan cahaya */
+            width: 340px;
+            /* Tinggi elips pantulan */
+            height: 60px;
+            /* Gradien radial cahaya emas lembut yang memudar ke tepi */
+            background: radial-gradient(ellipse at center, rgba(255, 220, 120, 0.32) 0%, rgba(245, 158, 11, 0.12) 45%, transparent 75%);
+            /* Bentuk elips melingkar */
+            border-radius: 50%;
+            /* Efek buram kabur agar pantulan terlihat sangat alami */
+            filter: blur(12px);
+            /* Lapisan paling dasar di bawah bayangan */
+            z-index: 0;
+            /* Tidak merespon interaksi kursor */
+            pointer-events: none;
+        }
+
+        /* PERSPECTIVE CAST SHADOW ON WOODEN PLANKS */
+        /* Bayangan jatuh dengan perspektif di atas lantai papan kayu */
+        .cast-shadow {
+            /* Posisi absolut */
+            position: absolute;
+            /* Posisi pas di bawah sepatu karakter */
+            bottom: -15px;
+            /* Berada di tengah */
+            left: 50%;
+            /* Menengahkan sumbu horizontal */
+            transform: translateX(-50%);
+            /* Lebar bayangan jatuh */
+            width: 230px;
+            /* Tinggi bayangan */
+            height: 32px;
+            /* Gradasi warna bayangan gelap transparan */
+            background: radial-gradient(ellipse at center, rgba(10, 5, 2, 0.82) 0%, rgba(15, 8, 3, 0.45) 50%, transparent 80%);
+            /* Bentuk elips */
+            border-radius: 50%;
+            /* Efek buram halus */
+            filter: blur(6px);
+            /* Lapisan di atas pantulan cahaya */
+            z-index: 1;
+            /* Tidak merespon klik mouse */
+            pointer-events: none;
+        }
+
+        /* REALISTIC CONTACT OCCLUSION SHADOW (Directly touching the boot soles) */
+        /* Bayangan oklusi kontak tajam tepat di titik sentuh sol sepatu */
+        .contact-shadow {
+            /* Posisi absolut */
+            position: absolute;
+            /* Jarak sangat rapat dengan sol sepatu */
+            bottom: -7px;
+            /* Berada di tengah */
+            left: 50%;
+            /* Penengahan horizontal */
+            transform: translateX(-50%);
+            /* Lebar area kontak sepatu */
+            width: 160px;
+            /* Tinggi elips kontak */
+            height: 15px;
+            /* Warna hitam pekat untuk oklusi bayangan rapat */
+            background: radial-gradient(ellipse at center, rgba(4, 2, 1, 1) 0%, rgba(10, 5, 2, 0.9) 45%, transparent 75%);
+            /* Bentuk elips */
+            border-radius: 50%;
+            /* Buram minimal agar tepi bayangan tetap tajam */
+            filter: blur(1.5px);
+            /* Lapisan tepat di bawah karakter */
+            z-index: 2;
+            /* Tidak merespon mouse */
+            pointer-events: none;
+        }
+
+        /* ASSASSIN CHARACTER SPRITE */
+        /* Sprite gambar karakter ninja pembunuh utama */
+        #ninja-karakter {
+            /* Lebar tampilan gambar sprite */
+            width: 300px;
+            /* Tinggi otomatis menyesuaikan proporsi gambar */
+            height: auto;
+            /* Elemen blok */
+            display: block;
+            /* Margin negatif bawah untuk menanam kaki karakter pas di lantai kayu */
+            margin: 0 auto -9px auto; /* Compensate for transparent padding in sprite to plant boots on planks */
+            /* Posisi relatif */
+            position: relative;
+            /* Lapisan di atas bayangan */
+            z-index: 4;
+            /* Titik tumpu transformasi di tengah bawah kaki */
+            transform-origin: bottom center;
+            /* Animasi pernapasan realistis halus */
+            animation: realisticBreathing 3.6s ease-in-out infinite;
+            /* Efek filter bayangan cahaya keemasan serta peningkatan kontras dan kejenuhan warna */
+            filter: drop-shadow(0 -6px 12px rgba(255, 230, 130, 0.65))
+                    drop-shadow(0 -1px 3px rgba(255, 245, 200, 0.9))
+                    drop-shadow(0 3px 22px rgba(255, 190, 60, 0.35))
+                    contrast(1.08) brightness(1.05) saturate(1.12);
+            /* Transisi halus saat efek hover */
+            transition: filter 0.3s ease, transform 0.2s ease;
+            /* Kursor berupa pointer penunjuk saat didekati */
+            cursor: pointer;
+        }
+
+        /* Efek saat kursor diarahkan ke atas karakter ninja */
+        #ninja-karakter:hover {
+            /* Peningkatan intensitas pendaran cahaya emas dan kontras saat disorot */
+            filter: drop-shadow(0 -5px 14px rgba(255, 235, 160, 0.7))
+                    drop-shadow(0 3px 25px rgba(255, 200, 70, 0.4))
+                    contrast(1.1) brightness(1.08) saturate(1.15);
+        }
+
+        /* GROUNDED BREATHING ANIMATION (Feet stay 100% locked to floor) */
+        /* Animasi pernapasan karakter di mana posisi kaki tetap menapak di lantai */
+        @keyframes realisticBreathing {
+            /* Siklus awal dan akhir pernapasan dengan skala normal */
+            0%, 100% {
+                transform: scale(1, 1);
+            }
+            /* Siklus puncak tarikan napas dada mengembang sedikit ke atas */
+            50% {
+                transform: scale(1.012, 1.018) translateY(-1px);
+            }
+        }
+
+        /* Compatibility dummy pedestal for existing script references */
+        /* Elemen pedestal panggung tersembunyi untuk menjaga kompatibilitas script lama */
+        .ninja-pedestal {
+            /* Disembunyikan dari tampilan visual */
+            display: none;
+        }
+
+        /* ================= TOP NAVIGATION HUD ================= */
+        /* Bilah navigasi HUD atas yang melayang di atas layar */
+        .top-hud-bar {
+            /* Posisi melayang tetap di atas layar */
+            position: fixed;
+            /* Menempel di bagian atas */
+            top: 0;
+            /* Menempel di tepi kiri */
+            left: 0;
+            /* Lebar memenuhi seluruh layar */
+            width: 100%;
+            /* Menghitung padding ke dalam lebar total */
+            box-sizing: border-box;
+            /* Jarak bantalan dalam bar */
+            padding: 16px 36px;
+            /* Menggunakan tata letak flexbox */
+            display: flex;
+            /* Memisahkan elemen kiri, tengah, dan kanan ke kedua ujung */
+            justify-content: space-between;
+            /* Penjajaran vertikal ke tengah */
+            align-items: center;
+            /* Tingkat lapisan tinggi di atas tampilan panggung */
+            z-index: 40;
+            /* Membiarkan klik mouse tembus di area kosong */
+            pointer-events: none;
+        }
+
+        /* Bagian kiri bilah HUD atas (profil dan mata uang) */
+        .top-hud-left {
+            /* Tampilan flexbox */
+            display: flex;
+            /* Penjajaran vertikal rata tengah */
+            align-items: center;
+            /* Jarak antar elemen kartu profil dan kapsul koin */
+            gap: 18px;
+            /* Mengaktifkan interaksi klik kursor */
+            pointer-events: auto;
+        }
+
+        /* PLAYER PROFILE CARD (ASSASSIN'S CREED STYLE) */
+        /* Kartu profil pemain bergaya antarmuka Assassin's Creed */
+        .player-profile-card {
+            /* Latar gradien gelap semi-transparan */
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(6, 10, 20, 0.95));
+            /* Garis tepi tipis keemasan */
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            /* Aksen garis tebal emas di sisi kiri */
+            border-left: 4px solid var(--accent-gold);
+            /* Sudut kartu melengkung */
+            border-radius: 14px;
+            /* Bantalan ruang dalam kartu */
+            padding: 8px 18px 8px 10px;
+            /* Tata letak flexbox */
+            display: flex;
+            /* Penjajaran rata tengah */
+            align-items: center;
+            /* Jarak antara avatar dan teks informasi */
+            gap: 14px;
+            /* Bayangan gelap kartu dan highlight bagian dalam */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            /* Kursor berupa penunjuk klik */
+            cursor: pointer;
+            /* Transisi animasi halus saat hover */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Efek kaca buram pada latar belakang */
+            backdrop-filter: blur(12px);
+        }
+
+        /* Efek hover saat kartu profil disorot mouse */
+        .player-profile-card:hover {
+            /* Mengangkat kartu 2 piksel ke atas */
+            transform: translateY(-2px);
+            /* Warna border emas terang saat disorot */
+            border-color: var(--accent-gold);
+            /* Bayangan bercahaya keemasan */
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.25);
+        }
+
+        /* Bingkai cincin melingkar untuk avatar pemain */
+        .avatar-ring-frame {
+            /* Posisi relatif */
+            position: relative;
+            /* Lebar bingkai avatar */
+            width: 50px;
+            /* Tinggi bingkai avatar */
+            height: 50px;
+            /* Bentuk lingkaran sempurna */
+            border-radius: 50%;
+            /* Garis tepi emas melingkar */
+            border: 2px solid var(--accent-gold);
+            /* Cahaya pendaran di sekeliling bingkai */
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+            /* Latar belakang gelap */
+            background: #090e1a;
+            /* Memotong gambar avatar yang keluar dari batas lingkaran */
+            overflow: hidden;
+            /* Mencegah bingkai avatar menyusut */
+            flex-shrink: 0;
+            /* Kontainer flex */
+            display: flex;
+            /* Penjajaran horizontal rata tengah */
+            align-items: center;
+            /* Penjajaran vertikal rata tengah */
+            justify-content: center;
+        }
+
+        /* Gambar avatar pemain */
+        #avatar-img {
+            /* Lebar gambar avatar sedikit diperbesar */
+            width: 110%;
+            /* Tinggi gambar avatar */
+            height: 110%;
+            /* Menyesuaikan proporsi tanpa merusak aspek rasio */
+            object-fit: cover;
+            /* Mengatur fokus posisi gambar pada area atas kepala */
+            object-position: center 20%;
+            /* Skala perbesaran gambar */
+            transform: scale(1.2);
+        }
+
+        /* Lencana indikator level pemain di pojok bingkai avatar */
+        .avatar-level-badge {
+            /* Posisi absolut menempel di sudut kanan bawah */
+            position: absolute;
+            bottom: -3px;
+            right: -3px;
+            /* Latar belakang emas pekat */
+            background: #b45309;
+            /* Warna teks putih */
+            color: #fff;
+            /* Garis tepi kuning terang */
+            border: 1.5px solid #fcd34d;
+            /* Bentuk bulat sempurna */
+            border-radius: 50%;
+            /* Lebar lencana */
+            width: 18px;
+            /* Tinggi lencana */
+            height: 18px;
+            /* Ukuran huruf angka level */
+            font-size: 10px;
+            /* Ketebalan font ekstra tebal */
+            font-weight: 900;
+            /* Tampilan flexbox */
+            display: flex;
+            /* Penjajaran horizontal dan vertikal ke tengah */
+            align-items: center;
+            justify-content: center;
+            /* Jenis huruf Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Kelompok teks informasi profil pemain */
+        .profile-info-group {
+            /* Tata letak fleksibel kolom vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Jarak tipis antar baris info */
+            gap: 2px;
+        }
+
+        /* Baris nama pemain beserta ikon edit */
+        .p-name-row {
+            /* Tampilan flexbox horizontal */
+            display: flex;
+            /* Rata tengah secara vertikal */
+            align-items: center;
+            /* Jarak antara nama dan ikon edit */
+            gap: 6px;
+        }
+
+        /* Teks nama pemain */
+        .p-name {
+            /* Font bergaya klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran font nama */
+            font-size: 18px;
+            /* Ketebalan huruf sangat tebal */
+            font-weight: 800;
+            /* Warna teks putih terang */
+            color: #f8fafc;
+            /* Jarak renggang antar huruf */
+            letter-spacing: 1.5px;
+            /* Menghilangkan margin bawaan */
+            margin: 0;
+            /* Bayangan teks agar terbaca jelas di atas latar */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Ikon pensil edit nama */
+        .edit-badge {
+            /* Ukuran simbol pensil */
+            font-size: 13px;
+            /* Warna emas aksen */
+            color: var(--accent-gold);
+            /* Transparansi normal */
+            opacity: 0.8;
+            /* Transisi efek */
+            transition: 0.2s;
+        }
+
+        /* Efek ikon edit saat kartu profil disorot */
+        .player-profile-card:hover .edit-badge {
+            /* Opasitas penuh */
+            opacity: 1;
+            /* Sedikit membesar */
+            transform: scale(1.1);
+        }
+
+        /* Baris teks pangkat/rank dan progres XP */
+        .p-rank-row {
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Rata tengah secara vertikal */
+            align-items: center;
+            /* Jarak antara teks rank dan progress bar */
+            gap: 8px;
+        }
+
+        /* Teks titel pangkat pemain */
+        .p-rank {
+            /* Ukuran huruf rank */
+            font-size: 11px;
+            /* Ketebalan font */
+            font-weight: 800;
+            /* Warna emas aksen */
+            color: var(--accent-gold);
+            /* Jarak antar huruf */
+            letter-spacing: 1px;
+            /* Teks huruf kapital semua */
+            text-transform: uppercase;
+            /* Font Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Lintasan batang pengalaman (XP track) */
+        .xp-track {
+            /* Lebar lintasan progress bar */
+            width: 75px;
+            /* Tinggi garis progress bar */
+            height: 4px;
+            /* Warna latar abu-abu semi-transparan */
+            background: rgba(255, 255, 255, 0.12);
+            /* Sudut melengkung halus */
+            border-radius: 2px;
+            /* Menyembunyikan luapan batang progres */
+            overflow: hidden;
+        }
+
+        /* Bagian isi persentase XP yang tercapai */
+        .xp-fill {
+            /* Persentase panjang pengisian XP */
+            width: 72%;
+            /* Tinggi mengisi lintasan secara penuh */
+            height: 100%;
+            /* Gradasi warna emas ke kuning terang */
+            background: linear-gradient(90deg, #f59e0b, #facc15);
+            /* Pendaran cahaya pada progress bar XP */
+            box-shadow: 0 0 6px rgba(250, 204, 21, 0.6);
+        }
+
+        /* CURRENCY CAPSULES */
+        /* Kontainer kapsul penampil mata uang (Koin & Diamond) */
+        .currency-capsule {
+            /* Latar gradien gelap tembus pandang */
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(6, 10, 20, 0.95));
+            /* Garis tepi tipis keemasan */
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            /* Sudut membulat kapsul */
+            border-radius: 14px;
+            /* Jarak bantalan ruang dalam */
+            padding: 8px 18px;
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Rata tengah secara vertikal */
+            align-items: center;
+            /* Jarak antara ikon dan angka nilai mata uang */
+            gap: 10px;
+            /* Bayangan gelap di bawah kapsul */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            /* Efek buram latar belakang */
+            backdrop-filter: blur(12px);
+            /* Transisi animasi */
+            transition: 0.3s;
+        }
+
+        /* Efek hover pada kapsul mata uang */
+        .currency-capsule:hover {
+            /* Mengubah warna border menjadi emas */
+            border-color: var(--accent-gold);
+            /* Mengangkat kapsul sedikit ke atas */
+            transform: translateY(-2px);
+        }
+
+        /* Garis aksen khusus untuk kapsul koin emas */
+        .currency-gold {
+            /* Garis vertikal aksen emas di sisi kanan */
+            border-right: 3px solid var(--accent-gold);
+        }
+
+        /* Garis aksen khusus untuk kapsul permata berlian */
+        .currency-diamond {
+            /* Garis vertikal aksen biru cyan di sisi kanan */
+            border-right: 3px solid #38bdf8;
+        }
+
+        /* Ikon simbol mata uang */
+        .c-icon {
+            /* Ukuran ikon */
+            font-size: 20px;
+            /* Bayangan cahaya di sekeliling ikon */
+            filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+        }
+
+        /* Nilai angka nominal mata uang */
+        .c-amount {
+            /* Font digital Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran angka mata uang */
+            font-size: 24px;
+            /* Ketebalan angka tebal */
+            font-weight: 700;
+            /* Menghilangkan margin */
+            margin: 0;
+            /* Jarak renggang huruf */
+            letter-spacing: 1px;
+        }
+
+        /* Warna khusus untuk angka nominal koin emas */
+        .c-gold-val {
+            /* Warna emas berkilau */
+            color: var(--accent-glow);
+            /* Efek pendaran teks kuning emas */
+            text-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
+        }
+
+        /* Warna khusus untuk angka nominal berlian */
+        .c-dia-val {
+            /* Warna biru langit cyan cerah */
+            color: #38bdf8;
+            /* Efek pendaran teks biru permata */
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+        }
+
+        /* CENTER CREST */
+        /* Lambang guild di bagian tengah atas HUD */
+        .center-crest {
+            /* Posisi absolut di tengah bar HUD */
+            position: absolute;
+            left: 50%;
+            /* Penengahan horizontal presisi */
+            transform: translateX(-50%);
+            /* Rata tengah untuk teks */
+            text-align: center;
+            /* Tidak menghalangi interaksi mouse */
+            pointer-events: none;
+        }
+
+        /* Teks subjudul di atas judul guild */
+        .crest-subtitle {
+            /* Font klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran teks kecil */
+            font-size: 11px;
+            /* Bobot huruf tebal */
+            font-weight: 700;
+            /* Warna aksen emas */
+            color: var(--accent-gold);
+            /* Jarak renggang antar huruf yang lebar untuk kesan megah */
+            letter-spacing: 6px;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+            /* Bayangan teks hitam */
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            /* Jarak margin bawah */
+            margin-bottom: 2px;
+        }
+
+        /* Teks judul utama game pada lambang tengah */
+        .crest-title {
+            /* Font klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran teks besar dan menonjol */
+            font-size: 32px;
+            /* Bobot huruf paling tebal */
+            font-weight: 900;
+            /* Menghapus margin */
+            margin: 0;
+            /* Jarak renggang antar huruf */
+            letter-spacing: 5px;
+            /* Huruf kapital */
+            text-transform: uppercase;
+            /* Warna putih murni */
+            color: #fff;
+            /* Efek bayangan pendaran putih dan bayangan gelap */
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.95);
+        }
+
+        /* TOP RIGHT SETTINGS */
+        /* Bagian kanan atas HUD untuk tombol pengaturan */
+        .top-hud-right {
+            /* Mengaktifkan interaksi klik kursor */
+            pointer-events: auto;
+        }
+
+        /* Tombol pengaturan bergaya gothic melingkar */
+        .btn-settings-gothic {
+            /* Lebar tombol */
+            width: 52px;
+            /* Tinggi tombol */
+            height: 52px;
+            /* Latar gradien gelap semi-transparan */
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(6, 10, 20, 0.95));
+            /* Garis tepi emas melingkar */
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            /* Bentuk lingkaran sempurna */
+            border-radius: 50%;
+            /* Kontainer flex */
+            display: flex;
+            /* Rata tengah horizontal */
+            justify-content: center;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Ukuran ikon gerigi roda */
+            font-size: 24px;
+            /* Warna ikon abu-abu keperakan */
+            color: #94a3b8;
+            /* Kursor tombol klik */
+            cursor: pointer;
+            /* Bayangan gelap di bawah tombol */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            /* Transisi efek animasi */
+            transition: all 0.4s ease;
+            /* Efek buram latar belakang */
+            backdrop-filter: blur(12px);
+        }
+
+        /* Efek interaktif saat kursor melayang di atas tombol pengaturan */
+        .btn-settings-gothic:hover {
+            /* Memutar ikon 90 derajat dan memperbesar ukuran sedikit */
+            transform: rotate(90deg) scale(1.05);
+            /* Warna garis tepi menjadi emas terang */
+            border-color: var(--accent-gold);
+            /* Warna ikon berubah keemasan */
+            color: var(--accent-gold);
+            /* Efek pendaran keemasan */
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* ================= SIDE ACTION DOCKS ================= */
+        /* Panel samping dermaga aksi (armory dan operations) */
+        .side-action-dock {
+            /* Posisi melayang tetap di tepi layar */
+            position: fixed;
+            /* Posisi vertikal tepat di tengah layar */
+            top: 50%;
+            /* Penyesuaian agar pas di tengah sumbu Y */
+            transform: translateY(-50%);
+            /* Tata letak fleksibel kolom vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Jarak antar tombol aksi */
+            gap: 12px;
+            /* Tingkat lapisan di atas latar belakang */
+            z-index: 30;
+        }
+
+        /* Dermaga aksi di sebelah kiri (Armory) */
+        .dock-left {
+            /* Jarak dari tepi kiri layar */
+            left: 28px;
+        }
+
+        /* Dermaga aksi di sebelah kanan (Operations) */
+        .dock-right {
+            /* Jarak dari tepi kanan layar */
+            right: 28px;
+        }
+
+        /* Judul header pada masing-masing dermaga samping */
+        .dock-header {
+            /* Font klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran teks */
+            font-size: 11px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna keemasan beropasitas */
+            color: rgba(212, 175, 55, 0.8);
+            /* Jarak renggang antar karakter */
+            letter-spacing: 3px;
+            /* Teks huruf kapital */
+            text-transform: uppercase;
+            /* Bantalan ruang di dalam header */
+            padding: 0 6px 4px 6px;
+            /* Garis pembatas tipis di bawah judul header */
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            /* Bayangan gelap teks */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Tombol menu aksi samping bergaya gothic */
+        .gothic-action-btn {
+            /* Latar belakang gradasi gelap */
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(6, 10, 20, 0.92));
+            /* Warna teks abu-abu terang */
+            color: #cbd5e1;
+            /* Garis tepi tipis keemasan halus */
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            /* Sudut melengkung */
+            border-radius: 12px;
+            /* Jarak bantalan tombol */
+            padding: 12px 18px;
+            /* Jenis huruf Nunito */
+            font-family: 'Nunito', sans-serif;
+            /* Ukuran font teks tombol */
+            font-size: 14px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Kursor pointer penunjuk */
+            cursor: pointer;
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Jarak antara ikon dan teks tombol */
+            gap: 12px;
+            /* Bayangan kartu tombol */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            /* Efek buram pada latar belakang */
+            backdrop-filter: blur(10px);
+            /* Transisi halus saat berinteraksi */
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Posisi relatif */
+            position: relative;
+            /* Menyembunyikan luapan */
+            overflow: hidden;
+            /* Lebar minimum tombol aksi */
+            min-width: 170px;
+        }
+
+        /* Garis aksen transparan awal di sisi kiri tombol dermaga kiri */
+        .dock-left .gothic-action-btn {
+            border-left: 3px solid transparent;
+        }
+
+        /* Garis aksen transparan awal di sisi kanan tombol dermaga kanan */
+        .dock-right .gothic-action-btn {
+            border-right: 3px solid transparent;
+        }
+
+        /* Efek hover saat tombol aksi di dermaga kiri disorot */
+        .dock-left .gothic-action-btn:hover {
+            /* Menggeser tombol ke arah kanan 6 piksel */
+            transform: translateX(6px);
+            /* Menerangkan warna garis tepi keemasan */
+            border-color: rgba(212, 175, 55, 0.7);
+            /* Garis aksen sisi kiri menjadi emas menyala */
+            border-left-color: var(--accent-gold);
+            /* Gradasi latar menjadi lebih terang */
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.96));
+            /* Warna teks menjadi putih */
+            color: #fff;
+            /* Efek bayangan pendaran emas */
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Efek hover saat tombol aksi di dermaga kanan disorot */
+        .dock-right .gothic-action-btn:hover {
+            /* Menggeser tombol ke arah kiri 6 piksel */
+            transform: translateX(-6px);
+            /* Menerangkan warna garis tepi keemasan */
+            border-color: rgba(212, 175, 55, 0.7);
+            /* Garis aksen sisi kanan menjadi emas menyala */
+            border-right-color: var(--accent-gold);
+            /* Gradasi latar menjadi lebih terang */
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.96));
+            /* Warna teks menjadi putih */
+            color: #fff;
+            /* Efek bayangan pendaran emas */
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Tampilan ikon pada tombol aksi */
+        .action-icon {
+            /* Ukuran ikon */
+            font-size: 18px;
+            /* Bayangan kilau pada ikon */
+            filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.4));
+        }
+
+        /* Teks label pada tombol aksi */
+        .action-text {
+            /* Font futuristik Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran teks */
+            font-size: 16px;
+            /* Bobot huruf tebal */
+            font-weight: 700;
+            /* Jarak renggang antar huruf */
+            letter-spacing: 1.2px;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+        }
+
+        /* ================= BOTTOM HUD (AC / RPG REPLICA) ================= */
+        /* Bilah HUD kontrol bagian bawah layar bergaya game Assassin's Creed / RPG */
+        .bottom-hud-bar {
+            /* Posisi tetap melayang di dasar layar */
+            position: fixed;
+            /* Menempel di bagian paling bawah */
+            bottom: 0;
+            /* Menempel di sisi kiri */
+            left: 0;
+            /* Membentang selebar layar */
+            width: 100%;
+            /* Perhitungan box sizing border-box */
+            box-sizing: border-box;
+            /* Jarak bantalan atas, samping, dan bawah */
+            padding: 12px 36px 16px;
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Menempatkan selector sektor di tengah */
+            justify-content: center;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Gradasi gelap dari transparan di atas hingga hitam pekat di dasar */
+            background: linear-gradient(180deg, rgba(3, 7, 18, 0) 0%, rgba(6, 10, 20, 0.88) 35%, rgba(3, 5, 12, 0.98) 100%);
+            /* Garis batas keemasan tipis di bagian atas bar */
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            /* Bayangan gelap memancar ke arah atas */
+            box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.75);
+            /* Tingkat lapisan tinggi */
+            z-index: 40;
+            /* Efek buram latar belakang */
+            backdrop-filter: blur(8px);
+        }
+
+        /* Pembungkus tombol deploy di sebelah kanan bilah HUD bawah */
+        .deploy-button-wrapper {
+            /* Posisi absolut di sebelah kanan */
+            position: absolute;
+            /* Jarak dari tepi kanan */
+            right: 36px;
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Rata kanan */
+            justify-content: flex-end;
+            /* Rata tengah vertikal */
+            align-items: center;
+        }
+
+        /* 1. LEFT: COMBAT STATS */
+        /* Kotak statistik pertarungan karakter di bagian kiri */
+        .combat-stats-box {
+            /* Tata letak fleksibel kolom vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Jarak antar elemen stat */
+            gap: 6px;
+        }
+
+        /* Judul tajuk kotak statistik tempur */
+        .stats-header-title {
+            /* Font klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran font judul */
+            font-size: 12px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna teks keemasan */
+            color: var(--accent-gold);
+            /* Jarak renggang huruf */
+            letter-spacing: 3px;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+            /* Bayangan gelap teks */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+            /* Margin bawah */
+            margin-bottom: 2px;
+        }
+
+        /* Kelompok baris item statistik */
+        .stat-row-group {
+            /* Tata letak fleksibel baris horizontal */
+            display: flex;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Jarak horizontal antar item stat */
+            gap: 16px;
+        }
+
+        /* Item statistik individu */
+        .stat-item {
+            /* Tata letak fleksibel vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Jarak antara label dan progress bar */
+            gap: 3px;
+        }
+
+        /* Pembungkus label nama dan ikon statistik */
+        .stat-label-wrap {
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Jarak antara ikon dan teks label */
+            gap: 6px;
+        }
+
+        /* Ikon penanda atribut statistik */
+        .stat-icon {
+            /* Ukuran font ikon */
+            font-size: 13px;
+        }
+
+        /* Nama atribut statistik (ATK, SPD, DEF) */
+        .stat-name {
+            /* Font Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran teks */
+            font-size: 12px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna teks abu-abu keperakan */
+            color: #94a3b8;
+            /* Jarak renggang huruf */
+            letter-spacing: 1px;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+        }
+
+        /* Nilai rasio / angka statistik */
+        .stat-ratio {
+            /* Font Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran font rasio */
+            font-size: 12px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna angka keemasan */
+            color: var(--accent-gold);
+            /* Margin kiri */
+            margin-left: 2px;
+        }
+
+        /* Batang lintasan progress bar statistik emas */
+        .stat-bar-gold {
+            /* Lebar batang indikator */
+            width: 82px;
+            /* Tinggi batang indikator */
+            height: 5px;
+            /* Latar belakang transparan */
+            background: rgba(255, 255, 255, 0.12);
+            /* Sudut melengkung halus */
+            border-radius: 2px;
+            /* Menyembunyikan luapan bar */
+            overflow: hidden;
+            /* Posisi relatif */
+            position: relative;
+        }
+
+        /* Pengisian warna gradien emas pada batang statistik */
+        .stat-bar-fill {
+            /* Lebar default pengisian 100% */
+            width: 100%;
+            /* Tinggi memenuhi wadah */
+            height: 100%;
+            /* Gradasi warna oranye gelap ke kuning emas */
+            background: linear-gradient(90deg, #d97706, #fbbf24);
+            /* Pendaran cahaya emas pada batang indikator */
+            box-shadow: 0 0 6px rgba(251, 191, 36, 0.8);
+        }
+
+        /* 2. CENTER: SECTOR SELECTOR CARDS */
+        /* Kotak pemilihan sektor misi di bagian tengah bilah kontrol bawah */
+        .sectors-nav-box {
+            /* Tata letak fleksibel kolom vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Penjajaran horizontal rata tengah */
+            align-items: center;
+            /* Jarak antara tab judul dan kartu sektor */
+            gap: 6px;
+        }
+
+        /* Baris judul tab pemilihan sektor */
+        .sectors-header-row {
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Rata tengah secara horizontal dan vertikal */
+            align-items: center;
+            justify-content: center;
+            /* Jarak antar judul tab */
+            gap: 25px;
+            /* Font klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran font */
+            font-size: 11px;
+            /* Bobot huruf tebal */
+            font-weight: 700;
+            /* Jarak renggang huruf */
+            letter-spacing: 2px;
+            /* Warna teks abu-abu redup untuk tab non-aktif */
+            color: #64748b;
+            /* Huruf kapital */
+            text-transform: uppercase;
+        }
+
+        /* Tab individual judul sektor yang bisa diklik */
+        .sector-header-tab {
+            /* Kursor tombol penunjuk */
+            cursor: pointer;
+            /* Transisi perubahan warna */
+            transition: 0.2s;
+        }
+
+        /* Tampilan khusus untuk tab sektor yang sedang aktif terpilih */
+        .sector-header-tab.active-sector-tab {
+            /* Warna teks berubah menjadi emas */
+            color: var(--accent-gold);
+            /* Efek pendaran keemasan */
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Baris wadah kartu miniatur sektor */
+        .sector-mini-cards-row {
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Rata tengah horizontal dan vertikal */
+            align-items: center;
+            justify-content: center;
+            /* Jarak horizontal antar kartu sektor */
+            gap: 14px;
+        }
+
+        /* Kartu miniatur sektor individual */
+        .sector-mini-card {
+            /* Lebar kartu sektor */
+            width: 165px;
+            /* Tinggi kartu sektor */
+            height: 72px;
+            /* Latar belakang gelap */
+            background: #080d1a;
+            /* Garis tepi tipis keemasan */
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            /* Sudut kartu melengkung */
+            border-radius: 8px;
+            /* Posisi relatif */
+            position: relative;
+            /* Menyembunyikan elemen visual yang meluap dari batas */
+            overflow: hidden;
+            /* Kursor pointer penunjuk */
+            cursor: pointer;
+            /* Bayangan gelap pada kartu */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+            /* Transisi animasi saat disentuh */
+            transition: all 0.25s ease;
+            /* Tata letak fleksibel vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Menempatkan konten teks di bagian bawah kartu */
+            justify-content: flex-end;
+            /* Jarak bantalan dalam kartu */
+            padding: 6px 10px;
+        }
+
+        /* Gaya visual kartu miniatur sektor yang sedang aktif dipilih */
+        .sector-mini-card.active-card {
+            /* Warna border emas terang */
+            border-color: var(--accent-gold);
+            /* Pendaran luar dan dalam warna emas */
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4), inset 0 0 12px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Efek hover saat kartu sektor disorot kursor */
+        .sector-mini-card:hover {
+            /* Kartu terangkat sedikit ke atas */
+            transform: translateY(-3px);
+            /* Garis tepi menjadi kuning cerah menyala */
+            border-color: var(--accent-glow);
+        }
+
+        /* Gambar pratinjau latar belakang di dalam kartu sektor */
+        .sector-card-bg-preview {
+            /* Posisi absolut menutupi seluruh kartu */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gambar menyesuaikan tanpa merusak aspek rasio */
+            object-fit: cover;
+            /* Efek kecerahan redup dan kontras tinggi */
+            filter: brightness(0.65) contrast(1.1);
+            /* Transisi efek gambar */
+            transition: 0.3s;
+        }
+
+        /* Efek zoom dan kecerahan gambar latar kartu saat disorot */
+        .sector-mini-card:hover .sector-card-bg-preview {
+            /* Gambar menjadi lebih terang */
+            filter: brightness(0.85);
+            /* Gambar sedikit membesar */
+            transform: scale(1.05);
+        }
+
+        /* Lapisan gradien bayangan di atas gambar kartu sektor */
+        .sector-gradient-shade {
+            /* Posisi absolut memenuhi kartu */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradien transparan di atas menuju gelap di dasar kartu */
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(6, 10, 20, 0.85) 100%);
+            /* Lapisan di atas gambar latar */
+            z-index: 1;
+        }
+
+        /* Lapisan teks informasi di atas latar kartu */
+        .sector-info-overlay {
+            /* Posisi relatif di atas lapisan bayangan */
+            position: relative;
+            z-index: 2;
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Memisahkan judul sektor di kiri dan status di kanan */
+            justify-content: space-between;
+            /* Meratakan elemen ke dasar */
+            align-items: flex-end;
+        }
+
+        /* Judul teks nama miniatur sektor */
+        .sector-mini-title {
+            /* Font Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran font */
+            font-size: 13px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna teks putih */
+            color: #fff;
+            /* Jarak renggang huruf */
+            letter-spacing: 1px;
+            /* Menghapus margin */
+            margin: 0;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+        }
+
+        /* Teks status kesiapan sektor (READY / LOCKED) */
+        .sector-mini-status {
+            /* Ukuran font teks status */
+            font-size: 10px;
+            /* Warna aksen emas */
+            color: var(--accent-gold);
+            /* Bobot huruf tebal */
+            font-weight: 700;
+        }
+
+        /* Ikon gembok pengunci sektor yang belum terbuka */
+        .sector-mini-lock {
+            /* Posisi absolut tepat di tengah kartu */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Lapisan paling atas kartu */
+            z-index: 3;
+            /* Ukuran ikon gembok */
+            font-size: 20px;
+            /* Bayangan gelap di bawah ikon gembok */
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.9));
+            /* Warna abu-abu keperakan */
+            color: #94a3b8;
+        }
+
+        /* 3. RIGHT: DEPLOY BUTTON (AUTHENTIC ASSASSIN'S CREED STYLE) */
+        /* Pembungkus tombol deploy aksi peluncuran misi utama */
+        .deploy-button-wrapper {
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Meratakan tombol ke kanan */
+            justify-content: flex-end;
+            /* Meratakan vertikal ke tengah */
+            align-items: center;
+        }
+
+        /* Tombol utama Deploy bergaya autentik Assassin's Creed */
+        .btn-deploy-master {
+            /* Latar belakang gradasi baja gelap */
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #0a0e17 100%);
+            /* Warna teks putih keperakan */
+            color: #f8fafc;
+            /* Font klasik Cinzel */
+            font-family: 'Cinzel', serif;
+            /* Ukuran huruf tombol besar dan gagah */
+            font-size: 22px;
+            /* Bobot font maksimal */
+            font-weight: 900;
+            /* Jarak renggang antar huruf yang lebar */
+            letter-spacing: 5px;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+            /* Jarak bantalan tombol */
+            padding: 14px 44px;
+            /* Sudut melengkung halus */
+            border-radius: 6px;
+            /* Kursor tombol pointer */
+            cursor: pointer;
+            /* Garis tepi emas berkilau */
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            /* Bayangan tombol tebal dan kilau bagian dalam */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(212, 175, 55, 0.15);
+            /* Transisi animasi responsif */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Posisi relatif */
+            position: relative;
+            /* Menyembunyikan luapan */
+            overflow: hidden;
+            /* Inline-flex untuk penataan ikon dan teks */
+            display: inline-flex;
+            /* Rata tengah horizontal dan vertikal */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Garis bingkai aksen hiasan ganda di bagian dalam tombol Deploy */
+        .btn-deploy-master::before {
+            /* Elemen pseudo kosong */
+            content: '';
+            /* Posisi absolut menempel di dalam border */
+            position: absolute;
+            /* Jarak 3 piksel dari tepi tombol */
+            inset: 3px;
+            /* Garis batas tipis keemasan */
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            /* Sudut melengkung bagian dalam */
+            border-radius: 3px;
+            /* Mencegah interaksi mouse */
+            pointer-events: none;
+        }
+
+        /* Efek hover dramatis saat tombol Deploy disorot */
+        .btn-deploy-master:hover {
+            /* Mengubah latar belakang menjadi gradasi emas menyala */
+            background: linear-gradient(135deg, #b45309 0%, #f59e0b 50%, #d97706 100%);
+            /* Garis tepi berwarna kuning cerah */
+            border-color: #fde68a;
+            /* Warna teks menjadi putih terang */
+            color: #fff;
+            /* Mengangkat tombol dan sedikit membesarkannya */
+            transform: translateY(-3px) scale(1.02);
+            /* Efek bayangan pendaran cahaya emas yang menyala kuat */
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.45), inset 0 0 20px rgba(254, 240, 138, 0.4);
+            /* Bayangan teks hitam agar kontras */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Efek saat tombol Deploy ditekan/diklik (state active) */
+        .btn-deploy-master:active {
+            /* Tombol turun 1 piksel memberi umpan balik mekanis */
+            transform: translateY(1px);
+            /* Bayangan mengecil saat ditekan */
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+/* MODAL DARK THEME */
+        /* Lapisan overlay gelap latar belakang untuk seluruh jendela dialog modal pop-up */
+        .modal-overlay {
+            /* Sembunyi secara default sampai diaktifkan via JS */
+            display: none;
+            /* Melayang memenuhi seluruh layar */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Latar belakang hitam transparan pekat */
+            background: rgba(2, 6, 23, 0.9);
+            /* Efek buram dramatis di belakang modal */
+            backdrop-filter: blur(8px);
+            /* Lapisan sangat tinggi di atas seluruh HUD */
+            z-index: 999;
+            /* Rata tengah isi modal secara horizontal dan vertikal */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animasi munculnya kotak modal dengan efek pembesaran dan fade-in */
+        @keyframes modalFade {
+            /* Kondisi awal sedikit mengecil dan transparan */
+            0% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            /* Kondisi akhir skala normal dan sepenuhnya terlihat */
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Kotak wadah utama konten di dalam jendela modal */
+        .modal-box {
+            /* Warna latar abu-abu gelap kebiruan */
+            background: #0f172a;
+            /* Jarak bantalan ruang dalam */
+            padding: 30px;
+            /* Sudut kotak membulat */
+            border-radius: 20px;
+            /* Rata tengah untuk konten teks */
+            text-align: center;
+            /* Lebar minimum kotak modal */
+            min-width: 450px;
+            /* Lebar maksimum kotak modal */
+            max-width: 600px;
+            /* Efek bayangan gelap di sekeliling kotak modal */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            /* Garis tepi abu-abu elegan */
+            border: 1px solid #334155;
+            /* Warna teks standar */
+            color: #f8fafc;
+            /* Batas tinggi maksimum 80% dari tinggi layar */
+            max-height: 80vh;
+            /* Bilah gulir vertikal otomatis jika konten panjang */
+            overflow-y: auto;
+            /* Memicu animasi modalFade saat terbuka */
+            animation: modalFade 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Judul tingkat dua (h2) di dalam kotak modal */
+        .modal-box h2 {
+            /* Menghapus margin atas */
+            margin-top: 0;
+            /* Warna kuning emas menyala */
+            color: var(--accent-glow);
+            /* Garis pembatas di bawah judul */
+            border-bottom: 1px solid #1e293b;
+            /* Jarak bantalan bawah */
+            padding-bottom: 15px;
+            /* Ukuran huruf judul modal */
+            font-size: 24px;
+            /* Font Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Jarak renggang huruf */
+            letter-spacing: 2px;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+        }
+
+        /* Tombol penutup dialog modal */
+        .btn-tutup {
+            /* Latar belakang transparan */
+            background: transparent;
+            /* Warna teks abu-abu keperakan */
+            color: #94a3b8;
+            /* Garis tepi tombol abu-abu */
+            border: 2px solid #334155;
+            /* Jarak bantalan tombol */
+            padding: 12px 20px;
+            /* Sudut tombol melengkung */
+            border-radius: 12px;
+            /* Kursor pointer penunjuk */
+            cursor: pointer;
+            /* Jarak margin atas */
+            margin-top: 20px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Font Nunito */
+            font-family: 'Nunito', sans-serif;
+            /* Lebar penuh memenuhi kontainer */
+            width: 100%;
+            /* Ukuran font */
+            font-size: 16px;
+            /* Transisi animasi */
+            transition: 0.2s;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+            /* Jarak renggang huruf */
+            letter-spacing: 1px;
+        }
+
+        /* Efek hover saat tombol tutup disorot */
+        .btn-tutup:hover {
+            /* Latar belakang menjadi lebih terang */
+            background: #1e293b;
+            /* Teks menjadi putih */
+            color: #fff;
+            /* Garis tepi menjadi lebih terang */
+            border-color: #475569;
+        }
+
+        /* Tombol opsi pilihan di dalam modal */
+        .opsi-btn {
+            /* Latar belakang tombol gelap */
+            background: #1e293b;
+            /* Warna teks abu-abu */
+            color: #cbd5e1;
+            /* Garis tepi tombol */
+            border: 1px solid #334155;
+            /* Jarak bantalan tombol */
+            padding: 10px 18px;
+            /* Jarak margin tombol */
+            margin: 5px;
+            /* Kursor tombol penunjuk */
+            cursor: pointer;
+            /* Sudut tombol melengkung */
+            border-radius: 10px;
+            /* Bobot font tebal */
+            font-weight: 800;
+            /* Font Nunito */
+            font-family: 'Nunito', sans-serif;
+            /* Tata letak inline-flex */
+            display: inline-flex;
+            /* Rata tengah horizontal dan vertikal */
+            align-items: center;
+            justify-content: center;
+            /* Jarak antara ikon dan teks tombol */
+            gap: 8px;
+            /* Transisi animasi */
+            transition: 0.2s;
+        }
+
+        /* Efek hover saat tombol opsi disorot */
+        .opsi-btn:hover {
+            /* Warna latar menjadi lebih terang */
+            background: #334155;
+            /* Warna teks putih */
+            color: #fff;
+            /* Tombol naik 2 piksel */
+            transform: translateY(-2px);
+        }
+
+        /* Gaya visual tombol opsi yang sedang aktif terpilih */
+        .opsi-btn.terpilih {
+            /* Latar belakang kuning emas transparan dengan prioritas utama */
+            background: rgba(245, 158, 11, 0.1) !important;
+            /* Warna teks emas */
+            color: var(--accent-gold) !important;
+            /* Garis tepi emas */
+            border-color: var(--accent-gold) !important;
+        }
+
+        /* Tombol transaksi pembelian barang */
+        .btn-beli {
+            /* Warna latar tombol beli */
+            background: #1e293b;
+            /* Warna garis tepi */
+            border-color: #334155;
+            /* Warna teks emas */
+            color: var(--accent-gold);
+        }
+
+        /* Efek hover pada tombol beli */
+        .btn-beli:hover {
+            /* Latar belakang emas transparan */
+            background: rgba(245, 158, 11, 0.1);
+            /* Warna border emas */
+            border-color: var(--accent-gold);
+        }
+
+        /* Tampilan tombol beli saat dalam kondisi nonaktif (disabled) */
+        .btn-beli:disabled {
+            /* Warna latar gelap redup */
+            background: #0f172a !important;
+            /* Warna border redup */
+            border-color: #1e293b !important;
+            /* Warna teks abu-abu redup */
+            color: #475569 !important;
+            /* Kursor tanda dilarang */
+            cursor: not-allowed;
+        }
+
+        /* Wadah kontainer tata letak kolom daftar berjarak vertikal */
+        .grid-container {
+            /* Tata letak fleksibel kolom vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Jarak antar item dalam daftar */
+            gap: 12px;
+            /* Teks rata kiri */
+            text-align: left;
+        }
+
+        /* Item baris individual di dalam daftar (misal prestasi / misi) */
+        .list-item {
+            /* Latar belakang gelap pekat */
+            background: #020617;
+            /* Jarak bantalan ruang item */
+            padding: 15px 20px;
+            /* Sudut melengkung */
+            border-radius: 16px;
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Memisahkan teks informasi di kiri dan aksi di kanan */
+            justify-content: space-between;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Garis batas tipis */
+            border: 1px solid #1e293b;
+            /* Transisi animasi */
+            transition: 0.2s;
+        }
+
+        /* Efek hover pada item baris daftar */
+        .list-item:hover {
+            /* Warna garis tepi lebih terang */
+            border-color: #475569;
+            /* Latar belakang sedikit lebih terang */
+            background: #0f172a;
+        }
+
+        /* Judul teks utama di dalam baris item */
+        .list-item div {
+            /* Ukuran font */
+            font-size: 16px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna teks putih terang */
+            color: #f8fafc;
+        }
+
+        /* Teks keterangan kecil di bawah judul item */
+        .list-item small {
+            /* Warna teks abu-abu redup */
+            color: #64748b;
+            /* Ukuran font kecil */
+            font-size: 13px;
+            /* Bobot font semi-tebal */
+            font-weight: 600;
+        }
+
+        /* UBAH NAMA DAN SETTING */
+        /* Kotak kolom isian teks untuk mengubah nama panggilan agen */
+        .input-nama {
+            /* Lebar input field */
+            width: 85%;
+            /* Jarak bantalan dalam field */
+            padding: 15px;
+            /* Ukuran teks input */
+            font-size: 20px;
+            /* Sudut melengkung */
+            border-radius: 12px;
+            /* Latar belakang gelap pekat */
+            background: #020617;
+            /* Garis batas abu-abu */
+            border: 1px solid #334155;
+            /* Teks rata tengah */
+            text-align: center;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Warna teks putih */
+            color: #f8fafc;
+            /* Margin jarak ke bawah */
+            margin-bottom: 20px;
+            /* Menghilangkan garis outline default browser */
+            outline: none;
+            /* Transisi efek */
+            transition: 0.2s;
+            /* Font Nunito */
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* Efek fokus saat input nama sedang diketik */
+        .input-nama:focus {
+            /* Garis tepi berwarna emas terang */
+            border-color: var(--accent-gold);
+            /* Pendaran bayangan emas di sekeliling input */
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Baris pengaturan pada modal pengaturan (misal slider volume) */
+        .setting-row {
+            /* Tata letak fleksibel horizontal */
+            display: flex;
+            /* Memisahkan label di kiri dan kontrol di kanan */
+            justify-content: space-between;
+            /* Rata tengah vertikal */
+            align-items: center;
+            /* Jarak margin vertikal */
+            margin: 15px 0;
+            /* Ukuran font */
+            font-size: 15px;
+            /* Bobot huruf tebal */
+            font-weight: 800;
+            /* Latar belakang gelap */
+            background: #020617;
+            /* Jarak bantalan baris */
+            padding: 15px 20px;
+            /* Sudut melengkung */
+            border-radius: 16px;
+            /* Garis tepi tipis */
+            border: 1px solid #1e293b;
+            /* Warna teks abu-abu keperakan */
+            color: #cbd5e1;
+        }
+
+        /* Elemen kontrol slider geser (misal pengatur volume audio) */
+        input[type="range"] {
+            /* Lebar bilah penggeser */
+            width: 180px;
+            /* Kursor penunjuk */
+            cursor: pointer;
+            /* Warna aksen titik geser menjadi emas */
+            accent-color: var(--accent-gold);
+            /* Tinggi bilah lintasan */
+            height: 6px;
+            /* Warna lintasan abu-abu gelap */
+            background: #1e293b;
+            /* Sudut lintasan melengkung */
+            border-radius: 10px;
+            /* Menghilangkan outline */
+            outline: none;
+            /* Menghilangkan border */
+            border: none;
+        }
+
+        /* Tombol pemilihan peta / stage misi */
+        .btn-map {
+            /* Lebar penuh */
+            width: 100%;
+            /* Jarak bantalan tombol */
+            padding: 20px;
+            /* Jarak margin bawah */
+            margin-bottom: 15px;
+            /* Teks rata kiri */
+            text-align: left;
+            /* Sudut tombol melengkung */
+            border-radius: 16px;
+            /* Kursor tombol penunjuk */
+            cursor: pointer;
+            /* Transisi animasi */
+            transition: 0.2s;
+            /* Tata letak fleksibel kolom vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Jarak antar elemen teks */
+            gap: 5px;
+            /* Posisi relatif */
+            position: relative;
+            /* Latar belakang gelap */
+            background: #020617;
+            /* Garis tepi tombol */
+            border: 1px solid #1e293b;
+        }
+
+        /* Judul teks nama peta pada tombol map */
+        .btn-map .map-title {
+            /* Font futuristik Rajdhani */
+            font-family: 'Rajdhani', sans-serif;
+            /* Ukuran huruf judul */
+            font-size: 22px;
+            /* Warna teks putih */
+            color: #f8fafc;
+            /* Huruf kapital semua */
+            text-transform: uppercase;
+            /* Jarak renggang huruf */
+            letter-spacing: 1px;
+        }
+
+        /* Deskripsi penjelasan pada tombol peta */
+        .btn-map .map-desc {
+            /* Ukuran font deskripsi */
+            font-size: 13px;
+            /* Bobot huruf semi-tebal */
+            font-weight: 600;
+            /* Warna teks abu-abu redup */
+            color: #64748b;
+        }
+
+        /* Efek hover pada tombol peta saat aktif dan tidak terkunci */
+        .btn-map:hover:not(:disabled) {
+            /* Garis tepi berubah keemasan */
+            border-color: var(--accent-gold);
+            /* Latar belakang transparan keemasan halus */
+            background: rgba(245, 158, 11, 0.05);
+            /* Geser 5 piksel ke kanan memberi respons visual */
+            transform: translateX(5px);
+        }
+
+        /* Gaya visual tombol peta saat dalam status terkunci / disabled */
+        .btn-map:disabled {
+            /* Opasitas redup setengah */
+            opacity: 0.5;
+            /* Kursor dilarang */
+            cursor: not-allowed;
+        }
+
+        /* Ikon gembok pengunci pada tombol peta */
+        .lock-icon {
+            /* Posisi absolut di sebelah kanan tombol */
+            position: absolute;
+            right: 20px;
+            /* Posisi vertikal tengah */
+            top: 50%;
+            transform: translateY(-50%);
+            /* Ukuran font ikon gembok */
+            font-size: 24px;
+            /* Tersembunyi secara default */
+            display: none;
+        }
+
+        /* Menampilkan ikon gembok jika tombol peta berstatus disabled */
+        .btn-map:disabled .lock-icon {
+            /* Ditampilkan sebagai elemen blok */
+            display: block;
+        }
+
+        /* ========================================================
+           TACTICAL WARDROBE (MODAL VAULT) & SECTOR DISPATCH STYLES
+           ======================================================== */
+        /* Wadah grid 3-kolom untuk kartu kostum tempur ninja di dalam Armory Vault */
+        .vault-cards-grid {
+            /* Tata letak grid */
+            display: grid;
+            /* Membuat 3 kolom dengan lebar seimbang */
+            grid-template-columns: repeat(3, 1fr);
+            /* Jarak antar kartu */
+            gap: 16px;
+            /* Margin jarak atas */
+            margin-top: 15px;
+            /* Batas tinggi maksimum grid */
+            max-height: 480px;
+            /* Bilah gulir vertikal jika koleksi kostum melebihi tinggi */
+            overflow-y: auto;
+            /* Jarak bantalan dalam */
+            padding: 4px;
+        }
+
+        /* Kartu kostum tempur (suit card) */
+        .suit-card {
+            /* Gradien latar belakang gelap elegan */
+            background: linear-gradient(145deg, #0b1120, #030712);
+            /* Garis tepi abu-abu gelap */
+            border: 2px solid #1e293b;
+            /* Sudut melengkung */
+            border-radius: 16px;
+            /* Jarak bantalan kartu */
+            padding: 16px;
+            /* Tata letak fleksibel vertikal */
+            display: flex;
+            flex-direction: column;
+            /* Rata tengah horizontal */
+            align-items: center;
+            /* Teks rata tengah */
+            text-align: center;
+            /* Jarak antar elemen kartu */
+            gap: 10px;
+            /* Kursor pointer penunjuk */
+            cursor: pointer;
+            /* Transisi animasi halus */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Posisi relatif */
+            position: relative;
+            /* Bayangan gelap di bawah kartu */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Efek hover saat kartu kostum disorot mouse */
+        .suit-card:hover {
+            /* Mengangkat kartu 4 piksel ke atas */
+            transform: translateY(-4px);
+            /* Garis tepi berubah menjadi biru langit cerah */
+            border-color: #38bdf8;
+            /* Efek pendaran bayangan biru */
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+        }
+
+        /* Tampilan khusus untuk kartu kostum yang sedang dipakai / dipilih */
+        .suit-card.terpilih {
+            /* Garis tepi emas terang */
+            border-color: var(--accent-gold);
+            /* Latar gradien bernuansa lebih hangat */
+            background: linear-gradient(145deg, #171f30, #090e1a);
+            /* Pendaran cahaya keemasan pekat di sekeliling kartu */
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Bingkai pratinjau lingkaran bola warna kostum tempur */
+        .suit-preview-frame {
+            /* Posisi relatif */
+            position: relative;
+            /* Lebar bingkai */
+            width: 70px;
+            /* Tinggi bingkai */
+            height: 70px;
+            /* Tata letak fleksibel */
+            display: flex;
+            /* Rata tengah horizontal dan vertikal */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Cincin kilau kostum (dinonaktifkan secara paksa untuk tampilan minimalis) */
+        .suit-glow-ring {
+            display: none !important;
+        }
+
+        /* Bola orb lingkaran penampil warna tema kostum */
+        .suit-orb {
+            /* Lebar bola warna */
+            width: 44px;
+            /* Tinggi bola warna */
+            height: 44px;
+            /* Bentuk lingkaran sempurna */
+            border-radius: 50%;
+            /* Garis tepi abu-abu tegas tanpa bayangan berlebih */
+            border: 2px solid #475569 !important;
+            /* Menghilangkan efek box shadow bawaan */
+            box-shadow: none !important;
+            /* Lapisan di atas bingkai */
+            z-index: 2;
+        }

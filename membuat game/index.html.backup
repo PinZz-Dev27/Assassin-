@@ -1,0 +1,2575 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Assassin - HQ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Rajdhani:wght@500;700;900&display=swap');
+
+        :root {
+            --ninja-color: #facc15;
+            --dark-bg: #030712;
+            --panel-bg: rgba(15, 23, 42, 0.7);
+            --border-color: #334155;
+            --accent-gold: #f59e0b;
+            --accent-glow: #facc15;
+        }
+
+        /* SCROLLBAR GELAP */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gold);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at 50% 20%, #1e293b 0%, #020617 80%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            color: #f8fafc;
+            position: relative;
+        }
+
+        /* PARTIKEL DEBU MALAM */
+        .dust-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 30s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        @keyframes drift {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100px 100px;
+            }
+        }
+
+        /* TOP NAVIGATION BAR */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 25px 50px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .left-nav-group {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .profile-card,
+        .currency-card {
+            background: var(--panel-bg);
+            color: #f8fafc;
+            border: 2px solid var(--border-color);
+            padding: 10px 25px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-card {
+            flex-direction: column;
+            gap: 2px;
+            align-items: flex-start;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .currency-card {
+            border-right: 4px solid var(--accent-gold);
+        }
+
+        .profile-card:hover,
+        .currency-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.15);
+        }
+
+        .p-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 24px;
+            margin: 0;
+            color: #f8fafc;
+            letter-spacing: 2px;
+        }
+
+        .p-rank {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .c-icon {
+            font-size: 22px;
+        }
+
+        .c-amount {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 28px;
+            color: var(--accent-glow);
+            margin: 0;
+            text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+        }
+
+        .btn-settings-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--panel-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            color: #94a3b8;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+            position: absolute;
+            right: 50px;
+            top: 25px;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-settings-icon:hover {
+            transform: rotate(90deg);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* JUDUL GAME ELEGAN */
+        .title-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .title-badge {
+            color: var(--accent-gold);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: -5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .title-logo-new {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 50px;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 5px 15px rgba(0, 0, 0, 0.9);
+        }
+
+        /* MAIN DASHBOARD LAYOUT */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 40px;
+            padding: 0 50px;
+            flex-grow: 1;
+            z-index: 10;
+            position: relative;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        /* SIDE PANELS (GELAP & ELEGAN) */
+        .panel-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .panel-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 8px;
+        }
+
+        .dash-btn {
+            background: #0f172a;
+            color: #cbd5e1;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 16px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dash-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent-gold);
+            transform: scaleY(0);
+            transition: 0.3s;
+        }
+
+        .dash-btn:hover {
+            background: #1e293b;
+            border-color: #475569;
+            color: #fff;
+            transform: translateX(8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .dash-btn:hover::before {
+            transform: scaleY(1);
+        }
+
+        .dash-btn:active {
+            transform: translateX(4px);
+        }
+
+        .btn-icon {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .dash-btn:hover .btn-icon {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px var(--accent-gold));
+        }
+
+        /* CENTER STAGE (GAMBAR KARAKTER CUSTOM) */
+        .center-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: relative;
+            gap: 20px;
+        }
+
+        .character-container {
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .ninja-pedestal {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 40px;
+            background: radial-gradient(ellipse, rgba(245, 158, 11, 0.15) 0%, rgba(0, 0, 0, 0.8) 70%, transparent 100%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* GAMBAR ASSASSIN CUSTOM */
+        #ninja-karakter {
+            width: 400px;
+            /* Sesuaikan ukuran gambar */
+            height: auto;
+            position: relative
+            ;
+            margin: 0 auto;
+            animation: napasKarakter 4s ease-in-out infinite;
+            filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.8));
+            z-index: 5;
+            transition: filter 0.3s;
+        }
+
+        @keyframes napasKarakter {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+
+
+        /* START BUTTON SKEWED ELEGAN */
+        .play-btn-wrapper {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            z-index: 50;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 38px;
+            font-weight: 900;
+            padding: 15px 60px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid #fcd34d;
+            letter-spacing: 6px;
+            box-shadow: 0 10px 25px rgba(180, 83, 9, 0.5);
+            transform: skewX(-15deg);
+            transition: 0.3s;
+        }
+
+        .play-btn span {
+            display: inline-block;
+            transform: skewX(15deg);
+        }
+
+        .play-btn:hover {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            transform: skewX(-15deg) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(180, 83, 9, 0.7);
+        }
+
+        .play-btn:active {
+            transform: skewX(-15deg) translateY(5px);
+            box-shadow: 0 5px 10px rgba(180, 83, 9, 0.5);
+        }
+
+        /* MODAL DARK THEME */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes modalFade {
+            0% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: #0f172a;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 450px;
+            max-width: 600px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid #334155;
+            color: #f8fafc;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalFade 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .modal-box h2 {
+            margin-top: 0;
+            color: var(--accent-glow);
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 15px;
+            font-size: 24px;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .btn-tutup {
+            background: transparent;
+            color: #94a3b8;
+            border: 2px solid #334155;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 800;
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 16px;
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-tutup:hover {
+            background: #1e293b;
+            color: #fff;
+            border-color: #475569;
+        }
+
+        .opsi-btn {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 10px 18px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: 800;
+            font-family: 'Nunito', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .opsi-btn:hover {
+            background: #334155;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .opsi-btn.terpilih {
+            background: rgba(245, 158, 11, 0.1) !important;
+            color: var(--accent-gold) !important;
+            border-color: var(--accent-gold) !important;
+        }
+
+        .btn-beli {
+            background: #1e293b;
+            border-color: #334155;
+            color: var(--accent-gold);
+        }
+
+        .btn-beli:hover {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--accent-gold);
+        }
+
+        .btn-beli:disabled {
+            background: #0f172a !important;
+            border-color: #1e293b !important;
+            color: #475569 !important;
+            cursor: not-allowed;
+        }
+
+        .grid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .list-item {
+            background: #020617;
+            padding: 15px 20px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #1e293b;
+            transition: 0.2s;
+        }
+
+        .list-item:hover {
+            border-color: #475569;
+            background: #0f172a;
+        }
+
+        .list-item div {
+            font-size: 16px;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .list-item small {
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* UBAH NAMA DAN SETTING */
+        .input-nama {
+            width: 85%;
+            padding: 15px;
+            font-size: 20px;
+            border-radius: 12px;
+            background: #020617;
+            border: 1px solid #334155;
+            text-align: center;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 20px;
+            outline: none;
+            transition: 0.2s;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .input-nama:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 15px;
+            font-weight: 800;
+            background: #020617;
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 1px solid #1e293b;
+            color: #cbd5e1;
+        }
+
+        input[type="range"] {
+            width: 180px;
+            cursor: pointer;
+            accent-color: var(--accent-gold);
+            height: 6px;
+            background: #1e293b;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+        }
+
+        .btn-map {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 15px;
+            text-align: left;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            position: relative;
+            background: #020617;
+            border: 1px solid #1e293b;
+        }
+
+        .btn-map .map-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
+            color: #f8fafc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-map .map-desc {
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .btn-map:hover:not(:disabled) {
+            border-color: var(--accent-gold);
+            background: rgba(245, 158, 11, 0.05);
+            transform: translateX(5px);
+        }
+
+        .btn-map:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .lock-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            display: none;
+        }
+
+        .btn-map:disabled .lock-icon {
+            display: block;
+        }
+
+        /* ========================================================
+           TACTICAL WARDROBE (MODAL VAULT) & SECTOR DISPATCH STYLES
+           ======================================================== */
+        .vault-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 15px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .suit-card {
+            background: linear-gradient(145deg, #0b1120, #030712);
+            border: 2px solid #1e293b;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .suit-card:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+        }
+
+        .suit-card.terpilih {
+            border-color: var(--accent-gold);
+            background: linear-gradient(145deg, #171f30, #090e1a);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .suit-preview-frame {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .suit-glow-ring {
+            display: none !important;
+        }
+
+        .suit-orb {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #475569 !important;
+            box-shadow: none !important;
+            z-index: 2;
+        }
+
+        .suit-tag-class {
+            position: absolute;
+            bottom: -6px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 2px 7px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            z-index: 3;
+        }
+
+        .suit-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            margin: 4px 0 0 0;
+            color: #f8fafc;
+            letter-spacing: 0.5px;
+        }
+
+        .suit-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.4;
+            min-height: 32px;
+        }
+
+        .suit-perk-badge {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            color: #facc15;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .suit-equip-btn {
+            width: 100%;
+            padding: 9px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+        }
+
+        .suit-card.terpilih .suit-equip-btn {
+            background: linear-gradient(90deg, #f59e0b, #eab308);
+            color: #020617;
+            border-color: #facc15;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ========================================================
+           NEW & IMPROVED CYBER BLACK MARKET (SHOP) STYLES
+           ======================================================== */
+        .shop-modal-box {
+            min-width: 760px;
+            max-width: 880px;
+            background: #0b1120 !important;
+            border: 1px solid #334155 !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85) !important;
+            padding: 28px !important;
+        }
+
+        .shop-currency-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 10px 24px;
+            margin: 12px 0 18px 0;
+        }
+
+        .shop-curr-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .shop-category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .shop-tab-btn {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .shop-tab-btn.aktif,
+        .shop-tab-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            color: #38bdf8;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.3);
+        }
+
+        .shop-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-height: 450px;
+            overflow-y: auto;
+            padding: 6px;
+        }
+
+        .shop-card {
+            background: linear-gradient(145deg, #0b1120, #030712);
+            border: 2px solid #1e293b;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            position: relative;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .shop-card:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .shop-card.diamond-tier {
+            border-color: rgba(245, 158, 11, 0.6);
+            background: linear-gradient(145deg, #1a1506, #070913);
+        }
+
+        .shop-card.diamond-tier:hover {
+            border-color: #facc15;
+            box-shadow: 0 12px 30px rgba(250, 204, 21, 0.3);
+        }
+
+        .shop-card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .badge-suit {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .badge-weapon {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .badge-diamond {
+            background: rgba(250, 204, 21, 0.2);
+            color: #facc15;
+            border: 1px solid #facc15;
+        }
+
+        .shop-price-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 9px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            margin-top: auto;
+        }
+
+        .price-coin {
+            background: linear-gradient(90deg, #d97706, #b45309);
+            color: #fff;
+            border: 1px solid #f59e0b;
+        }
+
+        .price-coin:hover {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+            transform: scale(1.02);
+        }
+
+        .price-diamond {
+            background: linear-gradient(90deg, #0284c7, #0369a1);
+            color: #fff;
+            border: 1px solid #00e5ff;
+        }
+
+        .price-diamond:hover {
+            background: linear-gradient(90deg, #00e5ff, #0284c7);
+            color: #020617;
+            box-shadow: 0 0 18px rgba(0, 229, 255, 0.7);
+            transform: scale(1.02);
+        }
+
+        .shop-card.vanished {
+            opacity: 0;
+            transform: scale(0.7) translateY(-20px);
+            pointer-events: none;
+            transition: all 0.35s ease-out;
+        }
+
+        /* SECTOR DISPATCH CARDS (MODAL PILIH MAP) */
+
+        .dispatch-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .dispatch-badge {
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .dispatch-subtitle {
+            color: #94a3b8;
+            font-size: 13px;
+            margin: 5px 0 0 0;
+        }
+
+        .sector-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-height: 460px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .sector-card {
+            background: linear-gradient(135deg, #090e1a, #030712);
+            border: 2px solid #1e293b;
+            border-radius: 18px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sector-card:hover:not(.locked) {
+            transform: translateX(6px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15);
+            background: linear-gradient(135deg, #131c2e, #090e1a);
+        }
+
+        .sector-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            border-color: #1e293b;
+        }
+
+        .sector-left-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+            flex: 1;
+        }
+
+        .sector-badge-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sector-num {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 2px;
+        }
+
+        .threat-tag {
+            font-size: 10px;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+
+        .threat-normal {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid #22c55e;
+        }
+
+        .threat-hard {
+            background: rgba(245, 158, 11, 0.15);
+            color: #facc15;
+            border: 1px solid #f59e0b;
+        }
+
+        .threat-nightmare {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid #ef4444;
+        }
+
+        .sector-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #f8fafc;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .sector-brief {
+            font-size: 12px;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .sector-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 4px;
+        }
+
+        .sector-stars {
+            font-size: 18px;
+            color: #facc15;
+            letter-spacing: 3px;
+        }
+
+        .sector-status-pill {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        .sector-status-pill.status-ready {
+            color: #4ade80;
+            border-color: rgba(34, 197, 94, 0.4);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .btn-deploy-sector {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: #ffffff;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        .sector-card:hover:not(.locked) .btn-deploy-sector {
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .sector-card.locked .btn-deploy-sector {
+            background: #1e293b;
+            color: #64748b;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .sector-lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #94a3b8;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 18px;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dust-particles"></div>
+
+    <!-- JUDUL GAME UNIK -->
+    <div class="title-container">
+        <div class="title-badge">NINJA VILLAGE</div>
+        <h1 class="title-logo-new">SPEED ASSASSIN</h1>
+    </div>
+
+    <!-- TOP BAR -->
+    <div class="top-nav">
+        <div class="left-nav-group">
+            <div class="profile-card" onclick="bukaModalNama()" title="Change Agent Name">
+                <h3 class="p-name"><span id="teks-profil">Player</span> ✎</h3>
+                <span class="p-rank" id="teks-rank">RANK: GENIN</span>
+            </div>
+
+            <div class="currency-card">
+                <span class="c-icon">💰</span>
+                <h2 class="c-amount" id="teks-koin">8400</h2>
+            </div>
+
+            <div class="currency-card" style="border-right: 4px solid #38bdf8;">
+                <span class="c-icon">💎</span>
+                <h2 class="c-amount" id="teks-diamond" style="color: #38bdf8;">0</h2>
+            </div>
+        </div>
+
+        <!-- SETTINGS BUTTON TOP RIGHT -->
+        <div class="btn-settings-icon" onclick="bukaModal('modal-setting')" title="System Settings">⚙️</div>
+    </div>
+
+    <div class="dashboard">
+
+        <!-- LEFT: ARMORY -->
+        <aside class="panel-group">
+            <div class="panel-title">ARMORY LOADOUT</div>
+            <button class="dash-btn" onclick="bukaModal('modal-vault')">
+                <span class="btn-icon">🥋</span> <span>Change Suit</span>
+            </button>
+            <button class="dash-btn" onclick="bukaModal('modal-senjata')">
+                <span class="btn-icon">⚔️</span> <span>Weapons</span>
+            </button>
+            <button class="dash-btn" onclick="bukaModal('modal-skill')">
+                <span class="btn-icon">📜</span> <span>Skill Book</span>
+            </button>
+        </aside>
+
+
+        <!-- CENTER: CHARACTER -->
+        <main class="center-stage">
+            <div class="character-container">
+                <div class="ninja-pedestal"></div>
+                <img id="ninja-karakter" src="navy.png" alt="Assassin">
+            </div>
+        </main>
+
+        <!-- RIGHT: OPERATIONS -->
+        <aside class="panel-group">
+            <div class="panel-title">OPERATIONS</div>
+            <button class="dash-btn" onclick="bukaModal('modal-shop')">
+                <span class="btn-icon">🛒</span> <span>Shop</span>
+            </button>
+            <button class="dash-btn" onclick="bukaModalMisi()">
+                <span class="btn-icon">🎯</span> <span>Daily Missions</span>
+            </button>
+            <button class="dash-btn" onclick="bukaModalPrestasi()">
+                <span class="btn-icon">🏅</span> <span>Achievements</span>
+            </button>
+        </aside>
+
+
+    </div>
+
+    <!-- TOMBOL PLAY SKEWED -->
+    <div class="play-btn-wrapper">
+        <button class="play-btn" onclick="bukaModal('modal-pilih-map')"><span>DEPLOY</span></button>
+    </div>
+
+    <!-- ================= MODALS ================= -->
+
+    <div id="modal-prestasi" class="modal-overlay">
+        <div class="modal-box">
+            <h2>🏅 Service Record</h2>
+            <div id="prestasi-container" class="grid-container"></div>
+            <button class="btn-tutup" onclick="tutupModal('modal-prestasi')">Close</button>
+        </div>
+    </div>
+
+    <div id="modal-unlock" class="modal-overlay" style="z-index: 1005;">
+        <div class="modal-box" style="border-color: #334155; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);">
+            <h1 style="color: #f59e0b; font-size: 32px; margin-top: 0; font-family: 'Rajdhani', sans-serif;">🔒 SECTOR
+                UNLOCKED! 🔒</h1>
+            <p style="font-size: 16px; color: #cbd5e1;">Access granted. New area ready for infiltration:</p>
+            <h2 id="teks-unlock-map"
+                style="color: #10b981; font-size: 24px; border: 1px solid #10b981; padding: 15px; border-radius: 12px; background: rgba(16, 185, 129, 0.1);">
+                🌲 New Area</h2>
+            <button class="opsi-btn btn-beli"
+                style="padding: 12px 30px; font-size: 18px; width: 100%; margin-top: 15px;"
+                onclick="tutupModal('modal-unlock')">ACCEPT MISSION</button>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div id="modal-setting" class="modal-overlay">
+        <div class="modal-box">
+            <h2>⚙️ System Settings</h2>
+            <div class="setting-row"><span>Sound Volume:</span><input type="range" id="volume-slider" min="0" max="1"
+                    step="0.1" onchange="ubahVolume(this.value)"></div>
+            <button class="btn-tutup" style="border-color: #ef4444; color: #ef4444;" onclick="resetGameData()">⚠️ Reset
+                All Data</button>
+            <button class="btn-tutup"
+                style="margin-top: 15px; border-color: var(--accent-gold); color: var(--accent-gold);"
+                onclick="tutupModal('modal-setting')">Confirm</button>
+        </div>
+    </div>
+
+    <div id="modal-misi" class="modal-overlay">
+        <div class="modal-box">
+            <h2>🎯 Daily Contracts</h2>
+            <div id="misi-container" class="grid-container"></div>
+            <button class="btn-tutup" onclick="tutupModal('modal-misi')">Close</button>
+        </div>
+    </div>
+
+    <div id="modal-nama" class="modal-overlay" style="z-index: 1001;">
+        <div class="modal-box" style="min-width: 400px;">
+            <h2>Agent Identity</h2>
+            <input type="text" id="input-nama" class="input-nama" placeholder="Codename..." maxlength="12">
+            <button class="opsi-btn btn-beli" onclick="simpanNama()"
+                style="width: 100%; padding: 15px; font-size: 18px; letter-spacing: 2px;">UPDATE DATABASE</button>
+            <button class="btn-tutup" onclick="tutupModal('modal-nama')">Cancel</button>
+        </div>
+    </div>
+
+    <div id="modal-pilih-map" class="modal-overlay">
+        <div class="modal-box sector-dispatch-box" style="min-width: 650px; max-width: 720px;">
+            <div class="dispatch-header">
+                <div class="dispatch-badge">DISPATCH TERMINAL</div>
+                <h2 style="margin: 4px 0;">SELECT OPERATION SECTOR</h2>
+                <p class="dispatch-subtitle">Choose your target compound — eliminate all guards, take down the boss, and
+                    steal the diamonds!</p>
+            </div>
+
+            <div class="sector-cards-container">
+                <!-- SECTOR 1 -->
+                <div class="sector-card" id="card-sector-1" onclick="gasMain(1, 'gedung')">
+                    <div class="sector-left-info">
+                        <div class="sector-badge-header">
+                            <span class="sector-num">SECTOR 01</span>
+                            <span class="threat-tag threat-normal">NORMAL</span>
+                        </div>
+                        <h3 class="sector-name">OLD WAREHOUSE DEPOT</h3>
+                        <p class="sector-brief">Infiltrate the logistics warehouse maze. Hide behind crates, dodge
+                            patrol flashlights, and take down enemies from behind.</p>
+                        <div class="sector-meta">
+                            <div class="sector-stars" id="stars-sector-1">⭐⭐⭐</div>
+                            <div class="sector-status-pill status-ready" id="status-pill-1">READY TO DEPLOY</div>
+                        </div>
+                    </div>
+                    <button class="btn-deploy-sector">DEPLOY ➔</button>
+                </div>
+
+                <!-- SEKTOR 2 -->
+                <div class="sector-card" id="card-sector-2" onclick="gasMain(2, 'hutan')">
+                    <div class="sector-left-info">
+                        <div class="sector-badge-header">
+                            <span class="sector-num">SEKTOR 02</span>
+                            <span class="threat-tag threat-hard">HARD</span>
+                        </div>
+                        <h3 class="sector-name">BIO-RESEARCH OUTPOST</h3>
+                        <p class="sector-brief">Military jungle base. Guarded by heavy armored juggernauts and deadly
+                            tripwire sensors.</p>
+                        <div class="sector-meta">
+                            <div class="sector-stars" id="stars-sector-2">☆☆☆</div>
+                            <div class="sector-status-pill" id="status-pill-2">REQUIRES SECTOR 1</div>
+                        </div>
+                    </div>
+                    <div class="sector-lock-overlay" id="lock-overlay-2">
+                        <span>🔒</span> <span>LOCKED — COMPLETE SECTOR 1 FIRST</span>
+                    </div>
+                    <button class="btn-deploy-sector" id="btn-deploy-2">DEPLOY ➔</button>
+                </div>
+
+                <!-- SECTOR 3 -->
+                <div class="sector-card" id="card-sector-3" onclick="gasMain(3, 'lab')">
+                    <div class="sector-left-info">
+                        <div class="sector-badge-header">
+                            <span class="sector-num">SECTOR 03</span>
+                            <span class="threat-tag threat-nightmare">NIGHTMARE</span>
+                        </div>
+                        <h3 class="sector-name">CYBER CITADEL PENTHOUSE</h3>
+                        <p class="sector-brief">High-tech cyber fortress. Watch out for auto-turrets, the executive
+                            boss, and the Rival Assassin in Stage 4.</p>
+                        <div class="sector-meta">
+                            <div class="sector-stars" id="stars-sector-3">☆☆☆</div>
+                            <div class="sector-status-pill" id="status-pill-3">REQUIRES SECTOR 2</div>
+                        </div>
+                    </div>
+                    <div class="sector-lock-overlay" id="lock-overlay-3">
+                        <span>🔒</span> <span>LOCKED — COMPLETE SECTOR 2 FIRST</span>
+                    </div>
+                    <button class="btn-deploy-sector" id="btn-deploy-3">DEPLOY ➔</button>
+                </div>
+            </div>
+
+            <button class="btn-tutup" onclick="tutupModal('modal-pilih-map')" style="margin-top: 15px;">Back</button>
+        </div>
+    </div>
+
+    <!-- VAULT MODAL: 6 CYBER-ASSASSIN SUITS -->
+    <div id="modal-vault" class="modal-overlay">
+        <div class="modal-box" style="min-width: 650px; max-width: 780px;">
+            <div class="dispatch-header">
+                <div class="dispatch-badge">CYBER WARDROBE</div>
+                <h2 style="margin: 4px 0;">ARMORY — OPERATIVE SUITS</h2>
+                <p class="dispatch-subtitle">Choose your shadow combat suit with unique passive perks and visual themes.
+                </p>
+            </div>
+
+            <div class="vault-cards-grid">
+                <!-- 1. SHADOW BLACK -->
+                <div class="suit-card" id="card-suit-hitam" onclick="gantiBaju('#111111')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(148, 163, 184, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #111111; border-color: #64748b; box-shadow: 0 0 15px #334155;"></div>
+                        <span class="suit-tag-class">SHADOW</span>
+                    </div>
+                    <h3 class="suit-name">Shadow Black</h3>
+                    <p class="suit-desc">Stealth polymer weave designed for deep infiltration and zero radar reflection.
+                    </p>
+                    <div class="suit-perk-badge">🕶️ VOID SHADOW (-40% DETECTION)</div>
+                    <button class="suit-equip-btn" id="btn-vault-hitam">EQUIP</button>
+                </div>
+
+                <!-- 2. OBSIDIAN NAVY -->
+                <div class="suit-card" id="card-suit-navy" onclick="gantiBaju('#2c3e50')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(0, 229, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #2c3e50; border-color: #00e5ff; box-shadow: 0 0 15px #00e5ff;"></div>
+                        <span class="suit-tag-class">OPERATIVE</span>
+                    </div>
+                    <h3 class="suit-name">Obsidian Navy</h3>
+                    <p class="suit-desc">Standard stealth division suit with sound-absorbing fibers.</p>
+                    <div class="suit-perk-badge">⚡ SILENT STRIDE (-30% NOISE)</div>
+                    <button class="suit-equip-btn" id="btn-vault-navy">EQUIP</button>
+                </div>
+
+                <!-- 3. LEGENDARY GOLD -->
+                <div class="suit-card" id="card-suit-emas" onclick="gantiBaju('#f1c40f')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(250, 204, 21, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #f1c40f; border-color: #facc15; box-shadow: 0 0 15px #facc15;"></div>
+                        <span class="suit-tag-class">SOVEREIGN</span>
+                    </div>
+                    <h3 class="suit-name">Legendary Gold</h3>
+                    <p class="suit-desc">Gold-plated armor of the greatest assassin emperor of all time.</p>
+                    <div class="suit-perk-badge">💎 WEALTH HARVEST (+2x DIAMONDS)</div>
+                    <button class="suit-equip-btn" id="btn-vault-emas">EQUIP</button>
+                </div>
+
+                <!-- 4. SLATE GREY -->
+                <div class="suit-card" id="card-suit-abu" onclick="gantiBaju('#95a5a6')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(203, 213, 225, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #95a5a6; border-color: #cbd5e1; box-shadow: 0 0 15px #cbd5e1;"></div>
+                        <span class="suit-tag-class">ENFORCER</span>
+                    </div>
+                    <h3 class="suit-name">Slate Grey</h3>
+                    <p class="suit-desc">Titanium kevlar layers for close-range compound defense.</p>
+                    <div class="suit-perk-badge">🛡️ BALLISTIC COAT (+3 HP MAX)</div>
+                    <button class="suit-equip-btn" id="btn-vault-abu">EQUIP</button>
+                </div>
+
+                <!-- 5. VOID PURPLE -->
+                <div class="suit-card" id="card-suit-ungu" onclick="gantiBaju('#8e44ad')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #8e44ad; border-color: #c084fc; box-shadow: 0 0 15px #c084fc;"></div>
+                        <span class="suit-tag-class">MYSTIC</span>
+                    </div>
+                    <h3 class="suit-name">Void Purple</h3>
+                    <p class="suit-desc">Void phase-shift tech that extends your takedown range.</p>
+                    <div class="suit-perk-badge">👁️ VOID REACH (+25% TAKEDOWN)</div>
+                    <button class="suit-equip-btn" id="btn-vault-ungu">EQUIP</button>
+                </div>
+
+                <!-- 6. CRIMSON BLOOD -->
+                <div class="suit-card" id="card-suit-merah" onclick="gantiBaju('#e74c3c')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #e74c3c; border-color: #ef4444; box-shadow: 0 0 15px #ef4444;"></div>
+                        <span class="suit-tag-class">ASSASSIN</span>
+                    </div>
+                    <h3 class="suit-name">Crimson Blood</h3>
+                    <p class="suit-desc">Blood-red shadow killer cloth built for lethal, merciless attacks.</p>
+                    <div class="suit-perk-badge">🗡️ LETHAL MELEE (+1 MELEE DMG)</div>
+                    <button class="suit-equip-btn" id="btn-vault-merah">EQUIP</button>
+                </div>
+
+                <!-- 7. GHOST WHITE -->
+                <div class="suit-card" id="card-suit-putih" onclick="gantiBaju('#ecf0f1')">
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #ecf0f1; border-color: #ffffff; box-shadow: 0 0 15px #ffffff;"></div>
+                        <span class="suit-tag-class">PHANTOM</span>
+                    </div>
+                    <h3 class="suit-name">Ghost White</h3>
+                    <p class="suit-desc">Arctic white armor that deflects enemy flashlight reflections.</p>
+                    <div class="suit-perk-badge">💨 GHOST SPRINT (+20% SPEED)</div>
+                    <button class="suit-equip-btn" id="btn-vault-putih">EQUIP</button>
+                </div>
+            </div>
+            <button class="btn-tutup" onclick="tutupModal('modal-vault')" style="margin-top: 15px;">Close</button>
+        </div>
+    </div>
+
+    <div id="modal-senjata" class="modal-overlay">
+        <div class="modal-box">
+            <h2>Armory — Weapons</h2>
+            <div class="grid-container">
+                <div class="list-item">
+                    <div>🗡️ Wooden Bokken <span
+                            style="font-size:11px; color:#22c55e; background: rgba(34,197,94,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">Demo
+                            Ready</span></div>
+                    <button class="opsi-btn" id="btn-senjata-kayu"
+                        onclick="gantiSenjata('bentuk-kayu', '#8B4513')">Equip</button>
+                </div>
+                <div class="list-item" id="vault-katana">
+                    <div style="color: #94a3b8;">⚔️ Steel Katana <span
+                            style="font-size:11px; color:#ef4444; background: rgba(239,68,68,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">🔒
+                            Locked (Demo)</span></div>
+                    <button class="opsi-btn" style="opacity: 0.5; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game!', 'DEMO VERSION')">Locked</button>
+                </div>
+                <div class="list-item" id="vault-karambit">
+                    <div style="color: #94a3b8;">🪝 Void Karambit <span
+                            style="font-size:11px; color:#ef4444; background: rgba(239,68,68,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">🔒
+                            Locked (Demo)</span></div>
+                    <button class="opsi-btn" style="opacity: 0.5; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game!', 'DEMO VERSION')">Locked</button>
+                </div>
+                <div class="list-item" id="vault-saber">
+                    <div style="color: #94a3b8;">🗡️ Plasma Saber <span
+                            style="font-size:11px; color:#ef4444; background: rgba(239,68,68,0.15); padding: 2px 7px; border-radius: 4px; margin-left: 8px;">🔒
+                            Locked (Demo)</span></div>
+                    <button class="opsi-btn" style="opacity: 0.5; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game!', 'DEMO VERSION')">Locked</button>
+                </div>
+            </div>
+            <button class="btn-tutup" onclick="tutupModal('modal-senjata')">Close</button>
+        </div>
+    </div>
+
+    <div id="modal-skill" class="modal-overlay">
+        <div class="modal-box" style="min-width: 560px;">
+            <div class="dispatch-header">
+                <div class="dispatch-badge">SPECIAL OPERATIVE</div>
+                <h2 style="margin: 4px 0;">CYBER SKILL PROTOCOLS</h2>
+                <p class="dispatch-subtitle">Unlock advanced shadow techniques using collected diamonds.</p>
+            </div>
+
+            <div class="shop-currency-bar" style="margin-bottom: 16px;">
+                <div class="shop-curr-item" style="color: #00e5ff;">
+                    <span style="font-size: 18px;">💎</span>
+                    <span>AVAILABLE DIAMONDS: <span id="skill-diamonds-display">0</span></span>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <div class="list-item" id="skill-ghost-card">
+                    <div>
+                        <div style="color: #38bdf8; font-weight: 800; font-size: 16px;">👻 Ghost Walk (Q)</div>
+                        <small>Become fully invisible and pass through detection cones.</small>
+                    </div>
+                    <button class="opsi-btn btn-beli" id="btn-buy-ghost"
+                        onclick="beliSkill('skill_ghost', 15, 'skill-ghost-card')">💎 15</button>
+                </div>
+
+                <div class="list-item" id="skill-blink-card">
+                    <div>
+                        <div style="color: #ef4444; font-weight: 800; font-size: 16px;">⚡ Blink Kill (P)</div>
+                        <small>Instantly warp behind nearest target and perform lethal strike.</small>
+                    </div>
+                    <button class="opsi-btn btn-beli" id="btn-buy-blink"
+                        onclick="beliSkill('skill_blink', 25, 'skill-blink-card')">💎 25</button>
+                </div>
+
+                <div class="list-item" id="skill-time-card">
+                    <div>
+                        <div style="color: #c084fc; font-weight: 800; font-size: 16px;">⏳ Time Freeze (I)</div>
+                        <small>Slow enemies and traps to a complete halt for 3 seconds.</small>
+                    </div>
+                    <button class="opsi-btn btn-beli" id="btn-buy-time"
+                        onclick="beliSkill('skill_time', 35, 'skill-time-card')">💎 35</button>
+                </div>
+
+                <div class="list-item" id="skill-clone-card">
+                    <div>
+                        <div style="color: #4ade80; font-weight: 800; font-size: 16px;">👥 Shadow Clone (T)</div>
+                        <small>Spawn a holo-decoy clone to divert enemy flashlight patrols.</small>
+                    </div>
+                    <button class="opsi-btn btn-beli" id="btn-buy-clone"
+                        onclick="beliSkill('skill_clone', 45, 'skill-clone-card')">💎 45</button>
+                </div>
+            </div>
+            <button class="btn-tutup" onclick="tutupModal('modal-skill')" style="margin-top: 15px;">Close</button>
+        </div>
+    </div>
+
+    <!-- BLACK MARKET SHOP MODAL (ENHANCED UI & AUTO-HIDE OWNED ITEMS) -->
+    <div id="modal-shop" class="modal-overlay">
+        <div class="modal-box shop-modal-box">
+            <div class="dispatch-header">
+                <div class="dispatch-badge">CYBER SYNDICATE</div>
+                <h2 style="margin: 4px 0;">BLACK MARKET ARSENAL</h2>
+                <p class="dispatch-subtitle">High-grade tactical suits & deadly void blades. Purchased items are
+                    instantly stored in your Armory.</p>
+            </div>
+
+            <!-- Currency Indicator inside shop -->
+            <div class="shop-currency-bar">
+                <div class="shop-curr-item" style="color: #f59e0b;">
+                    <span style="font-size: 18px;">💰</span>
+                    <span>COINS: <span id="shop-coins-display">8400</span></span>
+                </div>
+                <div class="shop-curr-item" style="color: #00e5ff;">
+                    <span style="font-size: 18px;">💎</span>
+                    <span>DIAMONDS: <span id="shop-diamonds-display">0</span></span>
+                </div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="shop-category-tabs">
+                <button class="shop-tab-btn aktif" onclick="filterShopTab('all', this)">ALL ASSETS</button>
+                <button class="shop-tab-btn" onclick="filterShopTab('suit', this)">TACTICAL SUITS</button>
+                <button class="shop-tab-btn" onclick="filterShopTab('weapon', this)">MELEE BLADES</button>
+            </div>
+
+            <div class="shop-cards-grid" id="shop-grid">
+                <!-- 0. OBSIDIAN NAVY SUIT (COINS) -->
+                <div class="shop-card" id="shop-card-navy" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(0, 229, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #2c3e50; border-color: #00e5ff; box-shadow: 0 0 15px #00e5ff;"></div>
+                    </div>
+                    <h3 class="suit-name">Obsidian Navy</h3>
+                    <p class="suit-desc">Standard stealth division suit with sound-absorbing fibers.</p>
+                    <div class="suit-perk-badge">⚡ SILENT STRIDE (-30% NOISE)</div>
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_navy', 800, 'koin', 'card-suit-navy', 'shop-card-navy')">
+                        <span>💰</span> 800 COINS
+                    </button>
+                </div>
+
+                <!-- 1. GHOST WHITE SUIT (COINS) -->
+                <div class="shop-card" id="shop-card-putih" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #ecf0f1; border-color: #fff; box-shadow: 0 0 15px #fff;"></div>
+                    </div>
+                    <h3 class="suit-name">Ghost White</h3>
+                    <p class="suit-desc">Arctic camouflage suit that bends patrol light reflections.</p>
+                    <div class="suit-perk-badge">💨 GHOST SPRINT (+20% SPEED)</div>
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_putih', 1000, 'koin', 'card-suit-putih', 'shop-card-putih')">
+                        <span>💰</span> 1,000 COINS
+                    </button>
+                </div>
+
+                <!-- 2. SLATE GREY SUIT (COINS) -->
+                <div class="shop-card" id="shop-card-abu" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(203, 213, 225, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #95a5a6; border-color: #cbd5e1; box-shadow: 0 0 15px #cbd5e1;"></div>
+                    </div>
+                    <h3 class="suit-name">Slate Grey</h3>
+                    <p class="suit-desc">Reinforced ballistic armor plating for high-threat skirmishes.</p>
+                    <div class="suit-perk-badge">🛡️ BALLISTIC COAT (+3 HP MAX)</div>
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_abu', 1500, 'koin', 'card-suit-abu', 'shop-card-abu')">
+                        <span>💰</span> 1,500 COINS
+                    </button>
+                </div>
+
+                <!-- 3. CRIMSON BLOOD SUIT (COINS) -->
+                <div class="shop-card" id="shop-card-merah" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #e74c3c; border-color: #ef4444; box-shadow: 0 0 15px #ef4444;"></div>
+                    </div>
+                    <h3 class="suit-name">Crimson Blood</h3>
+                    <p class="suit-desc">Nanofiber weave infused with lethal combat stimulants.</p>
+                    <div class="suit-perk-badge">🗡️ LETHAL MELEE (+1 MELEE DMG)</div>
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_merah', 2000, 'koin', 'card-suit-merah', 'shop-card-merah')">
+                        <span>💰</span> 2,000 COINS
+                    </button>
+                </div>
+
+                <!-- 4. VOID PURPLE SUIT (COINS) -->
+                <div class="shop-card" id="shop-card-ungu" data-kategori="suit">
+                    <span class="shop-card-badge badge-suit">SUIT</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #8e44ad; border-color: #c084fc; box-shadow: 0 0 15px #c084fc;"></div>
+                    </div>
+                    <h3 class="suit-name">Void Purple</h3>
+                    <p class="suit-desc">Phase-shifting electromagnetic cloak extending takedown reach.</p>
+                    <div class="suit-perk-badge">👁️ VOID REACH (+25% TAKEDOWN)</div>
+                    <button class="shop-price-pill price-coin"
+                        onclick="beliItem('baju_ungu', 2500, 'koin', 'card-suit-ungu', 'shop-card-ungu')">
+                        <span>💰</span> 2,500 COINS
+                    </button>
+                </div>
+
+                <!-- 5. LEGENDARY GOLD SUIT (DIAMONDS ONLY!) -->
+                <div class="shop-card diamond-tier" id="shop-card-emas" data-kategori="suit">
+                    <span class="shop-card-badge badge-diamond">💎 DIAMOND ONLY</span>
+                    <div class="suit-preview-frame">
+                        <div class="suit-glow-ring"
+                            style="background: radial-gradient(circle, rgba(250, 204, 21, 0.5) 0%, transparent 70%);">
+                        </div>
+                        <div class="suit-orb"
+                            style="background: #f1c40f; border-color: #facc15; box-shadow: 0 0 20px #facc15;"></div>
+                    </div>
+                    <h3 class="suit-name" style="color: #facc15;">Legendary Gold</h3>
+                    <p class="suit-desc">Emperor shadow armor. Doubled diamond harvest yield on every contract.</p>
+                    <div class="suit-perk-badge" style="border-color: #facc15; color: #facc15;">💎 WEALTH HARVEST (+2x
+                        DIAMONDS)</div>
+                    <button class="shop-price-pill price-diamond"
+                        onclick="beliItem('baju_emas', 50, 'diamond', 'card-suit-emas', 'shop-card-emas')">
+                        <span>💎</span> 50 DIAMONDS
+                    </button>
+                </div>
+
+                <!-- 6. STEEL KATANA (DEMO LOCKED) -->
+                <div class="shop-card" id="shop-card-katana" data-kategori="weapon" style="opacity: 0.85;">
+                    <span class="shop-card-badge"
+                        style="background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">🔒 DEMO
+                        LOCKED</span>
+                    <div style="font-size: 40px; margin: 10px 0;">⚔️</div>
+                    <h3 class="suit-name">Steel Katana</h3>
+                    <p class="suit-desc">Folded Damascus steel blade. Locked in current Demo build.</p>
+                    <div class="suit-perk-badge" style="border-color: #475569; color: #94a3b8;">🔒 FULL VERSION
+                        EXCLUSIVE</div>
+                    <button class="shop-price-pill"
+                        style="background: #1e293b; color: #64748b; border: 1px solid #334155; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.', 'DEMO VERSION')">
+                        <span>🔒</span> LOCKED (DEMO)
+                    </button>
+                </div>
+
+                <!-- 7. VOID KARAMBIT (DEMO LOCKED) -->
+                <div class="shop-card" id="shop-card-karambit" data-kategori="weapon" style="opacity: 0.85;">
+                    <span class="shop-card-badge"
+                        style="background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">🔒 DEMO
+                        LOCKED</span>
+                    <div style="font-size: 40px; margin: 10px 0;">🪝</div>
+                    <h3 class="suit-name">Void Karambit</h3>
+                    <p class="suit-desc">Curved assassin talon. Locked in current Demo build.</p>
+                    <div class="suit-perk-badge" style="border-color: #475569; color: #94a3b8;">🔒 FULL VERSION
+                        EXCLUSIVE</div>
+                    <button class="shop-price-pill"
+                        style="background: #1e293b; color: #64748b; border: 1px solid #334155; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.', 'DEMO VERSION')">
+                        <span>🔒</span> LOCKED (DEMO)
+                    </button>
+                </div>
+
+                <!-- 8. PLASMA SABER (DEMO LOCKED) -->
+                <div class="shop-card" id="shop-card-saber" data-kategori="weapon" style="opacity: 0.85;">
+                    <span class="shop-card-badge"
+                        style="background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid #475569;">🔒 DEMO
+                        LOCKED</span>
+                    <div style="font-size: 40px; margin: 10px 0;">🗡️</div>
+                    <h3 class="suit-name">Plasma Saber</h3>
+                    <p class="suit-desc">Superheated plasma edge. Locked in current Demo build.</p>
+                    <div class="suit-perk-badge" style="border-color: #475569; color: #94a3b8;">🔒 FULL VERSION
+                        EXCLUSIVE</div>
+                    <button class="shop-price-pill"
+                        style="background: #1e293b; color: #64748b; border: 1px solid #334155; cursor: not-allowed;"
+                        onclick="tampilkanInfo('Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.', 'DEMO VERSION')">
+                        <span>🔒</span> LOCKED (DEMO)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty state when all items bought -->
+            <div id="shop-empty-msg" style="display: none; padding: 40px 20px; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 10px;">⭐</div>
+                <h3 style="color: #38bdf8; font-family: 'Rajdhani', sans-serif; font-size: 22px; margin: 0;">ALL ASSETS
+                    ACQUIRED</h3>
+                <p style="color: #64748b; font-size: 13px; margin: 6px 0 0 0;">You have unlocked every piece of gear in
+                    the Black Market.</p>
+            </div>
+
+            <button class="btn-tutup" onclick="tutupModal('modal-shop')" style="margin-top: 18px;">Close</button>
+        </div>
+    </div>
+
+    <div id="modal-info" class="modal-overlay" style="z-index: 2000;">
+        <div class="modal-box" style="min-width: 300px; padding: 25px;">
+            <h2 id="info-judul" style="border: none; padding: 0; margin-bottom: 10px; font-size: 24px;">Info</h2>
+            <p id="info-pesan" style="font-size: 16px; font-weight: 800; color: #cbd5e1; margin: 0;"></p>
+        </div>
+    </div>
+
+    <script>
+        let globalVolume = parseFloat(localStorage.getItem('volumeGame'));
+        if (isNaN(globalVolume)) globalVolume = 1.0;
+        let volSlider = document.getElementById('volume-slider');
+        if (volSlider) {
+            volSlider.value = globalVolume;
+            volSlider.addEventListener('input', function () {ubahVolume(this.value);});
+        }
+
+        const AudioContextUI = window.AudioContext || window.webkitAudioContext;
+        let actxUI;
+        let masterGainUI;
+
+        function inisialisasiAudioUI() {
+            if (!actxUI) {
+                try {
+                    actxUI = new AudioContextUI();
+                    masterGainUI = actxUI.createGain();
+                    masterGainUI.connect(actxUI.destination);
+                    masterGainUI.gain.value = globalVolume;
+                } catch (e) {console.warn(e);}
+            }
+            if (actxUI && actxUI.state === 'suspended') actxUI.resume();
+        }
+
+        function playToneUI(type, f0, f1, dur, gVal = 0.1, isRamp = true) {
+            if (globalVolume <= 0) return;
+            inisialisasiAudioUI();
+            if (!actxUI || !masterGainUI) return;
+            let now = actxUI.currentTime, osc = actxUI.createOscillator(), g = actxUI.createGain();
+            osc.type = type; osc.frequency.setValueAtTime(f0, now);
+            if (f1 && f1 !== f0) {
+                if (isRamp) osc.frequency.exponentialRampToValueAtTime(Math.max(10, f1), now + dur);
+                else osc.frequency.setValueAtTime(f1, now + dur * 0.4);
+            }
+            g.gain.setValueAtTime(gVal, now); g.gain.linearRampToValueAtTime(0.001, now + dur);
+            osc.connect(g); g.connect(masterGainUI); osc.start(now); osc.stop(now + dur);
+        }
+
+        function mainkanSuaraUI(jenis) {
+            if (jenis === 'hover') playToneUI('sine', 450, 700, 0.04, 0.04);
+            else if (jenis === 'open') playToneUI('triangle', 300, 450, 0.15, 0.1);
+            else if (jenis === 'close') playToneUI('triangle', 450, 300, 0.15, 0.1);
+            else if (jenis === 'error') playToneUI('sawtooth', 200, 150, 0.2, 0.15, false);
+            else if (jenis === 'buy') playToneUI('square', 600, 1000, 0.2, 0.1, false);
+            else if (jenis === 'start') playToneUI('sawtooth', 300, 800, 0.5, 0.2);
+            else if (jenis === 'tada' && actxUI && masterGainUI) {
+                [440, 660, 880].forEach((f, i) => {
+                    let t = actxUI.currentTime + i * 0.15, o = actxUI.createOscillator(), g = actxUI.createGain();
+                    o.type = 'sine'; o.frequency.setValueAtTime(f, t);
+                    g.gain.setValueAtTime(0.2, t); g.gain.linearRampToValueAtTime(0.001, t + 0.6);
+                    o.connect(g); g.connect(masterGainUI); o.start(t); o.stop(t + 0.6);
+                });
+            }
+        }
+
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('button, .profile-card, .btn-map, .list-item, .btn-settings-icon')) {
+                mainkanSuaraUI('hover');
+            }
+        });
+
+        function ubahVolume(val) {
+            globalVolume = parseFloat(val);
+            localStorage.setItem('volumeGame', globalVolume);
+            if (masterGainUI && actxUI) masterGainUI.gain.setValueAtTime(globalVolume, actxUI.currentTime);
+        }
+
+        let storedKoin = localStorage.getItem('koinPemain');
+        let koinPemain = (storedKoin !== null && !isNaN(parseInt(storedKoin))) ? parseInt(storedKoin) : 8400;
+        let levelTerbuka = parseInt(localStorage.getItem('unlockedLevel')) || 1;
+        let namaPemain = localStorage.getItem('playerName') || 'Agent-X';
+        document.getElementById("teks-koin").innerText = koinPemain;
+
+        // RANK
+        let totalKills = parseInt(localStorage.getItem('totalKills')) || 0;
+        function getRankName() {
+            if (totalKills >= 100) return "LEGEND";
+            if (totalKills >= 50) return "SHADOW";
+            if (totalKills >= 20) return "JONIN";
+            if (totalKills >= 5) return "CHUNIN";
+            return "GENIN";
+        }
+        document.getElementById("teks-rank").innerText = "RANK: " + getRankName();
+
+        let cekUnlock = localStorage.getItem('justUnlocked');
+        if (cekUnlock) {
+            let mapName = (cekUnlock == 2) ? "🌲 Sector 2: Night Forest" : "🧪 Sector 3: Secret Lab";
+            document.getElementById('teks-unlock-map').innerText = mapName;
+            bukaModal('modal-unlock');
+            setTimeout(() => mainkanSuaraUI('tada'), 500);
+            localStorage.removeItem('justUnlocked');
+        }
+
+        function bukaModalPrestasi() {
+            mainkanSuaraUI('open');
+            let tk = parseInt(localStorage.getItem('totalKills')) || 0;
+            let isGhost = localStorage.getItem('ach_ghost') === 'true';
+            let isSpeed = localStorage.getItem('ach_speed') === 'true';
+            let cG = localStorage.getItem('claim_ach_ghost') === 'true';
+            let cS = localStorage.getItem('claim_ach_speed') === 'true';
+            let cK = localStorage.getItem('claim_ach_kill') === 'true';
+
+            let tGhost = {j: "👻 The Ghost", d: "Clear stage with 0 kills.", b: "Claim 3000 C"};
+            let tSpeed = {j: "⚡ Lightning Strike", d: "Win under 25 seconds.", b: "Claim 2000 C"};
+            let tKill = {j: "🩸 Reaper", d: `Eliminate 50 targets. (${tk}/50)`, b: "Claim 4000 C"};
+
+            let htmlPrestasi = `
+        <div class="list-item"><div><div style="font-weight: 900; color: var(--accent-gold); font-size: 16px;">${tGhost.j}</div><div style="font-size: 13px; color: #94a3b8;">${tGhost.d}</div></div><button class="opsi-btn btn-beli" ${cG ? 'disabled' : (isGhost ? '' : 'disabled')} onclick="klaimMisi('claim_ach_ghost', 3000, this, false)">${cG ? 'Claimed' : (isGhost ? tGhost.b : 'Locked')}</button></div>
+        <div class="list-item"><div><div style="font-weight: 900; color: var(--accent-gold); font-size: 16px;">${tSpeed.j}</div><div style="font-size: 13px; color: #94a3b8;">${tSpeed.d}</div></div><button class="opsi-btn btn-beli" ${cS ? 'disabled' : (isSpeed ? '' : 'disabled')} onclick="klaimMisi('claim_ach_speed', 2000, this, false)">${cS ? 'Claimed' : (isSpeed ? tSpeed.b : 'Locked')}</button></div>
+        <div class="list-item"><div><div style="font-weight: 900; color: var(--accent-gold); font-size: 16px;">${tKill.j}</div><div style="font-size: 13px; color: #94a3b8;">${tKill.d}</div></div><button class="opsi-btn btn-beli" ${cK ? 'disabled' : (tk >= 50 ? '' : 'disabled')} onclick="klaimMisi('claim_ach_kill', 4000, this, false)">${cK ? 'Claimed' : (tk >= 50 ? tKill.b : 'Locked')}</button></div>
+      `;
+            document.getElementById('prestasi-container').innerHTML = htmlPrestasi;
+            document.getElementById('modal-prestasi').style.display = "flex";
+        }
+
+        function getDailyStats() {
+            let tglHariIni = new Date().toLocaleDateString();
+            let savedDate = localStorage.getItem('daily_quest_date');
+            if (savedDate !== tglHariIni) {
+                localStorage.setItem('daily_quest_date', tglHariIni);
+                localStorage.setItem('daily_kills', '0');
+                localStorage.setItem('daily_intel', '0');
+                localStorage.setItem('daily_stages', '0');
+                localStorage.setItem('daily_boss', '0');
+            }
+            return {
+                kills: parseInt(localStorage.getItem('daily_kills')) || 0,
+                intel: parseInt(localStorage.getItem('daily_intel')) || 0,
+                stages: parseInt(localStorage.getItem('daily_stages')) || 0,
+                boss: parseInt(localStorage.getItem('daily_boss')) || 0
+            };
+        }
+
+        function bukaModalMisi() {
+            mainkanSuaraUI('open');
+            let tglHariIni = new Date().toLocaleDateString();
+            let dStats = getDailyStats();
+
+            // Status Klaim Hari Ini
+            let cLogin = (localStorage.getItem('misi_claim_login') === tglHariIni);
+            let cKills = (localStorage.getItem('misi_claim_kills') === tglHariIni);
+            let cIntel = (localStorage.getItem('misi_claim_intel') === tglHariIni);
+            let cStages = (localStorage.getItem('misi_claim_stages') === tglHariIni);
+            let cBoss = (localStorage.getItem('misi_claim_boss') === tglHariIni);
+
+            // 1. MISI LOGIN: Langsung bisa diklaim begitu login / buka menu
+            let mLogin = {
+                title: "🎁 Daily Check-in Protocol",
+                desc: "Direct daily login reward. Ready to claim immediately!",
+                reward: "+500 🪙 & +2 💎",
+                ready: true,
+                claimed: cLogin,
+                btnText: cLogin ? "✓ Done" : "Claim Reward",
+                id: "misi_claim_login",
+                koin: 500,
+                diamond: 2
+            };
+
+            // 2. MISI BUNUH MUSUH: Harus bunuh 15 musuh
+            let kTarget = 15;
+            let kCur = Math.min(kTarget, dStats.kills);
+            let kReady = dStats.kills >= kTarget;
+            let mKills = {
+                title: "🩸 Target Elimination",
+                desc: `Eliminate enemy operatives in combat. (${kCur}/${kTarget})`,
+                reward: "+1000 🪙 & +3 💎",
+                ready: kReady,
+                claimed: cKills,
+                btnText: cKills ? "✓ Done" : (kReady ? "Claim Reward" : `Locked (${kCur}/${kTarget})`),
+                id: "misi_claim_kills",
+                koin: 1000,
+                diamond: 3
+            };
+
+            // 3. MISI DOKUMEN / INTEL: Ambil 5 dokumen
+            let iTarget = 5;
+            let iCur = Math.min(iTarget, dStats.intel);
+            let iReady = dStats.intel >= iTarget;
+            let mIntel = {
+                title: "📂 Classified Intel Recovery",
+                desc: `Collect secret documents scattered in sectors. (${iCur}/${iTarget})`,
+                reward: "+1200 🪙 & +3 💎",
+                ready: iReady,
+                claimed: cIntel,
+                btnText: cIntel ? "✓ Done" : (iReady ? "Claim Reward" : `Locked (${iCur}/${iTarget})`),
+                id: "misi_claim_intel",
+                koin: 1200,
+                diamond: 3
+            };
+
+            // 4. MISI STAGE: Selesaikan 3 stage & escape
+            let sTarget = 3;
+            let sCur = Math.min(sTarget, dStats.stages);
+            let sReady = dStats.stages >= sTarget;
+            let mStages = {
+                title: "🚁 Extraction Specialist",
+                desc: `Successfully extract from missions via helipad. (${sCur}/${sTarget})`,
+                reward: "+1500 🪙 & +4 💎",
+                ready: sReady,
+                claimed: cStages,
+                btnText: cStages ? "✓ Done" : (sReady ? "Claim Reward" : `Locked (${sCur}/${sTarget})`),
+                id: "misi_claim_stages",
+                koin: 1500,
+                diamond: 4
+            };
+
+            // 5. MISI BOSS: Kalahkan 1 Boss / Rival Assassin
+            let bTarget = 1;
+            let bCur = Math.min(bTarget, dStats.boss);
+            let bReady = dStats.boss >= bTarget;
+            let mBoss = {
+                title: "👑 High-Value Target Execution",
+                desc: `Assassinate a Sector Boss or Rival Assassin. (${bCur}/${bTarget})`,
+                reward: "+2000 🪙 & +5 💎",
+                ready: bReady,
+                claimed: cBoss,
+                btnText: cBoss ? "✓ Done" : (bReady ? "Claim Reward" : `Locked (${bCur}/${bTarget})`),
+                id: "misi_claim_boss",
+                koin: 2000,
+                diamond: 5
+            };
+
+            let allMisi = [mLogin, mKills, mIntel, mStages, mBoss];
+
+            let htmlMisi = allMisi.map(m => `
+                <div class="list-item" style="display:flex; justify-content:space-between; align-items:center; background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px 16px; margin-bottom:10px;">
+                    <div>
+                        <div style="font-weight: 900; color: #10b981; font-size: 15px; display:flex; align-items:center; gap:8px;">
+                            ${m.title}
+                            <span style="font-size:11px; background:rgba(16,185,129,0.2); color:#34d399; padding:2px 7px; border-radius:10px; font-weight:700;">${m.reward}</span>
+                        </div>
+                        <div style="font-size: 13px; color: #94a3b8; margin-top:3px;">${m.desc}</div>
+                    </div>
+                    <button class="opsi-btn btn-beli" 
+                        style="min-width:130px; font-size:13px; padding:8px 14px; font-weight:800; border-radius:8px;"
+                        ${m.claimed || !m.ready ? 'disabled' : ''} 
+                        onclick="klaimMisiHarian('${m.id}', ${m.koin}, ${m.diamond}, this)">
+                        ${m.btnText}
+                    </button>
+                </div>
+            `).join('');
+
+            document.getElementById('misi-container').innerHTML = htmlMisi;
+            document.getElementById('modal-misi').style.display = "flex";
+        }
+
+        function klaimMisiHarian(id, koin, diamond, btnEl) {
+            mainkanSuaraUI('buy');
+            koinPemain += koin;
+            localStorage.setItem('koinPemain', koinPemain);
+            document.getElementById("teks-koin").innerText = koinPemain;
+
+            let curD = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+            curD += diamond;
+            localStorage.setItem('ninjaDiamonds', curD);
+            let dElem = document.getElementById("teks-diamond");
+            if (dElem) dElem.innerText = curD;
+
+            let tglHariIni = new Date().toLocaleDateString();
+            localStorage.setItem(id, tglHariIni);
+
+            btnEl.innerText = "✓ Done";
+            btnEl.disabled = true;
+            tampilkanInfo(`Reward Claimed: +${koin} Coins & +${diamond} Diamonds!`, "MISSION ACCOMPLISHED");
+        }
+
+        function klaimMisi(id, jumlah, btnEl, isDaily) {
+            mainkanSuaraUI('buy');
+            koinPemain += jumlah;
+            localStorage.setItem('koinPemain', koinPemain);
+            document.getElementById("teks-koin").innerText = koinPemain;
+            if (isDaily) localStorage.setItem(id, new Date().toLocaleDateString());
+            else localStorage.setItem(id, 'true');
+            btnEl.innerText = "Done";
+            btnEl.disabled = true;
+            tampilkanInfo("Transferred " + jumlah + " C", "System");
+        }
+
+        function bukaModalNama() {
+            mainkanSuaraUI('open');
+            document.getElementById('input-nama').value = namaPemain;
+            document.getElementById('modal-nama').style.display = 'flex';
+        }
+
+        function simpanNama() {
+            let namaBaru = document.getElementById('input-nama').value;
+            if (namaBaru && namaBaru.trim() !== "") {
+                mainkanSuaraUI('buy');
+                namaPemain = namaBaru.trim().substring(0, 15);
+                localStorage.setItem('playerName', namaPemain);
+                updateNamaUI();
+                tutupModal('modal-nama');
+                tampilkanInfo("Database Updated", "System");
+            } else {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Invalid Input!", "Error");
+            }
+        }
+
+        function updateNamaUI() {
+            document.getElementById("teks-profil").innerText = namaPemain;
+        }
+
+        // Change character image & glow color
+        function aplikasikanWarnaGlow(hexColor) {
+            let imgKarakter = document.getElementById("ninja-karakter");
+            if (imgKarakter) {
+                imgKarakter.style.filter = "drop-shadow(0 20px 20px rgba(0,0,0,0.75))";
+            }
+        }
+
+        // Ensure throwing knives are unlocked from the start
+        localStorage.setItem('item_shuriken', 'true');
+        // Shadow Black (#111111) is the ONLY suit unlocked by default from the start
+        localStorage.setItem('baju_hitam', 'true');
+
+        let keyBajuMap = {
+            '#111111': 'baju_hitam',
+            '#2c3e50': 'baju_navy',
+            '#ecf0f1': 'baju_putih',
+            '#95a5a6': 'baju_abu',
+            '#e74c3c': 'baju_merah',
+            '#8e44ad': 'baju_ungu',
+            '#f1c40f': 'baju_emas'
+        };
+
+        let warnaBaju = localStorage.getItem('ninjaColor') || '#111111';
+        let checkKey = keyBajuMap[warnaBaju] || 'baju_hitam';
+        if (checkKey !== 'baju_hitam' && localStorage.getItem(checkKey) !== 'true') {
+            warnaBaju = '#111111';
+            localStorage.setItem('ninjaColor', '#111111');
+        }
+        document.documentElement.style.setProperty('--ninja-color', warnaBaju);
+
+        let imgKarakter = document.getElementById("ninja-karakter");
+        if (imgKarakter) {
+            if (warnaBaju === '#111111') imgKarakter.src = "hitam.png";
+            else if (warnaBaju === '#2c3e50') imgKarakter.src = "navy.png";
+            else if (warnaBaju === '#ecf0f1') imgKarakter.src = "putih.png";
+            else if (warnaBaju === '#95a5a6') imgKarakter.src = "abu.png";
+            else if (warnaBaju === '#e74c3c') imgKarakter.src = "merah.png";
+            else if (warnaBaju === '#8e44ad') imgKarakter.src = "ungu.png";
+            else if (warnaBaju === '#f1c40f') imgKarakter.src = "emas.png";
+        }
+        aplikasikanWarnaGlow(warnaBaju);
+
+        function filterShopTab(cat, btn) {
+            document.querySelectorAll('.shop-tab-btn').forEach(b => b.classList.remove('aktif'));
+            if (btn) btn.classList.add('aktif');
+
+            let cards = document.querySelectorAll('.shop-card');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                let cardKey = card.id.replace('shop-card-', '');
+                let fullKey = card.getAttribute('data-kategori') === 'suit' ? ('baju_' + cardKey) : ('senjata_' + cardKey);
+                let isOwned = localStorage.getItem(fullKey) === 'true';
+
+                if (isOwned) {
+                    card.style.display = 'none';
+                    return;
+                }
+
+                if (cat === 'all' || card.getAttribute('data-kategori') === cat) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            let emptyMsg = document.getElementById('shop-empty-msg');
+            if (emptyMsg) {
+                emptyMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
+            }
+        }
+
+        function perbaruiShopUI() {
+            let sCoins = document.getElementById('shop-coins-display');
+            let sDiams = document.getElementById('shop-diamonds-display');
+            if (sCoins) sCoins.innerText = koinPemain;
+            if (sDiams) sDiams.innerText = localStorage.getItem('ninjaDiamonds') || '0';
+
+            // Check owned status and hide purchased items from shop
+            let cards = [
+                {id: 'shop-card-navy', key: 'baju_navy', vault: 'card-suit-navy'},
+                {id: 'shop-card-putih', key: 'baju_putih', vault: 'card-suit-putih'},
+                {id: 'shop-card-abu', key: 'baju_abu', vault: 'card-suit-abu'},
+                {id: 'shop-card-merah', key: 'baju_merah', vault: 'card-suit-merah'},
+                {id: 'shop-card-ungu', key: 'baju_ungu', vault: 'card-suit-ungu'},
+                {id: 'shop-card-emas', key: 'baju_emas', vault: 'card-suit-emas'},
+                {id: 'shop-card-katana', key: 'senjata_katana', vault: 'vault-katana'},
+                {id: 'shop-card-karambit', key: 'senjata_karambit', vault: 'vault-karambit'},
+                {id: 'shop-card-saber', key: 'senjata_saber', vault: 'vault-saber'}
+            ];
+
+            let activeCount = 0;
+            cards.forEach(item => {
+                let el = document.getElementById(item.id);
+                let vEl = document.getElementById(item.vault);
+                let isOwned = localStorage.getItem(item.key) === 'true';
+
+                if (isOwned) {
+                    if (el) el.style.display = 'none';
+                    if (vEl) vEl.style.display = 'flex';
+                } else {
+                    if (el) {
+                        el.style.display = 'flex';
+                        activeCount++;
+                    }
+                }
+            });
+
+            let emptyMsg = document.getElementById('shop-empty-msg');
+            if (emptyMsg) {
+                emptyMsg.style.display = (activeCount === 0) ? 'block' : 'none';
+            }
+        }
+
+        function perbaruiSkillUI() {
+            let sDiams = document.getElementById('skill-diamonds-display');
+            let currentDiamonds = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+            if (sDiams) sDiams.innerText = currentDiamonds;
+
+            let skills = [
+                {key: 'skill_ghost', btn: 'btn-buy-ghost'},
+                {key: 'skill_blink', btn: 'btn-buy-blink'},
+                {key: 'skill_time', btn: 'btn-buy-time'},
+                {key: 'skill_clone', btn: 'btn-buy-clone'}
+            ];
+
+            skills.forEach(s => {
+                let b = document.getElementById(s.btn);
+                if (b) {
+                    if (localStorage.getItem(s.key) === 'true') {
+                        b.innerText = "✓ UNLOCKED";
+                        b.disabled = true;
+                        b.style.borderColor = "#22c55e";
+                        b.style.color = "#4ade80";
+                        b.style.background = "rgba(34, 197, 94, 0.15)";
+                    }
+                }
+            });
+        }
+
+        function beliSkill(skillKey, costDiamond, cardId) {
+            let currentDiamonds = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+            if (currentDiamonds >= costDiamond) {
+                mainkanSuaraUI('buy');
+                currentDiamonds -= costDiamond;
+                localStorage.setItem('ninjaDiamonds', currentDiamonds);
+                localStorage.setItem(skillKey, 'true');
+
+                document.getElementById('teks-diamond').innerText = currentDiamonds;
+                perbaruiSkillUI();
+                tampilkanInfo("Skill Protocol Unlocked!", "SYSTEM");
+            } else {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Need " + costDiamond + " 💎! Insufficient Diamonds.", "Error");
+            }
+        }
+
+        function beliItem(kunciId, harga, mataUang, idVault, idShopCard) {
+            if (kunciId && kunciId.startsWith('senjata_')) {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Senjata ini terkunci di versi Demo game! Akan tersedia di rilis penuh.", "DEMO VERSION");
+                return;
+            }
+            let success = false;
+            let currentDiamonds = parseInt(localStorage.getItem('ninjaDiamonds')) || 0;
+
+            if (mataUang === 'diamond') {
+                if (currentDiamonds >= harga) {
+                    currentDiamonds -= harga;
+                    localStorage.setItem('ninjaDiamonds', currentDiamonds);
+                    document.getElementById("teks-diamond").innerText = currentDiamonds;
+                    let sd = document.getElementById('shop-diamonds-display');
+                    if (sd) sd.innerText = currentDiamonds;
+                    success = true;
+                } else {
+                    mainkanSuaraUI('error');
+                    tampilkanInfo("Need " + harga + " 💎! Insufficient Diamonds.", "Error");
+                    return;
+                }
+            } else {
+                if (koinPemain >= harga) {
+                    koinPemain -= harga;
+                    localStorage.setItem('koinPemain', koinPemain);
+                    document.getElementById("teks-koin").innerText = koinPemain;
+                    let sc = document.getElementById('shop-coins-display');
+                    if (sc) sc.innerText = koinPemain;
+                    success = true;
+                } else {
+                    mainkanSuaraUI('error');
+                    tampilkanInfo("Need " + harga + " C! Insufficient Coins.", "Error");
+                    return;
+                }
+            }
+
+            if (success) {
+                mainkanSuaraUI('buy');
+                localStorage.setItem(kunciId, 'true');
+
+                // Animate card vanishing
+                let shopCard = document.getElementById(idShopCard);
+                if (shopCard) {
+                    shopCard.classList.add('vanished');
+                    setTimeout(() => {
+                        shopCard.style.display = 'none';
+                        perbaruiShopUI();
+                    }, 350);
+                }
+
+                let vEl = document.getElementById(idVault);
+                if (vEl) vEl.style.display = 'flex';
+
+                perbaruiEquippedUI();
+                tampilkanInfo("Asset Acquired! Stored in Armory.", "PURCHASED");
+            }
+        }
+
+        function perbaruiEquippedUI() {
+            let currentBaju = localStorage.getItem('ninjaColor') || '#111111';
+            let currentSenjata = localStorage.getItem('weaponType') || 'bentuk-kayu';
+
+            // Sync Diamond Counter
+            let dElem = document.getElementById('teks-diamond');
+            if (dElem) dElem.innerText = localStorage.getItem('ninjaDiamonds') || '0';
+
+            // 7 SUITS: Hitam (Default Owned), Navy, Gold, Abu, Ungu, Merah, Putih (Must be bought)
+            let bajus = [
+                {btnId: 'btn-vault-hitam', cardId: 'card-suit-hitam', color: '#111111', key: 'baju_hitam'},
+                {btnId: 'btn-vault-navy', cardId: 'card-suit-navy', color: '#2c3e50', key: 'baju_navy'},
+                {btnId: 'btn-vault-emas', cardId: 'card-suit-emas', color: '#f1c40f', key: 'baju_emas'},
+                {btnId: 'btn-vault-abu', cardId: 'card-suit-abu', color: '#95a5a6', key: 'baju_abu'},
+                {btnId: 'btn-vault-ungu', cardId: 'card-suit-ungu', color: '#8e44ad', key: 'baju_ungu'},
+                {btnId: 'btn-vault-merah', cardId: 'card-suit-merah', color: '#e74c3c', key: 'baju_merah'},
+                {btnId: 'btn-vault-putih', cardId: 'card-suit-putih', color: '#ecf0f1', key: 'baju_putih'}
+            ];
+            bajus.forEach(b => {
+                let btn = document.getElementById(b.btnId);
+                let card = document.getElementById(b.cardId);
+                let isOwned = (b.key === 'baju_hitam') || (localStorage.getItem(b.key) === 'true');
+                let isEquipped = isOwned && (b.color.toLowerCase() === currentBaju.toLowerCase());
+
+                if (btn) {
+                    if (!isOwned) {
+                        btn.innerText = "🔒 LOCKED";
+                        btn.style.opacity = "0.6";
+                        btn.style.background = "rgba(100, 116, 139, 0.4)";
+                        btn.style.color = "#94a3b8";
+                        btn.style.cursor = "not-allowed";
+                    } else if (isEquipped) {
+                        btn.innerText = "✓ EQUIPPED";
+                        btn.style.opacity = "1";
+                        btn.style.background = "#22c55e";
+                        btn.style.color = "#ffffff";
+                        btn.style.cursor = "default";
+                    } else {
+                        btn.innerText = "EQUIP";
+                        btn.style.opacity = "1";
+                        btn.style.background = "";
+                        btn.style.color = "";
+                        btn.style.cursor = "pointer";
+                    }
+                }
+                if (card) {
+                    if (isEquipped) {
+                        card.classList.add('terpilih');
+                    } else {
+                        card.classList.remove('terpilih');
+                    }
+                    if (!isOwned) {
+                        card.style.opacity = "0.7";
+                        card.style.filter = "grayscale(0.6)";
+                    } else {
+                        card.style.opacity = "1";
+                        card.style.filter = "none";
+                    }
+                }
+            });
+
+            let senjatas = [
+                {id: 'btn-senjata-kayu', type: 'bentuk-kayu'},
+                {id: 'btn-senjata-katana', type: 'bentuk-katana'},
+                {id: 'btn-senjata-karambit', type: 'bentuk-karambit'},
+                {id: 'btn-senjata-saber', type: 'bentuk-saber'}
+            ];
+            senjatas.forEach(s => {
+                let el = document.getElementById(s.id);
+                if (el) {
+                    if (s.type === currentSenjata) {el.innerText = "✓ EQUIPPED"; el.classList.add('terpilih');}
+                    else {el.innerText = "EQUIP"; el.classList.remove('terpilih');}
+                }
+            });
+        }
+
+        function perbaruiTampilanMap() {
+            let card2 = document.getElementById('card-sector-2');
+            let card3 = document.getElementById('card-sector-3');
+            let lock2 = document.getElementById('lock-overlay-2');
+            let lock3 = document.getElementById('lock-overlay-3');
+            let pill2 = document.getElementById('status-pill-2');
+            let pill3 = document.getElementById('status-pill-3');
+
+            // Count stars earned
+            function getStarsForLevel(lvl) {
+                let s1 = parseInt(localStorage.getItem('stars_' + lvl + '_1')) || 0;
+                let s2 = parseInt(localStorage.getItem('stars_' + lvl + '_2')) || 0;
+                let s3 = parseInt(localStorage.getItem('stars_' + lvl + '_3')) || 0;
+                let maxS = Math.max(s1, s2, s3);
+                if (maxS >= 3) return "⭐⭐⭐";
+                if (maxS === 2) return "⭐⭐☆";
+                if (maxS === 1) return "⭐☆☆";
+                return "☆☆☆";
+            }
+
+            let s1Elem = document.getElementById('stars-sector-1');
+            let s2Elem = document.getElementById('stars-sector-2');
+            let s3Elem = document.getElementById('stars-sector-3');
+            if (s1Elem) s1Elem.innerText = getStarsForLevel(1);
+            if (s2Elem) s2Elem.innerText = getStarsForLevel(2);
+            if (s3Elem) s3Elem.innerText = getStarsForLevel(3);
+
+            if (levelTerbuka < 2) {
+                if (card2) card2.classList.add('locked');
+                if (lock2) lock2.style.display = 'flex';
+                if (pill2) {pill2.innerText = "LOCKED"; pill2.classList.remove('status-ready');}
+            } else {
+                if (card2) card2.classList.remove('locked');
+                if (lock2) lock2.style.display = 'none';
+                if (pill2) {pill2.innerText = "UNLOCKED — READY"; pill2.classList.add('status-ready');}
+            }
+
+            if (levelTerbuka < 3) {
+                if (card3) card3.classList.add('locked');
+                if (lock3) lock3.style.display = 'flex';
+                if (pill3) {pill3.innerText = "LOCKED"; pill3.classList.remove('status-ready');}
+            } else {
+                if (card3) card3.classList.remove('locked');
+                if (lock3) lock3.style.display = 'none';
+                if (pill3) {pill3.innerText = "UNLOCKED — READY"; pill3.classList.add('status-ready');}
+            }
+        }
+
+        function resetGameData() {
+            mainkanSuaraUI('error');
+            if (confirm("Wipe all system data? This cannot be undone.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        function bukaModal(id) {
+            mainkanSuaraUI('open');
+            if (id === 'modal-vault' || id === 'modal-senjata') perbaruiEquippedUI();
+            if (id === 'modal-pilih-map') perbaruiTampilanMap();
+            if (id === 'modal-shop') perbaruiShopUI();
+            if (id === 'modal-skill') perbaruiSkillUI();
+            document.getElementById(id).style.display = "flex";
+        }
+
+        function tutupModal(id) {
+            mainkanSuaraUI('close');
+            let modal = document.getElementById(id);
+            modal.style.animation = "none";
+            setTimeout(() => {
+                modal.style.display = "none";
+                modal.style.animation = "modalFade 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards";
+            }, 10);
+        }
+
+        function tampilkanInfo(psn, jdl) {
+            document.getElementById("info-judul").innerText = jdl;
+            document.getElementById("info-pesan").innerText = psn;
+            document.getElementById("modal-info").style.display = "flex";
+            setTimeout(() => {tutupModal('modal-info');}, 1500);
+        }
+
+        // Equip suit & change character image (7 suits supported)
+        function gantiBaju(c) {
+            let keyBajuMap = {
+                '#111111': 'baju_hitam',
+                '#2c3e50': 'baju_navy',
+                '#ecf0f1': 'baju_putih',
+                '#95a5a6': 'baju_abu',
+                '#e74c3c': 'baju_merah',
+                '#8e44ad': 'baju_ungu',
+                '#f1c40f': 'baju_emas'
+            };
+            let suitKey = keyBajuMap[c] || 'baju_hitam';
+            if (suitKey !== 'baju_hitam' && localStorage.getItem(suitKey) !== 'true') {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Baju ini masih terkunci! Silakan beli di Shop terlebih dahulu.", "SUIT LOCKED");
+                return;
+            }
+
+            mainkanSuaraUI('buy');
+            document.documentElement.style.setProperty('--ninja-color', c);
+            localStorage.setItem('ninjaColor', c);
+
+            let imgKarakter = document.getElementById("ninja-karakter");
+            if (imgKarakter) {
+                if (c === '#111111') imgKarakter.src = "hitam.png";
+                else if (c === '#2c3e50') imgKarakter.src = "navy.png";
+                else if (c === '#ecf0f1') imgKarakter.src = "putih.png";
+                else if (c === '#95a5a6') imgKarakter.src = "abu.png";
+                else if (c === '#e74c3c') imgKarakter.src = "merah.png";
+                else if (c === '#8e44ad') imgKarakter.src = "ungu.png";
+                else if (c === '#f1c40f') imgKarakter.src = "emas.png";
+            }
+
+            aplikasikanWarnaGlow(c);
+            perbaruiEquippedUI();
+            tutupModal('modal-vault');
+            tampilkanInfo("Operative Suit Equipped!", "ARMORY");
+        }
+
+        function gantiSenjata(t, c) {
+            if (t !== 'bentuk-kayu') {
+                mainkanSuaraUI('error');
+                tampilkanInfo("Senjata ini terkunci di versi Demo game!", "DEMO VERSION");
+                return;
+            }
+            mainkanSuaraUI('buy');
+            localStorage.setItem('weaponType', t);
+            localStorage.setItem('weaponColor', c);
+            perbaruiEquippedUI();
+            tutupModal('modal-senjata');
+        }
+
+        function gasMain(lvl, mapId) {
+            if (lvl > levelTerbuka) {
+                mainkanSuaraUI('error');
+                return;
+            }
+            mainkanSuaraUI('start');
+            localStorage.setItem('selectedMap', mapId);
+            localStorage.setItem('selectedLevel', lvl);
+            tutupModal('modal-pilih-map');
+            tampilkanInfo("Initializing Mission...", "SYSTEM");
+            setTimeout(() => {window.location.href = "game.html";}, 1000);
+        }
+
+        updateNamaUI();
+        perbaruiEquippedUI();
+        perbaruiShopUI();
+        perbaruiSkillUI();
+    </script>
+</body>
+
+</html>

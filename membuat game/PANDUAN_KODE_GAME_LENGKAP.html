@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Dokumentasi & Bedah Kode Game Speed Assassin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #070a12;
+            --bg-sidebar: #0d1322;
+            --bg-card: #111a2e;
+            --bg-card-hover: #16223d;
+            --border-color: #1e2c47;
+            --border-focus: #3b82f6;
+            --accent-gold: #f59e0b;
+            --accent-glow: #fbbf24;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-purple: #a855f7;
+            --accent-red: #ef4444;
+            --accent-orange: #f97316;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --text-code: #38bdf8;
+            --code-bg: #090e1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR NAV */
+        aside.sidebar {
+            width: 340px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 16px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        aside.sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        aside.sidebar::-webkit-scrollbar-thumb {
+            background: #25334d;
+            border-radius: 4px;
+        }
+
+        .brand-header {
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            margin-top: 4px;
+            letter-spacing: 0.02em;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 9px 12px 9px 34px;
+            background: #090e1a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.82rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1;
+        }
+
+        .nav-category {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            margin-top: 14px;
+            margin-bottom: 4px;
+            padding-left: 8px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 10px;
+            color: var(--text-sub);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        .nav-item a:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(3px);
+        }
+
+        .nav-item a.active {
+            color: var(--accent-gold);
+            background: rgba(245, 158, 11, 0.12);
+            font-weight: 700;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .sidebar-actions {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #162035;
+            color: #cbd5e1;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-gold);
+            color: #070a12;
+            border-color: var(--accent-gold);
+        }
+
+        /* MAIN CONTENT */
+        main.content {
+            margin-left: 340px;
+            padding: 40px 60px 100px;
+            width: calc(100% - 340px);
+            max-width: 1280px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(22, 32, 53, 0.9), rgba(13, 19, 34, 0.98));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+        }
+
+        .hero-title {
+            font-size: 2.15rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-desc {
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            max-width: 880px;
+        }
+
+        .section-header {
+            margin-top: 55px;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-tag {
+            font-size: 0.78rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(6, 182, 212, 0.25);
+        }
+
+        /* CARDS */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 22px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            border-color: #2e436e;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #f8fafc;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-core { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-ai { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+        .badge-audio { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-skill { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-combat { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-phys { background: rgba(14, 165, 233, 0.18); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3); }
+
+        /* CODE BLOCK */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid #1a253b;
+            border-radius: 8px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.86rem;
+            color: var(--text-code);
+            margin: 14px 0;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: transparent !important;
+            padding: 0 !important;
+            border: none !important;
+            color: inherit;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #38bdf8;
+        }
+
+        /* CODE EXPLANATION LIST */
+        .code-breakdown {
+            list-style: none;
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .code-breakdown li {
+            position: relative;
+            padding-left: 24px;
+            color: #cbd5e1;
+            font-size: 0.92rem;
+        }
+
+        .code-breakdown li::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+        }
+
+        /* TABLE */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 18px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        th {
+            background: #0d1424;
+            padding: 12px 16px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 0.02em;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: #cbd5e1;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* ACCORDION PERTANYAAN GURU */
+        .qa-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .qa-btn {
+            padding: 7px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #162035;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qa-btn:hover {
+            background: var(--accent-gold);
+            color: #070a12;
+            border-color: var(--accent-gold);
+        }
+
+        .qa-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .qa-item.active {
+            border-color: var(--accent-gold);
+            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.12);
+        }
+
+        .qa-header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.01);
+            user-select: none;
+        }
+
+        .qa-header:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .qa-question {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qa-qnum {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-gold);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .qa-toggle-icon {
+            font-size: 1rem;
+            color: var(--text-sub);
+            transition: transform 0.2s;
+        }
+
+        .qa-item.active .qa-toggle-icon {
+            transform: rotate(180deg);
+            color: var(--accent-gold);
+        }
+
+        .qa-body {
+            display: none;
+            padding: 18px 20px 22px;
+            background: #090e1a;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .qa-item.active .qa-body {
+            display: block;
+        }
+
+        .answer-label {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* GRID CARDS */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 18px;
+            margin: 18px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        /* CALLOUT BOX */
+        .callout {
+            border-left: 4px solid var(--accent-gold);
+            background: rgba(245, 158, 11, 0.08);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .callout.callout-info {
+            border-left-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.08);
+        }
+
+        .callout.callout-danger {
+            border-left-color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .callout-info .callout-title {
+            color: var(--accent-cyan);
+        }
+
+        .callout-danger .callout-title {
+            color: var(--accent-red);
+        }
+
+        /* HIGHLIGHT WORDS IN CODE */
+        .hl-num { color: #f59e0b; font-weight: 600; }
+        .hl-str { color: #10b981; }
+        .hl-kw  { color: #c084fc; font-weight: 600; }
+        .hl-fn  { color: #38bdf8; font-weight: 600; }
+        .hl-cm  { color: #64748b; font-style: italic; }
+
+        /* PRINT STYLES */
+        @media print {
+            aside.sidebar { display: none; }
+            main.content { margin-left: 0; width: 100%; padding: 0; }
+            .qa-body { display: block !important; }
+            body { background: white; color: black; }
+            .card, .qa-item { border: 1px solid #ccc; page-break-inside: avoid; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            aside.sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            aside.sidebar.open {
+                transform: translateX(0);
+            }
+            main.content {
+                margin-left: 0;
+                width: 100%;
+                padding: 24px 18px;
+            }
+            .mobile-toggle {
+                display: block;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-gold);
+                color: #070a12;
+                border: none;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+                z-index: 1000;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MOBILE TOGGLE BUTTON -->
+    <button class="mobile-toggle" style="display:none;" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+    <!-- SIDEBAR NAVIGATION DENGAN MENU TERPISAH -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand-header">
+            <div class="brand-title">
+                ⚡ Speed Assassin
+            </div>
+            <div class="brand-subtitle">Master Encyclopedia & Ujian Kode Game</div>
+        </div>
+
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari fungsi, rumus, soal...">
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-category">Dasar & Arsitektur</li>
+            <li class="nav-item"><a href="#arsitektur" class="active">🏛️ 1. Arsitektur Proyek</a></li>
+            <li class="nav-item"><a href="#sintaks">📘 2. Sintaks ES6 & Memori</a></li>
+
+            <li class="nav-category">Sistem & Fisika Khusus</li>
+            <li class="nav-item"><a href="#tembok">🧱 3. Tembok & Collision</a></li>
+            <li class="nav-item"><a href="#berjalan">🚶 4. Mekanika Berjalan (WASD)</a></li>
+            <li class="nav-item"><a href="#lari">🏃 5. Mekanika Lari & Stamina</a></li>
+            <li class="nav-item"><a href="#dash">⚡ 6. Dash & Motion Trail</a></li>
+            <li class="nav-item"><a href="#slash">🗡️ 7. Efek Slash & Melee</a></li>
+            <li class="nav-item"><a href="#tembakan">🎯 8. Tembakan & Proyektil</a></li>
+
+            <li class="nav-category">Kecerdasan Buatan (AI)</li>
+            <li class="nav-item"><a href="#logika-musuh">🧠 9. Logika AI & Mesin FSM</a></li>
+            <li class="nav-item"><a href="#tipe-musuh">🦹 10. Ragam & Hirarki Musuh</a></li>
+            <li class="nav-item"><a href="#stealth">🤫 11. Stealth & Takedown</a></li>
+
+            <li class="nav-category">Audio & Grafis Engine</li>
+            <li class="nav-item"><a href="#audio">🔊 12. Audio Prosedural Synthesizer</a></li>
+            <li class="nav-item"><a href="#rendering">🎨 13. Rendering Canvas 2D & HUD</a></li>
+
+            <li class="nav-category">Bank Ujian Guru</li>
+            <li class="nav-item"><a href="#qa-dasar">💡 Q&A: Dasar & Javascript</a></li>
+            <li class="nav-item"><a href="#qa-fisika">⚙️ Q&A: Fisika, Gerak & Tembok</a></li>
+            <li class="nav-item"><a href="#qa-tempur">⚔️ Q&A: Combat, Slash & Tembak</a></li>
+            <li class="nav-item"><a href="#qa-ai">🧠 Q&A: Kecerdasan AI Musuh</a></li>
+            <li class="nav-item"><a href="#qa-audio-canvas">🎨 Q&A: Canvas & Audio API</a></li>
+            <li class="nav-item"><a href="#qa-hot">🔥 Q&A: High Order Thinking (HOT)</a></li>
+        </ul>
+
+        <div class="sidebar-actions">
+            <button class="btn-action" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+            <button class="btn-action" onclick="toggleAllQA(true)">📂 Buka Semua Jawaban</button>
+        </div>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <main class="content">
+
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+            <span class="hero-badge">Dokumentasi Mesin Game Lengkap</span>
+            <h1 class="hero-title">Master Panduan Kode & Arsitektur Speed Assassin</h1>
+            <p class="hero-desc">
+                Bedah tuntas seluruh sistem game <em>Speed Assassin</em> (Top-down Stealth Action): mulai dari matematika tabrakan tembok, dinamika gerak berjalan dan lari, efek dash & afterimage, busur efek slash katana, balistik tembakan shuriken & peluru boss, kerucut pandang & pathfinding A* musuh, hingga 30+ bank soal ujian sekolah.
+            </p>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 1. ARSITEKTUR PROYEK -->
+        <!-- ========================================================================= -->
+        <section id="arsitektur">
+            <div class="section-header">
+                <h2>🏛️ 1. Arsitektur Proyek dan Aliran Data</h2>
+                <span class="section-tag">Pure Vanilla JS • No External Engine</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Bagaimana Ketiga File Inti Berkomunikasi?</h3>
+                <p>Game ini dibangun murni tanpa framework pihak ketiga (tanpa Phaser, Pixi, atau Unity). Seluruh engine rendering, engine fisika 2D, generator audio sintetis, dan AI algoritma ditulis mandiri dengan arsitektur <em>Separation of Concerns</em> (Pemisahan Peran):</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Berkas</th>
+                                <th>Peran Utama</th>
+                                <th>Entitas Kunci yang Ditangani</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>index.html</code></td>
+                                <td>Florence Guild HQ (Lobby & Manajemen)</td>
+                                <td>Toko kostum ninja, pemilihan senjata (Katana, Dagger, Saber), upgrade skill stamina, daftar quest harian, pemilihan stage, dan saldo koin/diamond.</td>
+                            </tr>
+                            <tr>
+                                <td><code>game.html</code></td>
+                                <td>Viewport Arena & Lapisan DOM HUD</td>
+                                <td>Elemen kanvas grafis <code>&lt;canvas id="arenaGame"&gt;</code>, modal pause, overlay hit-screen merah, slider volume audio, dan panduan tombol pintas.</td>
+                            </tr>
+                            <tr>
+                                <td><code>game.js</code></td>
+                                <td>Game Engine (Inti Logika Komputasi)</td>
+                                <td>Game loop 60 FPS, AABB wall collision, NavGrid 50x35 A*, Web Audio Synthesizer, finite state machine musuh, raycast lighting FOV, dan sistem partikel.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">📌 Jembatan Memori Bersama: Web Storage API (`localStorage`)</div>
+                    Ketika pemain memilih kostum emas, senjata saber, dan tahap 3 di lobi (<code>index.html</code>), data disimpan ke disk browser menggunakan <code>localStorage.setItem('ninjaSkin', 'emas')</code>. Saat tombol "DEPLOY" diklik, halaman dialihkan ke <code>game.html</code>, lalu <code>game.js</code> membaca konfigurasi tersebut pada fungsi <code>resetGame()</code>.
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 2. SINTAKS SPESIFIK & MANAJEMEN MEMORI -->
+        <!-- ========================================================================= -->
+        <section id="sintaks">
+            <div class="section-header">
+                <h2>📘 2. Sintaks Spesifik JavaScript & Optimasi Memori</h2>
+                <span class="section-tag">ES6+ Standards</span>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Aturan Variabel: `const` vs `let` (Tanpa `var`)</h3>
+                    <p>Di dalam <code>game.js</code> terdapat pemisahan tegas penggunaan kata kunci variabel:</p>
+                    <ul class="code-breakdown">
+                        <li><strong><code>const</code>:</strong> Digunakan untuk nilai konstan yang tidak boleh bermutasi, misalnya dimensi peta (<code>KOLOM_NAV = 50</code>, <code>BARIS_NAV = 35</code>), referensi elemen kanvas tetap, dan rumus trigonometri tetap.</li>
+                        <li><strong><code>let</code>:</strong> Digunakan untuk variabel dinamis yang berganti nilai setiap frame (koordinat X/Y pemain, bar stamina, timer cooldown, dan loop iterator).</li>
+                        <li><strong>Ditinggalkannya <code>var</code>:</strong> Mencegah <em>hoisting bug</em> dan kebocoran variabel ke luar kurung kurawal (<em>Block Scope</em> terjamin).</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Struktur Data Biner Efisien: `Uint8Array`</h3>
+                    <p>Untuk menyimpan status keterhalangan grid peta arena navigasi AI (50 x 35 = 1750 sel):</p>
+                    <pre><code>let kisiNavigasi = new Uint8Array(KOLOM_NAV * BARIS_NAV);</code></pre>
+                    <p><strong>Keunggulan Teknis:</strong><br>
+                    Tiap sel hanya memakan 1 byte memori fisik (angka 0 = bebas, angka 1 = tembok). Dibandingkan array objek biasa <code>[]</code>, <code>Uint8Array</code> tidak memicu <em>Garbage Collection Stutter</em> di tengah perhitungan ribuan evaluasi A*.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 3. SISTEM TEMBOK & COLLISION -->
+        <!-- ========================================================================= -->
+        <section id="tembok">
+            <div class="section-header">
+                <h2>🧱 3. Sistem Tembok, Collision & Raycasting</h2>
+                <span class="section-tag">AABB • Anti-Nyangkut • Slab Method</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-phys">Fisika Tembok</span> 1. Struktur Data Tembok & Deteksi Tabrakan (AABB vs Circle)</h3>
+                <p>Tembok di seluruh stage didefinisikan sebagai daftar balok persegi panjang dalam koordinat piksel 2D:</p>
+                <pre><code>// Format definisi objek tembok di data level:
+tembok = [
+  { x: 120, y: 80,  w: 160, h: 24 },
+  { x: 340, y: 180, w: 24,  h: 220 },
+  { x: 500, y: 140, w: 180, h: 24 }
+];</code></pre>
+                
+                <p>Fungsi deteksi tabrakan <code>cekTabrakanTembok(posisiX, posisiY, radius)</code> mengecek perpotongan antara lingkaran entitas (pemain, musuh, atau proyektil) terhadap seluruh balok AABB (<em>Axis-Aligned Bounding Box</em>):</p>
+                
+                <pre><code>function cekTabrakanTembok(posisiX, posisiY, radius) {
+  for (let t of tembok) {
+    if (posisiX + radius > t.x && 
+        posisiX - radius < t.x + t.w && 
+        posisiY + radius > t.y && 
+        posisiY - radius < t.y + t.h) {
+      return true; // Terjadi benturan dengan tembok ini
+    }
+  }
+  return false; // Ruang bebas tanpa halangan
+}</code></pre>
+
+                <ul class="code-breakdown">
+                    <li><strong>Perluasan Kotak (Box Expansion):</strong> Logika <code>posisiX + radius &gt; t.x</code> dan <code>posisiX - radius &lt; t.x + t.w</code> secara matematis memperluas batas kotak tembok sebesar radius lingkaran di setiap sisi, memungkinkan pengecekan <em>Overlap Interval</em> super cepat dalam mikrodetik.</li>
+                </ul>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-phys">Anti-Stuck</span> 2. Pembebasan Entitas (`bebaskanMusuhDariTembok`)</h3>
+                    <p>Mencegah karakter atau boss tersangkut saat terdorong knockback atau berbelok sempit:</p>
+                    <pre><code>function bebaskanMusuhDariTembok(m) {
+  for (let iter = 0; iter < 2; iter++) {
+    let collided = false;
+    for (let t of tembok) {
+      if (m.x + m.radius > t.x && m.x - m.radius < t.x + t.w &&
+          m.y + m.radius > t.y && m.y - m.radius < t.y + t.h) {
+        collided = true;
+        let dKiri  = (m.x + m.radius) - t.x;
+        let dKanan = (t.x + t.w) - (m.x - m.radius);
+        let dAtas  = (m.y + m.radius) - t.y;
+        let dBawah = (t.y + t.h) - (m.y - m.radius);
+        let minD = Math.min(dKiri, dKanan, dAtas, dBawah);
+
+        // Dorong keluar menuju sisi terdekat + 0.5px buffer
+        if (minD === dKiri)       m.x = t.x - m.radius - 0.5;
+        else if (minD === dKanan) m.x = t.x + t.w + m.radius + 0.5;
+        else if (minD === dAtas)  m.y = t.y - m.radius - 0.5;
+        else if (minD === dBawah) m.y = t.y + t.h + m.radius + 0.5;
+      }
+    }
+    if (!collided) break;
+  }
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-phys">Raycast Optik</span> 3. Penembus Garis Sinar (`hitRayWall`)</h3>
+                    <p>Digunakan oleh senter musuh dan laser cctv untuk mendeteksi dinding penghalang:</p>
+                    <pre><code>// Algoritma Slab Method (Line-AABB Intersection)
+function hitRayWall(asalX, asalY, arahX, arahY, jarakMaksimal) {
+  let jarakTerdekat = jarakMaksimal;
+  for (let i = 0; i < tembok.length; i++) {
+    let t = tembok[i];
+    // Hitung tMin dan tMax untuk sumbu X dan Y
+    let invDirX = 1 / (arahX !== 0 ? arahX : 0.00001);
+    let invDirY = 1 / (arahY !== 0 ? arahY : 0.00001);
+    let t1 = (t.x - asalX) * invDirX;
+    let t2 = (t.x + t.w - asalX) * invDirX;
+    let t3 = (t.y - asalY) * invDirY;
+    let t4 = (t.y + t.h - asalY) * invDirY;
+    let tMin = Math.max(Math.min(t1, t2), Math.min(t3, t4));
+    let tMax = Math.min(Math.max(t1, t2), Math.max(t3, t4));
+    if (tMax >= 0 && tMin <= tMax && tMin < jarakTerdekat) {
+      if (tMin >= 0) jarakTerdekat = tMin;
+    }
+  }
+  return jarakTerdekat;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-phys">Visual Tembok</span> 4. Rendering 2.5D Pseudo-Depth pada Kanvas</h3>
+                <p>Tembok digambar dengan efek kedalaman bayangan dan sudut bevel sesuai tema map aktif:</p>
+                <pre><code>// Pada draw() di game.js:
+ctx.shadowColor = 'rgba(0,0,0,0.7)';
+ctx.shadowBlur = 8;
+ctx.shadowOffsetX = 3;
+ctx.shadowOffsetY = 3;
+
+for (let t of tembok) {
+  if (temaPeta === "lab") {
+    ctx.fillStyle = warnaAtasTembok; // #1a252f
+    ctx.fillRect(t.x, t.y, t.w, t.h);
+    ctx.strokeStyle = warnaTembok;    // Neon Cyan #00e5ff
+    ctx.lineWidth = 2.5;
+    ctx.strokeRect(t.x, t.y, t.w, t.h);
+  } else {
+    // Sisi samping gelap (dasar)
+    ctx.fillStyle = warnaTembok;
+    ctx.fillRect(t.x, t.y, t.w, t.h);
+    // Atap tembok lebih terang dengan inset bevel 2px
+    ctx.shadowColor = 'transparent';
+    ctx.fillStyle = warnaAtasTembok;
+    ctx.fillRect(t.x + 2, t.y + 2, t.w - 4, t.h - 4);
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 4. MEKANIKA BERJALAN -->
+        <!-- ========================================================================= -->
+        <section id="berjalan">
+            <div class="section-header">
+                <h2>🚶 4. Mekanika Berjalan (Walking)</h2>
+                <span class="section-tag">WASD • Vektor Diagonal • Wall Sliding</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-core">Input & Kinematika</span> Logika Gerak Berjalan Mulus</h3>
+                <p>Ketika pemain menekan tombol [W], [A], [S], [D], sistem membaca status input dan menghitung vektor pergerakan terarah:</p>
+                <pre><code>let currentSpeed = pemain.kecepatanNormal; // Nilai bawaan: 3.8 px/frame
+let inputX = 0, inputY = 0;
+
+if (statusTombol.w) inputY -= 1;
+if (statusTombol.s) inputY += 1;
+if (statusTombol.a) inputX -= 1;
+if (statusTombol.d) inputX += 1;
+
+// 1. Normalisasi Gerakan Diagonal (PENTING!)
+if (inputX !== 0 && inputY !== 0) {
+  inputX *= 0.7071; // 1 / sqrt(2)
+  inputY *= 0.7071;
+}
+
+let targetVx = inputX * currentSpeed;
+let targetVy = inputY * currentSpeed;
+
+// 2. Akselerasi Halus (Smooth Interpolation)
+let kecepatanInterpolasi = 0.28;
+pemain.vx = (pemain.vx || 0) + (targetVx - (pemain.vx || 0)) * kecepatanInterpolasi;
+pemain.vy = (pemain.vy || 0) + (targetVy - (pemain.vy || 0)) * kecepatanInterpolasi;</code></pre>
+
+                <ul class="code-breakdown">
+                    <li><strong>Mengapa dikalikan 0.7071?</strong> Tanpa pengali ini, jika pemain menekan [W] dan [D] bersamaan, vektor kecepatan resultan menjadi $\sqrt{1^2 + 1^2} = 1.414$ (+41.4% lebih cepat). Dengan pengali $1/\sqrt{2} \approx 0.7071$, kecepatan diagonal tetap tepat 100% konsisten.</li>
+                    <li><strong>Senyap Sempurna:</strong> Saat berjalan normal, <code>pemain.noiseR = 0</code>. Karakter ninja melangkah tanpa mengeluarkan suara derap, sehingga musuh yang membelakangi pemain tidak akan sadar akan kedatangan Anda.</li>
+                </ul>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Wall Sliding (Meluncur di Sisi Tembok)</h3>
+                    <p>Agar ninja tidak macet saat berjalan menabrak sudut tembok secara menyerong, pergerakan sumbu X dan Y dipisahkan secara independen:</p>
+                    <pre><code>// Gerak sumbu X terlebih dahulu
+pemain.x += pemain.vx;
+if (cekTabrakanTembok(pemain.x, pemain.y, pemain.radius)) {
+  pemain.x -= pemain.vx; // Batalkan hanya sumbu X
+  pemain.vx = 0;
+}
+
+// Gerak sumbu Y secara terpisah
+pemain.y += pemain.vy;
+if (cekTabrakanTembok(pemain.x, pemain.y, pemain.radius)) {
+  pemain.y -= pemain.vy; // Batalkan hanya sumbu Y
+  pemain.vy = 0;
+}</code></pre>
+                    <p style="font-size:0.88rem; color:#cbd5e1; margin-top:8px;">Hasil: Jika pemain menekan [W]+[D] ke dinding vertikal, sumbu X ditahan nol namun sumbu Y tetap bergerak bebas, membuat ninja meluncur mulus ke atas di sepanjang dinding.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Rotasi 360° & Kemiringan Tubuh (Dynamic Lean)</h3>
+                    <p>Perputaran arah hadap dihitung secara matematis menggunakan arkus tangen dan interpolasi sudut linier:</p>
+                    <pre><code>let sudutTarget = Math.atan2(pemain.vy, pemain.vx);
+pemain.visualSudut = lerpAngle(pemain.visualSudut, sudutTarget, 0.26);
+
+// Efek tubuh miring lincah saat bermanuver
+let targetKemiringan = (pemain.arah === 'kiri' ? -0.1 : (pemain.arah === 'kanan' ? 0.1 : 0));
+pemain.leanAngle = (pemain.leanAngle || 0) + (targetKemiringan - (pemain.leanAngle || 0)) * 0.18;</code></pre>
+                    <p style="font-size:0.88rem; color:#cbd5e1; margin-top:8px;">Fungsi <code>lerpAngle</code> menyelesaikan anomali loncatan rotasi dari $-\pi$ ke $+\pi$ ($359^\circ$ ke $0^\circ$), menghasilkan perputaran tubuh yang elastis dan realistis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 5. MEKANIKA LARI & STAMINA -->
+        <!-- ========================================================================= -->
+        <section id="lari">
+            <div class="section-header">
+                <h2>🏃 5. Mekanika Lari & Konsumsi Stamina</h2>
+                <span class="section-tag">Shift Key • Noise Radius • Stamina Gauge</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-skill">Sistem Sprint</span> Mekanisme Berlari (Lari Kencang dengan Tombol Shift)</h3>
+                <p>Ketika pemain menahan tombol [Shift] sambil menekan tombol arah gerak, ninja beralih dari mode jalan senyap menjadi mode lari berkecepatan tinggi:</p>
+                <pre><code>let adaInputGerakan = statusTombol.w || statusTombol.s || statusTombol.a || statusTombol.d;
+
+if (statusTombol.shift && pemain.energiDash > 0 && adaInputGerakan) {
+  if (!sedangNgedash) {
+    mainkanSuara('dash'); // Memicu audio derap lari kencang
+    sedangNgedash = true;
+  }
+  currentSpeed = pemain.kecepatanDash; // Kecepatan meningkat dari 3.8 -> 7.6 px/frame
+  pemain.energiDash -= 2.2;            // Menguras stamina per frame
+  pemain.noiseR = 150;                 // Memancarkan gelombang suara derap kaki 150px!
+  picuSuara(pemain.x, pemain.y, pemain.noiseR);
+} else {
+  sedangNgedash = false;
+  // Regenerasi stamina saat tidak berlari / tombol dilepas
+  if (pemain.energiDash < 100) pemain.energiDash += 0.65;
+}</code></pre>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kondisi Bergerak</th>
+                                <th>Kecepatan</th>
+                                <th>Konsumsi Stamina</th>
+                                <th>Radius Suara (Noise Radius)</th>
+                                <th>Reaksi Musuh di Sekitar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Berjalan (Walk)</strong></td>
+                                <td>3.8 px/frame</td>
+                                <td>0 (Stamina pulih +0.65/f)</td>
+                                <td><code>0 px</code> (Hening mutlak)</td>
+                                <td>Musuh tenang, tidak mendengar derap langkah apapun.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Berlari (Sprint / Dash)</strong></td>
+                                <td>7.6 px/frame (+100%)</td>
+                                <td><code>-2.2</code> unit/frame</td>
+                                <td><code>150 px</code> (Derap keras)</td>
+                                <td>Musuh dalam jarak 150px langsung kaget, berubah ke mode <code>investigate</code> dan berbalik memeriksa!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout-danger">
+                    <div class="callout-title">⚠️ Risiko Taktis: Suara Derap Kaki (`picuSuara`)</div>
+                    Fungsi <code>picuSuara(pemain.x, pemain.y, 150)</code> memeriksa seluruh musuh di arena:
+                    <pre><code>function picuSuara(x, y, radius) {
+  for (let m of musuh) {
+    if (Math.hypot(x - m.x, y - m.y) < radius) {
+      m.status = "investigate";
+      m.targetX = x;
+      m.targetY = y;
+      m.alertTimer = 180; // Waspada mencari selama 3 detik
+    }
+  }
+}</code></pre>
+                    Gunakan lari cepat hanya untuk melintasi lorong terbuka atau mengejar musuh yang sedang membelakangi Anda!
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 6. DASH & MOTION TRAIL -->
+        <!-- ========================================================================= -->
+        <section id="dash">
+            <div class="section-header">
+                <h2>⚡ 6. Sistem Dash & Efek Bayangan (Afterimage)</h2>
+                <span class="section-tag">Afterimage Trail • Lerp Response • Frame Animation</span>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-skill">Visual Effect</span> Merekam Jejak Bayangan Ninja</h3>
+                    <p>Saat berlari kencang/dash, sistem merekam snapshot posisi tubuh setiap 3 frame ke dalam antrian bayangan:</p>
+                    <pre><code>if (sedangNgedash && sedangBergerak) {
+  pemain.state = 'dash';
+  pemain.animFrame = Math.floor(penghitungBingkai / 4) % 4;
+
+  if (penghitungBingkai % 3 === 0) {
+    let kunciBaju = petaWarnaBaju[warnaPemain] || 'navy';
+    let gambarSprite = asetGame.spritesheets[kunciBaju];
+    let sData = DATA_LEMBAR_SPRITE[kunciBaju];
+    let sRect = sData.walk[3];
+
+    pemain.trail.push({
+      x: pemain.x,
+      y: pemain.y,
+      sudut: pemain.visualSudut,
+      alpha: 0.45,
+      sRect: sRect,
+      gambarLembarSprite: gambarSprite
+    });
+    if (pemain.trail.length > 5) pemain.trail.shift();
+  }
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Pemudaran & Responsivitas Kemudi</h3>
+                    <p>Setiap frame di <code>update()</code>, nilai transparansi bayangan dikurangi secara berkala:</p>
+                    <pre><code>// Reduksi opacity bayangan afterimage
+pemain.trail.forEach(t => t.alpha -= 0.05);
+pemain.trail = pemain.trail.filter(t => t.alpha > 0);
+
+// Akselerasi kemudi lebih tajam saat dash
+let kecepatanInterpolasi = sedangNgedash ? 0.38 : 0.28;
+pemain.vx += (targetVx - pemain.vx) * kecepatanInterpolasi;
+pemain.vy += (targetVy - pemain.vy) * kecepatanInterpolasi;</code></pre>
+                    <p style="font-size:0.88rem; color:#cbd5e1; margin-top:8px;">Koefisien interpolasi dinaikkan ke <code>0.38</code> saat dash, memberikan rasa kemudi <em>drift</em> ninja yang sangat lincah dan responsif saat bermanuver menghindari peluru.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 7. EFEK SLASH & SERANGAN MELEE -->
+        <!-- ========================================================================= -->
+        <section id="slash">
+            <div class="section-header">
+                <h2>🗡️ 7. Efek Slash, Katana Melee & Rapid Slashes</h2>
+                <span class="section-tag">Canvas Arc Slash • Cooldown Limiter • Flurry 3-Bar HP</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-combat">Tebasan Reguler</span> 1. Eksekusi Tebasan Melee (Tombol [L] / `bunuhMusuh`)</h3>
+                <p>Mekanisme serangan pisau/katana dibatasi maksimal 2 kali tebasan berturut-turut untuk menjaga keseimbangan permainan:</p>
+                <pre><code>function bunuhMusuh() {
+  if (window.gameState !== "playing") return;
+
+  // 1. Cek Apakah Sedang Cooldown
+  if (pemain.slashCooldown > 0) {
+    let sisa = (pemain.slashCooldown / 60).toFixed(1);
+    munculkanTeks(pemain.x, pemain.y - 20, `COOLDOWN! (${sisa}s)`, "#ef4444");
+    mainkanSuara('block');
+    return;
+  }
+
+  // 2. Konsumsi Kuota Tebasan (Maksimal 2x)
+  pemain.slashCharges = (pemain.slashCharges !== undefined) ? pemain.slashCharges - 1 : 1;
+  if (pemain.slashCharges <= 0) {
+    pemain.slashCooldown = 120; // 2 Detik Cooldown (120 frame pada 60 FPS)
+    pemain.slashCharges = 0;
+  } else {
+    pemain.slashResetTimer = 90; // Jeda 1.5s untuk reset kuota jika tidak lanjut menebas
+  }
+
+  pemain.state = 'serang';
+  pemain.actionTimer = 18;
+
+  // 3. Tambahkan Objek Efek Slash ke Array
+  daftarTebasan.push({
+    x: pemain.x + Math.cos(pemain.sudut) * 20,
+    y: pemain.y + Math.sin(pemain.sudut) * 20,
+    sudut: pemain.sudut,
+    frame: 0
+  });
+  mainkanSuara('slash');
+  // Lanjut ke pemeriksaan benturan hitbox musuh (Radius 75px)...
+}</code></pre>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-combat">Canvas Rendering</span> 2. Menggambar Busur Tebasan Sabit</h3>
+                    <p>Busur tebasan katana dirender pada <code>draw()</code> dengan membesarkan radius lingkaran sembari memudarkan ketebalan garis:</p>
+                    <pre><code>for (let s of daftarTebasan) {
+  ctx.save();
+  ctx.translate(s.x, s.y);
+  ctx.rotate(s.sudut);
+  ctx.beginPath();
+  // Busur sabit melingkar dari -120 derajat ke +120 derajat
+  ctx.arc(0, 0, 36 + s.frame * 1.5, -Math.PI / 1.5, Math.PI / 1.5);
+  ctx.lineWidth = 7 * (1 - s.frame / 15);
+  ctx.globalAlpha = 1 - (s.frame / 15);
+  ctx.strokeStyle = warnaSenjata;
+  // Jika senjata berjenis Cyber Saber, beri efek glow neon
+  if (tipeSenjata === "bentuk-saber") {
+    ctx.shadowColor = "#00e5ff";
+    ctx.shadowBlur = 15;
+  }
+  ctx.stroke();
+  ctx.restore();
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-skill">Ultimate Slash</span> 3. Skill Rapid Slash (Tombol [R] / -3 Bar HP)</h3>
+                    <p>Serangan pedang bertubi-tubi kilat selama 2 detik penuh yang mengiris 3 Bar HP musuh/boss:</p>
+                    <pre><code>// Di update() saat pemain.rapidActive aktif:
+pemain.rapidTimer--;
+
+// Munculkan flurry tebasan acak setiap 6 frame
+if (pemain.rapidTimer % 6 === 0) {
+  let randA = pemain.sudut + (Math.random() - 0.5) * 1.6;
+  daftarTebasan.push({
+    x: pemain.x + Math.cos(randA) * 25,
+    y: pemain.y + Math.sin(randA) * 25,
+    sudut: randA,
+    frame: 0
+  });
+  playTone('sawtooth', 380 + Math.random() * 260, 180, 0.08, 0.18);
+  getarLayar = 5;
+}
+
+// 3 Pukulan Fatal berurutan pada frame 100, 60, dan 20
+if (pemain.rapidTimer === 100 || pemain.rapidTimer === 60 || pemain.rapidTimer === 20) {
+  for (let m of musuh) {
+    if (Math.hypot(pemain.x - m.x, pemain.y - m.y) < 115) {
+      m.hp--; // Potong 1 Bar HP per pukulan
+      m.stunTimer = 18;
+      munculkanTeks(m.x, m.y - 15, "-1 BAR HP!", "#f59e0b");
+      getarLayar = 12;
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 8. SISTEM TEMBAKAN & PROYEKTIL -->
+        <!-- ========================================================================= -->
+        <section id="tembakan">
+            <div class="section-header">
+                <h2>🎯 8. Sistem Tembakan & Proyektil (Shooting)</h2>
+                <span class="section-tag">Shuriken • Kunai Fan • Enemy Tracer Bullets • Boss Cannon</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-combat">Pemain: Jarak Jauh</span> 1. Lemparan Bintang Ninja Shuriken (`lemparShuriken`)</h3>
+                <p>Pemain dapat menembakkan shuriken jarak jauh (Tombol [K] atau Klik Kanan) menggunakan kuota amunisi terbatas:</p>
+                <pre><code>function lemparShuriken() {
+  if (window.gameState !== "playing" || pemain.ammo <= 0) return;
+  pemain.ammo--; // Amunisi berkurang
+  pemain.state = 'serang';
+  pemain.actionTimer = 12;
+
+  daftarShuriken.push({
+    x: pemain.x,
+    y: pemain.y,
+    dx: Math.cos(pemain.sudut) * 13, // Melaju kencang 13 px/frame
+    dy: Math.sin(pemain.sudut) * 13,
+    rot: 0
+  });
+  mainkanSuara('shuriken');
+}</code></pre>
+
+                <p style="margin-top:10px;">Di fungsi <code>update()</code>, lintasan dan tabrakan shuriken dihitung secara fisik:</p>
+                <ul class="code-breakdown">
+                    <li><strong>Perputaran Visual:</strong> <code>s.rot += 0.5</code> setiap frame menghasilkan visual bintang berputar di udara.</li>
+                    <li><strong>Tabrakan Tembok:</strong> <code>cekTabrakanTembok(s.x, s.y, 5)</code> memicu denting logam, memercikkan partikel abu-abu, dan suara pantulan <code>picuSuara(s.x, s.y, 180)</code> yang memancing musuh.</li>
+                    <li><strong>Penetralan Musuh:</strong> Shuriken memberikan damage 1 HP dan knockback 20px pada keroco biasa. Namun jika mengenai perisai depan musuh <strong>Juggernaut</strong> atau ditepis oleh <strong>Rival Assassin</strong>, proyektil terpental mental (<em>Deflected</em>).</li>
+                </ul>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-combat">Musuh: Peluru Senapan</span> 2. Peluru Musuh (Hunter Tracer Bullets)</h3>
+                    <p>Musuh bersenjata pistol dan Boss menembak pemain saat status waspada (<em>Chase</em>):</p>
+                    <pre><code>// Musuh menembakkan peluru dari ujung moncong laras:
+let sudutPeluru = Math.atan2(pemain.y - m.y, pemain.x - m.x) + (Math.random() - 0.5) * 0.1;
+let ujungMoncongX = m.x + Math.cos(m.sudut) * (m.radius + 14);
+let ujungMoncongY = m.y + Math.sin(m.sudut) * (m.radius + 14);
+let tembakanBoss = (m.tipe === "boss");
+
+daftarPeluruMusuh.push({
+  x: ujungMoncongX,
+  y: ujungMoncongY,
+  vx: Math.cos(sudutPeluru) * (tembakanBoss ? 11.5 : 9.8),
+  vy: Math.sin(sudutPeluru) * (tembakanBoss ? 11.5 : 9.8),
+  life: 85,
+  isBoss: tembakanBoss,
+  damage: tembakanBoss ? 6 : 4
+});</code></pre>
+                    <ul class="code-breakdown">
+                        <li>Peluru menabrak tembok: memicu percikan api bunga kuningan (<code>#facc15</code>).</li>
+                        <li>Peluru mengenai pemain: memotong HP, layar bergetar hebat (25 frame pada Boss Cannon), dan memicu kebal sesaat 35-45 frame.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-skill">Rival Elit</span> 3. Crimson Kunai Fan (Kipas 5 Kunai)</h3>
+                    <p>Musuh Rival Assassin melempar 5 shuriken beracun berbentuk formasi kipas menyebar:</p>
+                    <pre><code>let baseA = Math.atan2(pemain.y - m.y, pemain.x - m.x);
+[-0.35, -0.18, 0, 0.18, 0.35].forEach(offset => {
+  let a = baseA + offset;
+  daftarShuriken.push({
+    x: m.x,
+    y: m.y,
+    dx: Math.cos(a) * 9.5,
+    dy: Math.sin(a) * 9.5,
+    rot: 0,
+    isEnemy: true // Menandai bahwa kunai ini mematikan bagi pemain
+  });
+});</code></pre>
+                    <p style="font-size:0.88rem; color:#cbd5e1; margin-top:8px;">Jika terkena pemain, mengakibatkan <code>-2 HP</code>, layar bergetar, dan memunculkan teks pop-up merah <code>"-2 HP (KUNAI RIVAL)"</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 9. LOGIKA KECERDASAN BUATAN (AI) MUSUH -->
+        <!-- ========================================================================= -->
+        <section id="logika-musuh">
+            <div class="section-header">
+                <h2>🧠 9. Logika Kecerdasan Buatan (AI) Musuh</h2>
+                <span class="section-tag">Finite State Machine • Vision Cone • Raycast FOV • A* Pathfinding</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-ai">Mesin Status FSM</span> Diagram & Alur Siklus Status Musuh</h3>
+                <p>Setiap entitas musuh dikendalikan oleh <strong>Finite State Machine (FSM)</strong> dengan 4 status utama:</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status FSM</th>
+                                <th>Perilaku Gerak</th>
+                                <th>Kondisi Masuk</th>
+                                <th>Kondisi Transisi Keluar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code style="color:#60a5fa;">"patrol"</code></td>
+                                <td>Berjalan bolak-balik di rutenya. Membalik arah saat menabrak dinding (<code>dx *= -1</code>).</td>
+                                <td>Kondisi bawaan awal map, atau setelah selesai memeriksa area tanpa menemukan target.</td>
+                                <td>Pemain terlihat oleh kerucut senter ➔ Masuk ke <code>"chase"</code>.<br>Mendengar suara lari/klon ➔ Masuk ke <code>"investigate"</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code style="color:#ef4444;">"chase"</code></td>
+                                <td>Lari kencang mengejar koordinat pemain, senter berubah merah menyala, menembak peluru jika memiliki senjata.</td>
+                                <td>Fungsi <code>cekMelihatPemain(m)</code> bernilai <code>true</code>.</td>
+                                <td>Pemain bersembunyi atau lolos dari garis pandang ➔ Masuk ke <code>"investigate"</code> menuju koordinat terakhir.</td>
+                            </tr>
+                            <tr>
+                                <td><code style="color:#f59e0b;">"investigate"</code></td>
+                                <td>Berlari menuju titik koordinat terakhir suara didengar atau lokasi terakhir pemain tampak (<code>alertTimer = 180</code>).</td>
+                                <td>Pemain lolos dari pandangan, menginjak daun kering, atau derap lari dash terdengar.</td>
+                                <td>Melihat pemain kembali ➔ Masuk ke <code>"chase"</code>.<br>Timer habis tanpa hasil ➔ Kembali ke <code>"patrol"</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code style="color:#94a3b8;">"idle"</code></td>
+                                <td>Diam terpaku di tempat, tidak menyerang. Digunakan untuk target sandera/VIP atau saat terkena stun.</td>
+                                <td>Karakter berstatus VIP atau terpukul stun.</td>
+                                <td>Stun timer habis. (VIP tetap idle selamanya).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-ai">Penglihatan Sensoris</span> Logika Senter Penglihatan (`cekMelihatPemain`)</h3>
+                    <p>Mengevaluasi 4 lapisan pengujian fisik setiap frame:</p>
+                    <pre><code>function cekMelihatPemain(m) {
+  // 1. Sedang bersembunyi di kardus / skill ghost? -> Lolos
+  if (pemain.isHiding || pemain.ghostActive) return false;
+
+  let jX = pemain.x - m.x;
+  let jY = pemain.y - m.y;
+  let jTot = Math.hypot(jX, jY);
+
+  // 2. Di luar jangkauan jarak senter (240px)? -> Lolos
+  if (jTot > JARAK_PANDANG) return false;
+
+  // 3. Di luar sudut kerucut pandang (+/- 35 derajat)? -> Lolos
+  let sPemain = Math.atan2(jY, jX);
+  let selisih = Math.abs(sPemain - m.sudut);
+  if (selisih > Math.PI) selisih = 2 * Math.PI - selisih;
+  if (selisih > LEBAR_PANDANG) return false;
+
+  // 4. Apakah ada dinding yang memutus garis pandang?
+  let hitDist = hitRayWall(m.x, m.y, jX / jTot, jY / jTot, jTot);
+  return hitDist >= jTot - 5;
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title"><span class="badge badge-ai">Algoritma Jalur Terpendek</span> A* Pathfinding (`cariJalanAStar`)</h3>
+                    <p>Jika garis pandang ke pemain terputus oleh labirin tembok, musuh mengkalkulasi rute memutar:</p>
+                    <pre><code>// Fungsi evaluasi A* teroptimasi pada NavGrid 50x35:
+function cariJalanAStar(titikAwalX, titikAwalY, targetX, targetY) {
+  // 1. Petakan koordinat piksel ke sel grid selNav = 20px
+  let startX = Math.floor(titikAwalX / UKURAN_SEL);
+  let targetGridX = Math.floor(targetX / UKURAN_SEL);
+  
+  // 2. Evaluasi biaya simpul: f(n) = g(n) + h(n)
+  // g(n) = jarak tempuh riil dari start
+  // h(n) = estimasi jarak Manhattan ke target
+
+  // 3. Eksplorasi 4 tetangga sel bebas tembok
+  // 4. String-pulling smoothing: memotong sudut lancip
+  // Mengembalikan array waypoint rute: [{x, y}, {x, y}]
+}</code></pre>
+                    <p style="font-size:0.88rem; color:#cbd5e1; margin-top:8px;">Pencarian dibatasi maksimal 450 langkah per evaluasi dan diperbarui bergantian setiap beberapa frame (<em>Time-slicing</em>) demi menjaga performa 60 FPS tanpa frame-drop.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 10. RAGAM & HIRARKI MUSUH -->
+        <!-- ========================================================================= -->
+        <section id="tipe-musuh">
+            <div class="section-header">
+                <h2>🦹 10. Ragam & Hirarki Musuh (Enemy Hierarchy)</h2>
+                <span class="section-tag">Patrol Guard • Ranged Pistol • Juggernaut • Rival • Boss VIP</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Karakteristik Mekanikal Setiap Musuh di Arena</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipe Musuh</th>
+                                <th>HP</th>
+                                <th>Kecepatan</th>
+                                <th>Metode Serangan</th>
+                                <th>Kelemahan & Taktik Mengalahkannya</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Keroco Patroli (Melee)</strong></td>
+                                <td>2 - 3</td>
+                                <td>3.5 px/f</td>
+                                <td>Serangan fisik jarak dekat saat menyentuh ninja (Damage 3 HP + Knockback).</td>
+                                <td>Mudah dihabisi dari belakang dengan 1 kali Stealth Takedown senyap.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Keroco Pistol (Ranged)</strong></td>
+                                <td>2 - 3</td>
+                                <td>3.5 px/f</td>
+                                <td>Menembakkan peluru kuning dari laras pistol (Damage 4 HP, fire rate 0.75s).</td>
+                                <td>Lakukan dash zig-zag untuk menghindari peluru, lalu dekati dan tebas.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Juggernaut Guard</strong></td>
+                                <td>5 - 6</td>
+                                <td>2.4 px/f</td>
+                                <td>Serangan gada berat perisai (Damage 5 HP).</td>
+                                <td><strong>Kebal depan:</strong> Membawa perisai besi tebal. Shuriken dan tebasan dari depan mental! Wajib dipancing membelakangi lalu serang punggungnya.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rival Assassin (Elit)</strong></td>
+                                <td>15 - 20</td>
+                                <td>5.0 px/f</td>
+                                <td>Kage Bunshin (2 clone), Crimson Kunai Fan (5 proyektil), Smoke Bomb, Shunpo Dash, Parry & Counter.</td>
+                                <td>Hindari duel tebas langsung dari depan karena akan di-parry. Gunakan skill Slow-Motion Waktu [F] atau bunuh saat ia berada dalam jendela <em>Vulnerable</em> sesaat setelah dash!</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Boss Cyborg & VIP</strong></td>
+                                <td>25+ (Boss) / 1 (VIP)</td>
+                                <td>3.4 px/f (Boss) / 0 (VIP)</td>
+                                <td>Meriam Boss Cannon raksasa berdaya hancur tinggi (Damage 6-7 HP). VIP tidak menyerang (orang lemah yang dilindungi).</td>
+                                <td>Habisi seluruh pengawal di sekitar VIP, lalu dekati VIP untuk eksekusi instan 1 serangan. Untuk Boss, gunakan kombinasi Shuriken dan Rapid Slash [R].</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 11. MEKANIKA STEALTH & TAKEDOWN -->
+        <!-- ========================================================================= -->
+        <section id="stealth">
+            <div class="section-header">
+                <h2>🤫 11. Mekanika Stealth & Silent Takedown</h2>
+                <span class="section-tag">Backstab Angle • Instant Kill • Zero Alarm</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><span class="badge badge-skill">Eksekusi Senyap</span> Logika Pukulan dari Belakang (`executeStealthTakedown`)</h3>
+                <p>Mekanika kunci dari permainan assassin: mengeksekusi musuh tanpa membunyikan alarm ke seisi map:</p>
+                <pre><code>// Pemeriksaan syarat takedown pada update() dan bunuhMusuh():
+m.canTakedown = (!melihatPemain && distKePemain < 70 && !pemain.ghostActive);
+
+function executeStealthTakedown(m, index) {
+  if (!m || m.hp <= 0) return;
+
+  // 1. Indra Keenam Rival Assassin: Bisa menghindar jika tidak terkena stun/slow-mo!
+  if (m.tipe === "rival" && !pemain.timeActive && (!m.stunTimer || m.stunTimer <= 0)) {
+    m.dashCooldown = 60;
+    munculkanTeks(m.x, m.y - 20, "⚡ SIXTH SENSE: EVADED!", "#dc2626");
+    return;
+  }
+
+  // 2. Eksekusi Instan: Memangkas langsung seluruh sisa HP musuh
+  let adalahVIP = (m.isVIP || (m.tipe && m.tipe.startsWith("viplevel")));
+  let dmg = adalahVIP ? m.hp : (m.tipe === "boss" ? 4 : (m.tipe === "rival" ? 3 : m.hp));
+  m.hp -= dmg;
+
+  // 3. Efek Garis Kilat Merah Menusuk Jantung Target
+  let sAngle = Math.atan2(m.y - pemain.y, m.x - pemain.x);
+  daftarTebasan.push({ x: m.x, y: m.y, sudut: sAngle, frame: 0 });
+
+  // 4. Efek Darah di Lantai & Drop Item
+  if (m.hp <= 0) {
+    kotoran.push({ x: m.x, y: m.y, r: 10, isBlood: true, a: 0.85 });
+    daftarKoinPeta.push({ x: m.x, y: m.y, collected: false, drop: true });
+    dropRegenItem(m.x, m.y); // Drop medkit penambah darah
+    musuh.splice(index, 1);
+    statistikPermainan.killCount++;
+    munculkanTeks(m.x, m.y, "STEALTH ASSASSINATED!", "#ef4444");
+    mainkanSuara('slash');
+  }
+}</code></pre>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">📌 Mengapa Tidak Ada Sirine yang Berbunyi?</div>
+                    Karena serangan dilakukan dari belakang di luar kerucut pandang senter (<code>!cekMelihatPemain</code>), variabel <code>alarmsTriggered</code> tidak bertambah. Ini menjaga evaluasi skor akhir pemain tetap meraih rating <strong>3 Bintang (⭐⭐⭐)</strong> saat menyelesaikan stage!
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 12. AUDIO PROSEDURAL SYNTHESIZER -->
+        <!-- ========================================================================= -->
+        <section id="audio">
+            <div class="section-header">
+                <h2>🔊 12. Audio Prosedural Synthesizer (Web Audio API)</h2>
+                <span class="section-tag">OscillatorNode • GainNode • Zero MP3 • Zero Latency</span>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Bagaimana Suara Dihasilkan Tanpa File Audio Eksternal?</h3>
+                <p>Game ini 100% bebas dari unduhan file MP3/WAV. Seluruh efek suara dirancang menggunakan modulasi frekuensi gelombang matematis:</p>
+                <pre><code>function playTone(tipeGelombang, frekuensiAwal, frekuensiAkhir, durasi, nilaiPenguat = 0.3) {
+  if (!konteksAudio) return;
+  let waktuSekarang = konteksAudio.currentTime;
+  let osilator = konteksAudio.createOscillator();
+  let nodePenguat = konteksAudio.createGain();
+
+  osilator.type = tipeGelombang; // 'sine', 'sawtooth', 'triangle', 'square'
+  osilator.frequency.setValueAtTime(frekuensiAwal, waktuSekarang);
+  osilator.frequency.exponentialRampToValueAtTime(frekuensiAkhir, waktuSekarang + durasi);
+
+  nodePenguat.gain.setValueAtTime(nilaiPenguat, waktuSekarang);
+  nodePenguat.gain.exponentialRampToValueAtTime(0.001, waktuSekarang + durasi);
+
+  // Sambungkan kabel virtual: Oscillator -> Gain -> Speaker Komputer
+  osilator.connect(nodePenguat);
+  nodePenguat.connect(konteksAudio.destination);
+
+  osilator.start(waktuSekarang);
+  osilator.stop(waktuSekarang + durasi);
+}</code></pre>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Efek Suara</th>
+                                <th>Bentuk Gelombang</th>
+                                <th>Frekuensi Awal & Akhir</th>
+                                <th>Sensasi Suara yang Dihasilkan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tebasan Katana (Slash)</strong></td>
+                                <td><code>sawtooth</code></td>
+                                <td>380 Hz ➔ 70 Hz (0.15s)</td>
+                                <td>Suara gesekan pisau tajam membelah udara.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dash Sprint</strong></td>
+                                <td><code>triangle</code></td>
+                                <td>240 Hz ➔ 60 Hz (0.2s)</td>
+                                <td>Suara deru angin cepat saat ninja melesat.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ambil Koin Emas</strong></td>
+                                <td><code>sine</code></td>
+                                <td>987 Hz ➔ 1318 Hz (0.12s)</td>
+                                <td>Denting lonceng koin logam bernada ceria.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alarm Senter Terdeteksi</strong></td>
+                                <td><code>square</code></td>
+                                <td>440 Hz ➔ 880 Hz berulang</td>
+                                <td>Sirine buzzer peringatan bahaya yang menusuk telinga.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 13. RENDERING CANVAS 2D & HUD -->
+        <!-- ========================================================================= -->
+        <section id="rendering">
+            <div class="section-header">
+                <h2>🎨 13. Sistem Rendering Canvas 2D & Layering HUD</h2>
+                <span class="section-tag">Order of Drawing • Matrix Transform • Dynamic Bar</span>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Urutan Lapisan Visual (Z-Order) di `draw()`</h3>
+                    <p>Karena Canvas 2D tidak memiliki CSS <code>z-index</code>, kedalaman visual diatur dari urutan eksekusi fungsi gambar:</p>
+                    <ol class="code-breakdown" style="padding-left:10px;">
+                        <li>Lantai dasar dan petak ubin grid arena map.</li>
+                        <li>Noda ceceran darah (<code>kotoran</code>) dan item drop di lantai.</li>
+                        <li>Afterimage trail bayangan saat pemain berlari dash.</li>
+                        <li>Kerucut cahaya senter musuh (Vision Cone semi-transparan).</li>
+                        <li>Karakter ninja pemain, bayangan klon, dan seluruh musuh.</li>
+                        <li>Tembok labirin 2.5D beserta bayangan balok.</li>
+                        <li>Proyektil peluru musuh dan bintang shuriken berputar.</li>
+                        <li>Busur sabit efek tebasan katana (<code>daftarTebasan</code>).</li>
+                        <li>Partikel percikan api dan teks melayang angka damage.</li>
+                        <li>Lapisan HUD teratas: Bar darah HP pemain, stamina dash, amunisi, dan timer skill.</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Transformasi Matriks: `save()`, `translate()`, `rotate()`</h3>
+                    <p>Pola baku dalam merotasi sprite ninja dan senjata agar berputar tepat pada poros tubuhnya:</p>
+                    <pre><code>ctx.save();                    // 1. Simpan kondisi kanvas bersih
+ctx.translate(pemain.x, pemain.y); // 2. Pindahkan titik pusat (0,0) ke tubuh karakter
+ctx.rotate(pemain.visualSudut); // 3. Putar koordinat sesuai sudut arah hadap
+
+// 4. Gambar sprite ninja dengan titik tengah seimbang (-r, -r)
+ctx.drawImage(gambarSprite, -radius, -radius, diameter, diameter);
+
+ctx.restore();                 // 5. Kembalikan matriks agar elemen lain tidak ikut miring!</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- BANK SOAL UJIAN GURU & TANYA JAWAB TEKNIS -->
+        <!-- ========================================================================= -->
+        <section id="qa-guru">
+            <div class="section-header">
+                <h2>🎓 Bank Soal Ujian Praktik & Presentasi Guru (30+ Soal)</h2>
+                <span class="section-tag">Tanya Jawab Analisis Mendalam</span>
+            </div>
+
+            <div class="qa-controls">
+                <button class="qa-btn" onclick="toggleAllQA(true)">📂 Buka Semua Jawaban</button>
+                <button class="qa-btn" onclick="toggleAllQA(false)">📁 Tutup Semua Jawaban</button>
+            </div>
+
+            <!-- BAGIAN A -->
+            <h3 id="qa-dasar" style="color:var(--accent-gold); margin: 24px 0 12px;">Bagian A: Konsep Dasar JavaScript & Variabel</h3>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q1</span> Mengapa kamu memilih `let` dan `const` dibandingkan `var` di seluruh skrip?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"`let` dan `const` adalah fitur modern ECMAScript 6 yang menganut aturan <em>Block Scope</em>. Variabel yang dideklarasikan dengan keduanya hanya hidup di dalam kurung kurawal tempat dibuatnya, mencegah kebocoran nilai atau tertimpa tanpa sengaja di luar perulangan. `const` saya gunakan untuk nilai konstan yang tidak boleh bermutasi seperti ukuran grid navigasi atau referensi kanvas, sedangkan `let` digunakan untuk variabel yang berubah setiap frame seperti koordinat X/Y dan stamina. Sebaliknya, `var` sudah ditinggalkan karena bersifat <em>Function Scope</em> dan rentan memicu bug akibat <em>hoisting</em>."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q2</span> Bagaimana cara `localStorage` menyimpan data saldo koin dan kostum saat browser ditutup?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Game memanfaatkan <strong>Web Storage API (localStorage)</strong> yang menyimpan data pasangan kunci-nilai (key-value) langsung ke hard disk profil browser. Data ini bersifat persisten dan tidak akan hilang saat tab ditutup atau komputer dimatikan. Karena <code>localStorage</code> hanya menerima format teks string, kita menggunakan <code>JSON.stringify()</code> untuk menyimpan objek konfigurasi dan <code>JSON.parse()</code> untuk menguraikannya kembali ke memori objek saat game dibuka."</p>
+                </div>
+            </div>
+
+            <!-- BAGIAN B -->
+            <h3 id="qa-fisika" style="color:var(--accent-gold); margin: 24px 0 12px;">Bagian B: Fisika Gerak, Tembok & Collision</h3>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q3</span> Mengapa pemain tidak bergerak lebih cepat saat menekan tombol W dan D bersamaan?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Karena di dalam fungsi <code>update()</code> vektor arah diagonal dinormalisasi. Jika berjalan lurus kecepatannya $V$, maka tanpa normalisasi gerak diagonal akan memiliki resultan Pythagoras $\sqrt{V^2 + V^2} \approx 1.414 \times V$ (41.4% lebih cepat). Kami mengatasinya dengan mengalikan input diagonal dengan $1/\sqrt{2} \approx 0.7071$, sehingga kecepatan bergerak ninja selalu stabil sama di seluruh 8 arah."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q4</span> Bagaimana algoritma Wall Sliding bekerja saat karakter menabrak dinding secara miring?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Dengan memisahkan pembaruan koordinat sumbu X dan sumbu Y. Pertama, posisi X ditambah <code>vx</code>; jika terjadi tabrakan dinding lewat <code>cekTabrakanTembok()</code>, hanya posisi X yang dibatalkan dan <code>vx</code> direset ke nol. Setelah itu, posisi Y ditambah <code>vy</code> dan diuji secara independen. Dengan demikian, jika pemain menabrak dinding tegak lurus sumbu X, ia tetap bisa meluncur bebas ke atas atau ke bawah di sepanjang sumbu Y tanpa tersangkut."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q5</span> Apa fungsi dari algoritma `bebaskanMusuhDariTembok`?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Fungsi ini adalah mekanisme <em>anti-stuck resolution</em>. Jika musuh atau boss terdorong ke dalam dinding akibat knockback serangan, fungsi akan mengukur jarak penetrasi ke 4 sisi tembok (kiri, kanan, atas, bawah). Sisi dengan jarak penetrasi terkecil dipilih sebagai rute keluar terdekat, lalu karakter didorong keluar tepat di luar batas tembok ditambah buffer 0.5 piksel."</p>
+                </div>
+            </div>
+
+            <!-- BAGIAN C -->
+            <h3 id="qa-tempur" style="color:var(--accent-gold); margin: 24px 0 12px;">Bagian C: Sistem Tempur, Slash & Tembakan</h3>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q6</span> Mengapa serangan tebasan katana dibatasi 2 kali berturut-turut lalu terkena cooldown?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Untuk mencegah strategi <em>button-mashing</em> (menekan tombol serang tanpa henti) yang merusak nilai taktis game stealth. Dengan sistem <code>slashCharges = 2</code> dan jeda cooldown 2 detik (120 frame), pemain dituntut berpikir strategis kapan waktu terbaik untuk menebas, mengutamakan pendekatan senyap dari belakang daripada bertarung terbuka secara brutal."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q7</span> Bagaimana efek busur tebasan sabit katana digambar dan memudar di kanvas?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Di fungsi <code>draw()</code>, setiap objek tebasan dirender menggunakan perintah <code>ctx.arc(0, 0, radius, sudutMulai, sudutAkhir)</code> dengan sudut $-\frac{2\pi}{3}$ hingga $+\frac{2\pi}{3}$ ($240^\circ$ sapuan sabit). Seiring bertambahnya <code>s.frame</code> dari 0 ke 15, ketebalan garis <code>lineWidth</code> dan transparansi <code>globalAlpha</code> dikurangi menggunakan rumus linier $1 - \frac{\text{frame}}{15}$, menciptakan ilusi visual kilatan pedang yang melebar lalu memudar lenyap."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q8</span> Apa yang terjadi ketika shuriken pemain mengenai perisai depan musuh Juggernaut?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Sistem menghitung selisih sudut datangnya shuriken terhadap arah hadap Juggernaut. Jika sudut berada dalam rentang $\pm 90^\circ$ di depan perisai, shuriken dianggap tertangkis (<em>Deflected</em>). Shuriken dihapus, suara denting pelindung berbunyi, layar bergetar 8 frame, dan muncul teks pop-up <code>'BLOCKED!'</code> tanpa mengurangi HP Juggernaut."</p>
+                </div>
+            </div>
+
+            <!-- BAGIAN D -->
+            <h3 id="qa-ai" style="color:var(--accent-gold); margin: 24px 0 12px;">Bagian D: Logika Kecerdasan Buatan (AI) Musuh</h3>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q9</span> Bagaimana musuh bisa mendeteksi pemain menggunakan kerucut senter (Vision Cone)?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Melalui 4 lapisan validasi di fungsi <code>cekMelihatPemain()</code>:<br>
+                    1. Memeriksa apakah pemain sedang sembunyi di kardus atau mengaktifkan skill ghost.<br>
+                    2. Memeriksa jarak Euclidean $\sqrt{\Delta x^2 + \Delta y^2}$ kurang dari jarak senter (240px).<br>
+                    3. Menghitung sudut posisi pemain terhadap arah hadap musuh menggunakan <code>Math.atan2</code>, apakah berada di dalam sudut kerucut $\pm 35^\circ$.<br>
+                    4. Menembakkan sinar raycast <code>hitRayWall()</code> untuk memastikan tidak ada balok tembok yang memutus pandangan."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q10</span> Kapan algoritma A* Pathfinding dijalankan dan bagaimana optimasinya agar tidak lag?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"A* hanya dijalankan jika musuh berstatus waspada (<em>Chase</em> atau <em>Investigate</em>) DAN garis pandang lurusnya terhalang oleh tembok. Jika garis pandang lurus terbuka, musuh langsung lari lurus tanpa memanggil A*. Optimasi yang diterapkan: NavGrid berukuran sel 20px disimpan dalam <code>Uint8Array</code>, pencarian dibatasi maksimal 450 langkah, dan kalkulasi rute disebar bergantian antar musuh (<em>Time-slicing</em>)."</p>
+                </div>
+            </div>
+
+            <!-- BAGIAN E -->
+            <h3 id="qa-audio-canvas" style="color:var(--accent-gold); margin: 24px 0 12px;">Bagian E: Audio Synthesizer & Canvas Engine</h3>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q11</span> Mengapa kamu menggunakan Web Audio API daripada memutar file audio MP3 biasa?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Terdapat 3 keunggulan krusial:<br>
+                    1. <strong>Ukuran File 0 KB:</strong> Tidak membutuhkan unduhan aset eksternal, membuat game sangat cepat dimuat.<br>
+                    2. <strong>Zero Latency:</strong> Panggilan file audio biasa sering mengalami jeda (lag audio) saat diputar beruntun. Web Audio API membangkitkan gelombang instan di prosesor suara tanpa delay.<br>
+                    3. <strong>Modulasi Dinamis:</strong> Pitch nada, frekuensi sweep, dan volume bisa diubah-ubah secara matematis langsung melalui kode program."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q12</span> Mengapa kita harus memanggil `ctx.save()` dan `ctx.restore()` saat merotasi karakter?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"<code>ctx.save()</code> menyimpan kondisi pengaturan kanvas (seperti posisi origin matriks koordinat, rotasi, dan opacity) ke tumpukan memori. Setelah kita menggeser origin dengan <code>translate(x, y)</code> dan merotasi karakter dengan <code>rotate(angle)</code>, pemanggilan <code>ctx.restore()</code> mengembalikan konfigurasi kanvas ke keadaan awal. Tanpa <code>restore()</code>, seluruh gambar berikutnya (seperti tembok dan HUD) akan ikut terputar miring."</p>
+                </div>
+            </div>
+
+            <!-- BAGIAN F -->
+            <h3 id="qa-hot" style="color:var(--accent-gold); margin: 24px 0 12px;">Bagian F: Pertanyaan Analisis Mendalam (High Order Thinking)</h3>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q13</span> Mengapa Rival Assassin bisa menghindari serangan Stealth Takedown dari belakang?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Rival Assassin dirancang sebagai ninja elit yang memiliki insting <em>Sixth Sense</em>. Di fungsi <code>executeStealthTakedown</code>, terdapat logika pengaman khusus: jika musuh bertipe <code>'rival'</code> dan tidak sedang dalam status beku slow-motion waktu (<code>!pemain.timeActive</code>) serta tidak sedang terkena stun, ia langsung melakukan Shunpo Dash menghindar ke samping sejauh 110px. Satu-satunya cara mengeksekusinya adalah dengan membekukan waktu terlebih dahulu atau menyerangnya tepat saat jendela pemulihannya (<em>Vulnerable Window</em>) terbuka."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q14</span> Bagaimana arsitektur game ini memastikan pintu stage hanya terbuka saat seluruh musuh gugur?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Di dalam fungsi <code>update()</code>, variabel <code>sisaMusuh = musuh.length</code> diperiksa setiap frame. Selama <code>sisaMusuh &gt; 0</code>, flag <code>portalKeluar.active = false</code>. Jika pemain nekat menyentuh koordinat pintu keluar saat masih ada musuh hidup, game memicu suara penolakan <code>'square'</code> dan memunculkan teks merah <code>'PINTU TERKUNCI! HABISI SEMUA MUSUH'</code>. Begitu array <code>musuh.length === 0</code>, pintu otomatis terbuka dengan efek suara arpeggio kemenangan dan pemain diizinkan melintasi pintu menuju stage berikutnya."</p>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <div class="qa-question"><span class="qa-qnum">Q15</span> Apa kesimpulan terbesar dari perancangan arsitektur game Speed Assassin ini?</div>
+                    <span class="qa-toggle-icon">▼</span>
+                </div>
+                <div class="qa-body">
+                    <span class="answer-label">Kunci Jawaban Ideal:</span>
+                    <p>"Game <em>Speed Assassin</em> membuktikan bahwa game aksi top-down 2D yang kaya fitur (A* pathfinding, raycasting FOV, sintesis audio prosedural, balistik proyektil, dan animasi spritesheet) dapat dibangun secara murni menggunakan <strong>Vanilla JavaScript dan HTML5 Canvas</strong> tanpa dependensi pihak ketiga. Performa tinggi 60 FPS tercapai berkat pemanfaatan struktur memori typed array, algoritma tabrakan AABB berkecepatan mikrodetik, dan manajemen siklus loop <code>requestAnimationFrame</code> yang bersih dan terstruktur."</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--border-color); color: var(--text-sub); font-size: 0.85rem; text-align: center;">
+            Master Dokumentasi & Ensiklopedia Kode Game: Speed Assassin &bull; Dibuat untuk Presentasi, Ujian Kejuruan & Bank Soal Pemrograman Game
+        </footer>
+
+    </main>
+
+    <!-- INTERACTIVE JAVASCRIPT FOR ENCYCLOPEDIA -->
+    <script>
+        // Toggle Accordion Q&A
+        function toggleQA(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Buka / Tutup Semua Accordion Sekaligus
+        function toggleAllQA(open) {
+            const items = document.querySelectorAll('.qa-item');
+            items.forEach(item => {
+                if (open) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Live Search Filter (Menyaring Seluruh Kartu & Q&A)
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.card, .qa-item');
+            
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = '';
+                    if (query.length > 2 && card.classList.contains('qa-item')) {
+                        card.classList.add('active'); // Otomatis buka jika cocok
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Highlight Active Link di Sidebar saat Scroll
+        const sections = document.querySelectorAll('section, h3[id]');
+        const navLinks = document.querySelectorAll('.nav-item a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 140;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
